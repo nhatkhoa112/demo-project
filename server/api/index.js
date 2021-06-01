@@ -4,6 +4,6 @@ const imageRouter = require('./upload.api');
 
 router.use('/user', userRouter);
 
-router.use('/image', imageRouter);
+router.use('/upload', imageRouter);
 
 module.exports = router;
