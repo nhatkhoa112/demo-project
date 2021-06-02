@@ -49,6 +49,7 @@ const userController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
   activateEmail: async (req, res) => {
     try {
       const { activation_token } = req.body;
@@ -85,6 +86,7 @@ const userController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -108,6 +110,7 @@ const userController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   getAccessToken: (req, res) => {
     try {
       const rf_token = req.cookies.refreshtoken;
@@ -126,6 +129,7 @@ const userController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
   forgotPassword: async (req, res) => {
     try {
       const { email } = req.body;
@@ -142,6 +146,7 @@ const userController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+
   resetPassword: async (req, res) => {
     try {
       const { password } = req.body;
@@ -159,12 +164,75 @@ const userController = {
       return res.status(500).json({ msg: err.message });
     }
   },
-  getUserInfor: async (req, res) => {},
-  getUsersAllInfor: async (req, res) => {},
-  logout: async (req, res) => {},
-  updateUser: async (req, res) => {},
-  updateUsersRole: async (req, res) => {},
-  deleteUser: async (req, res) => {},
+
+  getUserInfor: async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id, { password: 0 });
+      if (!user)
+        return res.status(400).json({ msg: 'Invalid Authentication.' });
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  getUsersAllInfor: async (req, res) => {
+    try {
+      const users = await User.find({}, { password: 0 });
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  logout: async (req, res) => {
+    try {
+      res.clearCookie('refreshtoken', { path: 'api/user/refresh_token' });
+      return res.json({ msg: 'Logged out.' });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  updateUser: async (req, res) => {
+    try {
+      delete req.body.role;
+      const user = await User.findByIdAndUpdate(
+        req.user.id,
+        { ...req.body },
+        { new: true }
+      );
+
+      res.json({ msg: 'Update Success!.', data: { user } });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  updateUsersRole: async (req, res) => {
+    try {
+      const { role } = req.body;
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { role },
+        { new: true }
+      );
+      res.json({ msg: 'Update success!', data: { user } });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  deleteUser: async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete({ _id: req.params.id });
+
+      res.json({ msg: 'Delete success!', data: { user } });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
   googleLogin: async (req, res) => {},
   facebookLogin: async (req, res) => {},
 };
