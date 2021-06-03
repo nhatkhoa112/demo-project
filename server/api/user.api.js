@@ -37,8 +37,8 @@ router.post('/google_login', userController.googleLogin);
 
 router.post('/facebook_login', userController.facebookLogin);
 
-router.post('/test', userController.test);
+router.get('/test', userController.test);
 
-router.post('/testDb', userController.testDb);
+router.get('/testDb', userController.testDb);
 
 module.exports = router;

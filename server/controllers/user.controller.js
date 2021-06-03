@@ -235,6 +235,7 @@ const userController = {
 
   googleLogin: async (req, res) => {},
   facebookLogin: async (req, res) => {},
+
   test: async (req, res) => {
     try {
       res.json({ msg: 'Hello Production' });
@@ -244,8 +245,8 @@ const userController = {
   },
   testDb: async (req, res) => {
     try {
-      const user = await User.find({}, { password: 0 });
-      res.json({ msg: 'Hello Production' });
+      const users = await User.find({}, { password: 0 });
+      res.json({ msg: 'Hello Production', data: { users } });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
