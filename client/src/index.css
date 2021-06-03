@@ -40,5 +40,3 @@ button {
 /* header */
 @import url('./components/headers/header.css');
 
-/* login  || register page */
-@import url('./components/mainpages/auth/login.css');
