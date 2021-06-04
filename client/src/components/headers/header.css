@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
 header {
   min-height: 70px;
   width: 100%;
@@ -11,6 +12,13 @@ header {
 header .logo {
   flex: 1;
 }
+
+header .logo a {
+  text-transform: capitalize !important;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+}
+
 header a {
   text-transform: uppercase;
   color: #555;
@@ -40,6 +48,10 @@ header ul li a:hover {
 
 .menu {
   display: none;
+}
+
+.menu-show {
+  transform: translateX(100%);
 }
 
 .close {

@@ -1,142 +1,182 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../../../redux/actions';
 import './login.css';
-import $ from 'jquery';
-import image1 from './image/undraw_maker_launch_crhe.svg';
-import image2 from './image/undraw_press_play_bx2d.svg';
+import image1 from './image/image3.svg';
+import image2 from './image/image4.svg';
+import { motion } from 'framer-motion';
 
 export const Login = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
+  const [isSignUp, setIsSignUp] = useState(false);
+  const clear = () => {
+    setUser({
+      email: '',
+      password: '',
+      name: '',
+      avatarUrl: '',
+    });
+  };
   const [user, setUser] = useState({
     email: '',
     password: '',
-    err: '',
-    success: '',
+    name: '',
+    avatarUrl: '',
   });
 
-  const [isSignUp, setIsSignUp] = useState(false);
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    dispatch(authActions.loginRequest(user));
+  };
 
-  console.log(isSignUp);
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    dispatch(authActions.register(user));
+  };
 
   return (
-    <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
-      <div className="forms-container">
-        <div className="signin-signup">
-          <form autocomplete="new-password" className="sign-in-form">
-            <h2 className="title">Sign in</h2>
-            <div className="input-field">
-              <i className="fas fa-envelope" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.75 }}
+    >
+      <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
+        <div className="forms-container">
+          <div className="signin-signup">
+            <form className="sign-in-form" onSubmit={handleSignIn}>
+              <h2 className="title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-envelope" />
+                <input
+                  autoComplete="new-password"
+                  type="text"
+                  placeholder="Email"
+                  value={user.email}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock" />
+                <input
+                  autoComplete="new-password"
+                  type="password"
+                  placeholder="Password"
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
+                />
+              </div>
               <input
-                autocomplete="new-password"
-                type="text"
-                placeholder="Email"
+                type="submit"
+                defaultValue="Login"
+                className="btn solid"
+                onClick={handleSignIn}
               />
-            </div>
-            <div className="input-field">
-              <i className="fas fa-lock" />
+              <p className="social-text">Or Sign in with social platforms</p>
+              <div className="social-media">
+                <button className="social-icon">
+                  <i className="fab fa-facebook-f" />
+                </button>
+                <button className="social-icon">
+                  <i className="fab fa-twitter" />
+                </button>
+                <button className="social-icon">
+                  <i className="fab fa-google" />
+                </button>
+                <button className="social-icon">
+                  <i className="fab fa-linkedin-in" />
+                </button>
+              </div>
+            </form>
+            <form
+              autoComplete="new-password"
+              className="sign-up-form"
+              onSubmit={handleSignUp}
+            >
+              <h2 className="title">Sign in</h2>
+              <div className="input-field">
+                <i className="fas fa-user" />
+                <input
+                  autoComplete="new-password"
+                  type="text"
+                  placeholder="Username"
+                  value={user.name}
+                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-envelope" />
+                <input
+                  autoComplete="new-password"
+                  type="text"
+                  placeholder="Email"
+                  value={user.email}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-lock" />
+                <input
+                  autoComplete="new-password"
+                  type="password"
+                  placeholder="Password"
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
+                />
+              </div>
               <input
-                autocomplete="new-password"
-                type="password"
-                placeholder="Password"
+                type="submit"
+                defaultValue="Sign up"
+                className="btn solid"
+                onClick={handleSignUp}
               />
-            </div>
-            <input type="submit" defaultValue="Login" className="btn solid" />
-            <p className="social-text">Or Sign in with social platforms</p>
-            <div className="social-media">
-              <button className="social-icon">
-                <i className="fab fa-facebook-f" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-twitter" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-google" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-linkedin-in" />
-              </button>
-            </div>
-          </form>
-          <form autocomplete="new-password" className="sign-up-form">
-            <h2 className="title">Sign in</h2>
-            <div className="input-field">
-              <i className="fas fa-user" />
-              <input
-                autocomplete="new-password"
-                type="text"
-                placeholder="Username"
-              />
-            </div>
-            <div className="input-field">
-              <i className="fas fa-envelope" />
-              <input
-                autocomplete="new-password"
-                type="text"
-                placeholder="Email"
-              />
-            </div>
-            <div className="input-field">
-              <i className="fas fa-lock" />
-              <input
-                autocomplete="new-password"
-                type="password"
-                placeholder="Password"
-              />
-            </div>
-            <input type="submit" defaultValue="Sign up" className="btn solid" />
-            <p className="social-text">Or Sign Up with social platforms</p>
-            <div className="social-media">
-              <button className="social-icon">
-                <i className="fab fa-facebook-f" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-twitter" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-google" />
-              </button>
-              <button className="social-icon">
-                <i className="fab fa-linkedin-in" />
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
-      <div className="panels-container">
-        <div className="panel left-panel">
-          <div className="content">
-            <h3>New here ? </h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Assumenda, laboriosam.
-            </p>
+        <div className="panels-container">
+          <div className="panel left-panel">
+            <div className="content">
+              <h3>New here ? </h3>
+              <p>You don't have a account. Let register now.</p>
 
-            <button
-              className="btn transparent"
-              id="sign-up-btn"
-              onClick={() => setIsSignUp(true)}
-            >
-              Sign up
-            </button>
+              <button
+                className="btn transparent"
+                id="sign-up-btn"
+                onClick={() => {
+                  clear();
+                  setIsSignUp(true);
+                }}
+              >
+                Sign up
+              </button>
+            </div>
+            <img src={image1} className="image" alt="" />
           </div>
-          <img src={image1} className="image" alt="" />
-        </div>
-        <div className="panel right-panel">
-          <div className="content">
-            <h3>One of us ? </h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Assumenda, laboriosam.
-            </p>
-            <button
-              className="btn transparent"
-              id="sign-in-btn"
-              onClick={() => setIsSignUp(false)}
-            >
-              Sign in
-            </button>
+          <div className="panel right-panel">
+            <div className="content">
+              <h3>One of us ? </h3>
+              <p>You had the account, let sign in and join with us.</p>
+              <button
+                className="btn transparent"
+                id="sign-in-btn"
+                onClick={() => {
+                  clear();
+                  setIsSignUp(false);
+                }}
+              >
+                Sign in
+              </button>
+            </div>
+            <img src={image2} className="image" alt="" />
           </div>
-          <img src={image2} className="image" alt="" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

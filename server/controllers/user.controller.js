@@ -96,7 +96,6 @@ const userController = {
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) res.status(400).json({ msg: 'The password is incorrect.' });
-
       const accesstoken = createAccessToken({ id: user._id });
       const refreshtoken = createRefreshToken({ id: user._id });
 
@@ -105,7 +104,7 @@ const userController = {
         path: 'api/user/refresh_token',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
-      res.json({ msg: 'Login success!', data: { accesstoken } });
+      res.json({ msg: 'Login success!', data: { accesstoken, user } });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

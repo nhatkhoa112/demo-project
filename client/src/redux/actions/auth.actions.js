@@ -3,9 +3,22 @@ import api from '../../utils/api';
 import { routeActions } from './route.actions';
 import { toast } from 'react-toastify';
 
-const loginRequest = (email, password) => async (dispatch) => {
+const loginRequest = (user) => async (dispatch) => {
   try {
-  } catch (error) {}
+    dispatch({ type: types.LOGIN_REQUEST, payload: null });
+    const { data } = await api.post('/user/login', user);
+    toast.success(`Welcome ${data.data.user.name}`);
+    dispatch({ type: types.LOGIN_REQUEST, payload: data.data });
+    console.log(api.defaults);
+    api.defaults.headers.common['authorization'] = data.data.accesstoken;
+    api.defaults.headers['Authorization'] = data.data.accesstoken;
+    // console.log(api.defaults.headers.common['authorization']);
+    localStorage.setItem('accessToken', data.data.accesstoken);
+    dispatch(routeActions.redirect('/'));
+  } catch (error) {
+    dispatch({ type: types.LOGIN_REQUEST, payload: null });
+    console.log(error.message);
+  }
 };
 
 const loginFacebookRequest = (access_token) => async (dispatch) => {
@@ -18,8 +31,17 @@ const loginGoogleRequest = (access_token) => async (dispatch) => {
   } catch (error) {}
 };
 const register = (user) => async (dispatch) => {
+  dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
-  } catch (error) {}
+    const { data } = await api.post('/user/register', user);
+    dispatch({ type: types.REGISTER_SUCCESS, payload: data.data });
+    dispatch(routeActions.redirect('/'));
+    console.log(data);
+    toast.success(`Thank you for your registration}!`);
+  } catch (error) {
+    dispatch({ type: types.REGISTER_FAILURE, payload: error });
+    console.log(error);
+  }
 };
 
 const verifyEmail = (code) => async (dispatch) => {

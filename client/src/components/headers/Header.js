@@ -9,8 +9,6 @@ export const Header = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [menu, setMenu] = useState(false);
 
-  console.log();
-
   const adminRouter = () => {
     return (
       <>
@@ -45,12 +43,12 @@ export const Header = () => {
 
       <div className="logo">
         <h1>
-          <Link to="/">{isAdmin ? 'Admin' : 'DevAT Shop'}</Link>
+          <Link to="/">{isAdmin ? 'Admin' : 'KoHaKu Shop'}</Link>
         </h1>
       </div>
 
-      <ul style={{ left: menu ? 0 : '-100%' }}>
-        <li>
+      <ul className={menu ? 'menu-show' : ''}>
+        <li onClick={() => setMenu(false)}>
           <Link to="/">{isAdmin ? 'Products' : 'Shop'}</Link>
         </li>
 
@@ -59,7 +57,7 @@ export const Header = () => {
         {isLogged ? (
           loggedRouter()
         ) : (
-          <li>
+          <li onClick={() => setMenu(false)}>
             <Link to="/login">Login ✥ Register</Link>
           </li>
         )}

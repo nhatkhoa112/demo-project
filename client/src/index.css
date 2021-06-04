@@ -40,3 +40,34 @@ button {
 /* header */
 @import url('./components/headers/header.css');
 
+/* Toast */
+
+.Toastify__toast {
+}
+.Toastify__toast--rtl {
+}
+.Toastify__toast--dark {
+}
+.Toastify__toast--default {
+}
+.Toastify__toast--info {
+}
+.Toastify__toast--success {
+  border: 2px solid teal;
+  background: #c7dded !important;
+  padding: 20px !important;
+  color: #333 !important;
+  text-transform: capitalize !important;
+  box-shadow: 0 5px 10px #ccc !important;
+}
+
+.Toastify__toast--success:hover {
+  box-shadow: 0 10px 20px #ccc !important;
+}
+
+.Toastify__toast--warning {
+}
+.Toastify__toast--error {
+}
+.Toastify__toast-body {
+}

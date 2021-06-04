@@ -1,15 +1,9 @@
 import * as types from '../constants/auth.constants';
 
 const initialState = {
-  //   loading: false,
-  //   isAuthenticated,
-  //   accessToken: localStorage.getItem('accessToken'),
-  //   user: {
-  //     name: fbUser ? fbUser.name : '',
-  //     email: fbUser ? fbUser.email : '',
-  //     avatarUrl: fbUser ? fbUser.avatarUrl : '',
-  //     // _id: fbUser ? fbUser._id : '',
-  //   },
+  loading: false,
+  isAuthenticated: false,
+  user: [],
 };
 
 const authReducer = (state = initialState, action) => {
