@@ -81,7 +81,10 @@ const userController = {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
       });
 
-      res.json({ msg: 'Account has been activated!', data: { accesstoken } });
+      res.json({
+        msg: 'Account has been activated!',
+        data: { accesstoken, user: newUser },
+      });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

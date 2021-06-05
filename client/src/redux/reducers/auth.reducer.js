@@ -1,9 +1,17 @@
 import * as types from '../constants/auth.constants';
 
+const isAuthenticated = !!localStorage.getItem('accessToken');
+const koHaUser = JSON.parse(localStorage.getItem('koHaUser'));
+
 const initialState = {
+  isAuthenticated,
   loading: false,
-  isAuthenticated: false,
-  user: [],
+  user: {
+    name: koHaUser ? koHaUser.name : '',
+    email: koHaUser ? koHaUser.email : '',
+    avatar: koHaUser ? koHaUser.avatar : '',
+    id: koHaUser ? koHaUser._id : '',
+  },
 };
 
 const authReducer = (state = initialState, action) => {
@@ -25,7 +33,24 @@ const authReducer = (state = initialState, action) => {
     case types.GET_CURRENT_USER_REQUEST:
       return { ...state, loading: true };
 
+    case types.VERIFY_EMAIL_SUCCESS:
+      localStorage.setItem('accessToken', payload.accesstoken);
+      localStorage.setItem('koHaUser', JSON.stringify(payload.user));
+      console.log(payload.user);
+      return {
+        ...state,
+        loading: false,
+        user: {
+          ...state.user,
+          name: payload.user.name,
+          email: payload.user.email,
+          id: payload.user._id,
+          avatar: payload.user.avatar,
+        },
+      };
+
     case types.REGISTER_SUCCESS:
+      console.log(payload);
       return {
         ...state,
         loading: false,
@@ -33,7 +58,6 @@ const authReducer = (state = initialState, action) => {
 
     case types.LOGIN_SUCCESS:
     case types.LOGIN_GOOGLE_SUCCESS:
-    case types.VERIFY_EMAIL_SUCCESS:
     case types.LOGIN_FACEBOOK_SUCCESS:
       return {
         ...state,

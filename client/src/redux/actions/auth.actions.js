@@ -9,10 +9,8 @@ const loginRequest = (user) => async (dispatch) => {
     const { data } = await api.post('/user/login', user);
     toast.success(`Welcome ${data.data.user.name}`);
     dispatch({ type: types.LOGIN_REQUEST, payload: data.data });
-    console.log(api.defaults);
     api.defaults.headers.common['authorization'] = data.data.accesstoken;
     api.defaults.headers['Authorization'] = data.data.accesstoken;
-    // console.log(api.defaults.headers.common['authorization']);
     localStorage.setItem('accessToken', data.data.accesstoken);
     dispatch(routeActions.redirect('/'));
   } catch (error) {
@@ -34,19 +32,27 @@ const register = (user) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
     const { data } = await api.post('/user/register', user);
-    dispatch({ type: types.REGISTER_SUCCESS, payload: data.data });
+    dispatch({ type: types.REGISTER_SUCCESS, payload: null });
     dispatch(routeActions.redirect('/'));
-    console.log(data);
-    toast.success(`Thank you for your registration}!`);
+    toast.success(`Thank you for your registration!`);
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });
     console.log(error);
   }
 };
 
-const verifyEmail = (code) => async (dispatch) => {
+const verifyEmail = (activation_token) => async (dispatch) => {
+  dispatch({ type: types.VERIFY_EMAIL_REQUEST, payload: null });
   try {
-  } catch (error) {}
+    const { data } = await api.post('/user/activation', { activation_token });
+    dispatch({ type: types.VERIFY_EMAIL_SUCCESS, payload: data.data });
+    const name = data.data.user.name;
+    toast.success(`Welcome, ${name}! Your email address has been verified.`);
+    api.defaults.headers['Authorization'] = data.data.accesstoken;
+    api.defaults.headers.common['authorization'] = data.data.accesstoken;
+  } catch (error) {
+    dispatch({ type: types.VERIFY_EMAIL_FAILURE, payload: error });
+  }
 };
 
 const updateProfile = (name, avatarUrl) => async (dispatch) => {
