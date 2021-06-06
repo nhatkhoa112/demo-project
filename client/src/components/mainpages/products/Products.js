@@ -19,22 +19,16 @@ export const Products = () => {
     <motion.div transition={transition} className="products-page">
       <div className="production">
         <Link to="/cart">
-          <div id="imageCard">
-            <img
-              id="image"
-              src={image}
-              alt="image"
-              width="200px"
-              height="200px"
-            />
-            <img
-              id="image1"
-              src={image2}
-              alt="image"
-              width="200px"
-              height="200px"
-            />
-          </div>
+          <motion.img
+            initial={{ x: '30vw' }}
+            animate={{ x: '0' }}
+            exit={{ x: '30vw', width: '400px', height: '400px' }}
+            transition={{ duration: 2 }}
+            src={image}
+            alt="image"
+            width="200px"
+            height="200px"
+          />
         </Link>
       </div>
     </motion.div>

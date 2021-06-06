@@ -58,10 +58,15 @@
   padding: 0;
   font-family: sans-serif;
 }
-.hero {
+
+.detail-page {
+  width: 100%;
+  min-height: 100vh;
+}
+.detail-page .hero {
   width: 100%;
 }
-.row {
+.detail-page .row {
   width: 90%;
   height: 100vh;
   margin: auto;
@@ -69,28 +74,28 @@
   align-items: center;
   justify-content: space-between;
 }
-.col {
+.detail-page .col {
   flex-basis: 45%;
 }
 
-.col img {
+.detail-page .col img {
   width: 100%;
 }
 
-.slider {
+.detail-page .slider {
   height: 80vh;
   display: flex;
   flex-direction: column;
 }
 
-.product {
+.detail-page .product {
   display: flex;
   align-items: center;
   overflow: hidden;
   overflow-x: auto;
 }
 
-.product img {
+.detail-page .product img {
   height: 10vh;
   margin-bottom: 9px;
   width: 24%;
@@ -99,21 +104,21 @@
   margin: 0 5px;
 }
 
-.product img:hover {
+.detail-page .product img:hover {
   opacity: 1;
 }
 
-.preview {
+.detail-page .preview {
   margin-bottom: 20px;
 }
 
-.preview img {
+.detail-page .preview img {
   height: 100%;
 }
 p {
   margin-bottom: 20px;
 }
-.brand {
+.detail-page .brand {
   background: #008000;
   width: fit-content;
   color: #fff;
@@ -125,26 +130,26 @@ h2 {
   color: #555;
   margin-bottom: 20px;
 }
-.rating {
+.detail-page .rating {
   display: flex;
   height: 15px;
 }
-.rating .fa {
+.detail-page .rating .fa {
   color: #008000;
 }
-.price {
+.detail-page .detail-page .price {
   color: #fe980f;
   font-size: 26px;
   font-weight: bold;
   padding-top: 10px;
 }
-input {
+.detail-page input {
   width: 30px;
   border: 1px solid #ccc;
   font-weight: bold;
   text-align: center;
 }
-button {
+.detail-page button {
   color: #fff;
   font-size: 15px;
   outline: none;
@@ -155,31 +160,31 @@ button {
   box-sizing: border-box;
   cursor: pointer;
 }
-button .fa {
+.detail-page button .fa {
   margin-right: 10px;
 }
-.related {
+.detail-page .related {
   width: 90%;
   margin: 0 auto 40px;
 }
-.related .row {
+.detail-page .related .row {
   width: 100%;
   height: auto;
 }
-.columns {
+.detail-page .columns {
   flex-basis: 22%;
   height: 100%;
 }
-.items img {
+.detail-page .items img {
   width: 100%;
 }
-.details {
+.detail-page .details {
   margin-top: 20px;
 }
-.details p {
+.detail-page .details p {
   font-size: 14px;
   margin-bottom: 10px;
 }
-.details .rating {
+.detail-page .details .rating {
   margin: 10px 0;
 }

@@ -1,14 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
-header {
-  min-height: 70px;
+
+.header-page {
+  position: relative;
+  min-height: 90px;
   width: 100%;
+}
+
+header {
+  width: 100%;
+  height: 90px;
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid #ddd;
+  padding: 0 40px;
 }
+
 header .logo {
   flex: 1;
 }
@@ -61,6 +70,12 @@ header ul li a:hover {
 .cart-icon {
   position: relative;
   margin-right: 20px;
+  transition: all 0.5s ease-in-out;
+}
+  
+
+.cart-icon:hover {
+  transform: scale(0.8);
 }
 .cart-icon span {
   background: crimson;
@@ -132,4 +147,129 @@ header ul li a:hover {
     color: teal;
     opacity: 0.6;
   }
+}
+
+/* header 2 */
+
+.header2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+}
+
+.logo-shop {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #555;
+}
+
+.menu-item {
+  flex: 4;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item .top-menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: space-between;
+  align-items: center;
+  border-bottom: 1px solid #888;
+}
+
+.menu-item .bottom-menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: space-between;
+  align-items: center;
+}
+
+.bottom-menu .link-item {
+  flex: 1;
+  width: 25%;
+  height: 100%;
+  border-right: 1px solid #999;
+  position: relative;
+}
+
+.bottom-menu .link-item:nth-last-of-type(1) {
+  border: none;
+}
+
+.cart-logo {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border-left: 1px solid #555;
+}
+
+.header2 .menu {
+  display: none;
+}
+
+.header2 .menu-show {
+  transform: translateX(100%);
+}
+
+.header2 .close {
+  display: none;
+}
+
+.header2 .logo-shop a {
+  text-transform: capitalize !important;
+  font-family: 'Kalam', cursive;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #555;
+}
+
+.link-item a {
+  color: #555;
+}
+
+.item {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-left: 1px solid hsla(0, 0%, 78%, 0.342);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.link-item .text-content {
+  display: flex;
+  height: 100%;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-item .icon-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

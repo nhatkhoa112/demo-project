@@ -4,7 +4,7 @@ import { authActions } from '../../../redux/actions';
 import './login.css';
 import image1 from './image/image3.svg';
 import image2 from './image/image4.svg';
-import { motion } from 'framer-motion';
+import { isValidMotionProp, motion } from 'framer-motion';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +41,8 @@ export const Login = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.75 }}
+      transition={{ duration: 1 }}
+      className="login-page"
     >
       <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
         <div className="forms-container">
@@ -173,7 +174,7 @@ export const Login = () => {
                 Sign in
               </button>
             </div>
-            <img src={image2} className="image" alt="" />
+            <motion.img src={image2} className="image" alt="" />
           </div>
         </div>
       </div>

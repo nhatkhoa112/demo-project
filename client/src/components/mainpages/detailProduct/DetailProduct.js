@@ -22,68 +22,58 @@ export const DetailProduct = () => {
   };
 
   return (
-    // <div className="product-detail">
-    //   <div id="product-content" class="row product-content">
-    //     <div id="thumbnails" className="product-thumbnails">
-    //       <div className="selected-image">
-
-    //       </div>
-    //       <div className="thumb-image"></div>
-    //     </div>
-    //     <div id="content"></div>
-    //   </div>
-    //   <section id="overview" className="row"></section>
-    // </div>
-    <div className="hero">
-      <div className="row">
-        <div className="col">
-          <div className="slider">
-            <div className="preview">
-              <img src={selectImage} id="imagebox" alt="" />
-            </div>
-            <div className="product">
-              {productImages.map((image) => {
-                return (
-                  <img
-                    key={image.id}
-                    data-index={image.id}
-                    src={image.img}
-                    alt=""
-                    onClick={handleClick}
-                  />
-                );
-              })}
+    <div className="detail-page">
+      <div className="hero">
+        <div className="row">
+          <div className="col">
+            <div className="slider">
+              <div className="preview">
+                <img src={selectImage} id="imagebox" alt="" />
+              </div>
+              <div className="product">
+                {productImages.map((image) => {
+                  return (
+                    <img
+                      key={image.id}
+                      data-index={image.id}
+                      src={image.img}
+                      alt=""
+                      onClick={handleClick}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col">
-          <div className="content">
-            <p className="brand">Brand: Varanga</p>
-            <h2>Woman Black Quirky Print Empire Dress</h2>
-            <div className="rating">
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star" />
-              <i className="fa fa-star-half-o" />
+          <div className="col">
+            <div className="content">
+              <p className="brand">Brand: Varanga</p>
+              <h2>Woman Black Quirky Print Empire Dress</h2>
+              <div className="rating">
+                <i className="fa fa-star" />
+                <i className="fa fa-star" />
+                <i className="fa fa-star" />
+                <i className="fa fa-star" />
+                <i className="fa fa-star-half-o" />
+              </div>
+              <p className="price">Brand: Varanga</p>
+              <p>
+                Size:{' '}
+                <select name="size">
+                  <option value="select size">select size</option>
+                  <option value="small">small</option>
+                  <option value="medium">medium</option>
+                  <option value="large">large</option>
+                </select>
+              </p>
+              <p>
+                Quantity: <input type="text" defaultValue={1} />
+              </p>
+              <button type="button">
+                <i className="fa fa-shopping-cart" />
+                Add to cart
+              </button>
             </div>
-            <p className="price">Brand: Varanga</p>
-            <p>
-              Size:{' '}
-              <select name="size">
-                <option value="select size">select size</option>
-                <option value="small">small</option>
-                <option value="medium">medium</option>
-                <option value="large">large</option>
-              </select>
-            </p>
-            <p>
-              Quantity: <input type="text" defaultValue={1} />
-            </p>
-            <button type="button">
-              <i className="fa fa-shopping-cart" />
-              Add to cart
-            </button>
           </div>
         </div>
       </div>
