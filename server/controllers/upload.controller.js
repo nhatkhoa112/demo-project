@@ -1,30 +1,33 @@
-const cloudinary = require('cloudinary');
 const fs = require('fs');
-
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-});
+const cloudinary = require('../middlewares/cloudinary');
 
 const uploadController = {
-  upload: (req, res) => {
+  uploadMulti: async (req, res) => {
     try {
-      const file = req.files.file;
-
-      cloudinary.v2.uploader.upload(
-        file.tempFilePath,
-        { folder: 'final-project' },
-        async (err, result) => {
-          if (err) throw err;
-
-          removeTmp(file.tempFilePath);
-
-          res.json({ public_id: result.public_id, url: result.secure_url });
+      const uploader = async (path) => await cloudinary.uploads(path, 'Images');
+      const urls = [];
+      const files = req.files;
+      for (const file of files) {
+        if (file.size > 1024 * 1024 * 2) {
+          return res.status(400).json({ msg: 'Size too large, maximum 2Mb' });
         }
-      );
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
+
+        if (
+          file.mimetype !== 'image/jpeg' &&
+          file.mimetype !== 'image/png' &&
+          file.mimetype !== 'image/jpg'
+        ) {
+          return res.status(400).json({ msg: 'File format is incorrect.' });
+        }
+
+        const { path } = file;
+        const newPath = await uploader(path);
+        urls.push(newPath);
+        fs.unlinkSync(path);
+      }
+      res.status(200).json({ msg: 'Uploaded image success!!', data: urls });
+    } catch (error) {
+      res.status(500).json({ msg: 'Uploaded image failure!!' });
     }
   },
 

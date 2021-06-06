@@ -10,8 +10,8 @@ export const DetailProduct = () => {
   const productImages = [
     { id: 0, img: image },
     { id: 1, img: image2 },
-    { id: 2, img: image3 },
-    { id: 3, img: image4 },
+    // { id: 2, img: image3 },
+    // { id: 3, img: image4 },
   ];
   const [selectImage, setSelectImage] = useState(productImages[0].img);
 
