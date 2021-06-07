@@ -37,7 +37,7 @@ export const Header = () => {
 
   return (
     <div className="header-page">
-      <header clasName="header">
+      <header className="header">
         <div className="menu" onClick={() => setMenu(!menu)}>
           <img src={Menu} alt="" width="30" />
         </div>

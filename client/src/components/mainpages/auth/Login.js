@@ -5,10 +5,12 @@ import './login.css';
 import image1 from './image/image3.svg';
 import image2 from './image/image4.svg';
 import { isValidMotionProp, motion } from 'framer-motion';
+import { ModalUpload } from '../../modalUpload/ModalUpload';
 
 export const Login = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [isSignUp, setIsSignUp] = useState(false);
   const clear = () => {
@@ -31,10 +33,16 @@ export const Login = () => {
     dispatch(authActions.loginRequest(user));
   };
 
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setModalOpen(true);
+  };
+
   const handleSignUp = (e) => {
     e.preventDefault();
     dispatch(authActions.register(user));
   };
+  console.log(modalOpen);
 
   return (
     <motion.div
@@ -45,6 +53,7 @@ export const Login = () => {
       className="login-page"
     >
       <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
+        <ModalUpload modalOpen={modalOpen} setModalOpen={setModalOpen} />
         <div className="forms-container">
           <div className="signin-signup">
             <form className="sign-in-form" onSubmit={handleSignIn}>
@@ -130,6 +139,12 @@ export const Login = () => {
                     setUser({ ...user, password: e.target.value })
                   }
                 />
+              </div>
+              <div className="avatar-field">
+                <button onClick={handleOpenModal}>
+                  <i className="fas fa-plus"></i>
+                  <div>Avatar</div>
+                </button>
               </div>
               <input
                 type="submit"

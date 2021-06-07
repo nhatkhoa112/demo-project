@@ -1,0 +1,12 @@
+.drop-zone input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop-zone div {
+  text-align: center !important;
+  margin-bottom: 0;
+  font-weight: 500;
+  font-size: 1.4rem;
+}

@@ -92,6 +92,35 @@ input {
   font-size: 1.1rem;
 }
 
+.login-page .avatar-field {
+  max-width: 380px;
+  width: 100%;
+  margin: 10px 0;
+  height: 55px;
+  display: grid;
+  padding: 0 0.4rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page .avatar-field button {
+  height: 55px;
+  width: 100px;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  flex-direction: column;
+  color: #777;
+}
+.login-page .avatar-field button:hover {
+  color: black;
+}
+
 .login-page .input-field input {
   margin-right: 30px;
   background: none;
