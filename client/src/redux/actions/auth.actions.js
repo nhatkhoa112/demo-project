@@ -32,7 +32,7 @@ const register = (user) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
     const { data } = await api.post('/user/register', user);
-    dispatch({ type: types.REGISTER_SUCCESS, payload: null });
+    dispatch({ type: types.REGISTER_SUCCESS, payload: data.data });
     dispatch(routeActions.redirect('/'));
     toast.success(`Thank you for your registration!`);
   } catch (error) {

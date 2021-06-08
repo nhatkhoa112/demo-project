@@ -5,44 +5,61 @@ import './login.css';
 import image1 from './image/image3.svg';
 import image2 from './image/image4.svg';
 import { isValidMotionProp, motion } from 'framer-motion';
-import { ModalUpload } from '../../modalUpload/ModalUpload';
 
 export const Login = () => {
+  let imageUpload = [];
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    name: '',
+    avatar: '',
+  });
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const [modalOpen, setModalOpen] = useState(false);
-
   const [isSignUp, setIsSignUp] = useState(false);
+  const [avatar, setAvatar] = useState({});
+  const [image, setImage] = useState([]);
+  const widget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: 'kohaku121',
+      uploadPreset: 'ml_default',
+    },
+    (error, result) => {
+      if (!error && result && result.event === 'success') {
+        imageUpload.push({
+          public_id: result.info.public_id,
+          url: result.info.secure_url,
+        });
+        setImage(imageUpload);
+        setUser({ ...user, avatar: imageUpload[0].url });
+      }
+    }
+  );
+
+  console.log(user);
+  const handleOpenWidget = (e) => {
+    e.preventDefault();
+    widget.open();
+  };
+
   const clear = () => {
     setUser({
       email: '',
       password: '',
       name: '',
-      avatarUrl: '',
+      avatar: '',
     });
   };
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    name: '',
-    avatarUrl: '',
-  });
 
   const handleSignIn = (e) => {
     e.preventDefault();
     dispatch(authActions.loginRequest(user));
   };
 
-  const handleOpenModal = (e) => {
-    e.preventDefault();
-    setModalOpen(true);
-  };
-
   const handleSignUp = (e) => {
     e.preventDefault();
     dispatch(authActions.register(user));
   };
-  console.log(modalOpen);
 
   return (
     <motion.div
@@ -53,7 +70,6 @@ export const Login = () => {
       className="login-page"
     >
       <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
-        <ModalUpload modalOpen={modalOpen} setModalOpen={setModalOpen} />
         <div className="forms-container">
           <div className="signin-signup">
             <form className="sign-in-form" onSubmit={handleSignIn}>
@@ -141,7 +157,7 @@ export const Login = () => {
                 />
               </div>
               <div className="avatar-field">
-                <button onClick={handleOpenModal}>
+                <button onClick={handleOpenWidget}>
                   <i className="fas fa-plus"></i>
                   <div>Avatar</div>
                 </button>

@@ -12,7 +12,7 @@ const { CLIENT_URL } = process.env;
 const userController = {
   register: async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, avatar } = req.body;
 
       if (!name || !email || !password)
         return res.status(400).json({ msg: 'Please fill in all fields.' });
@@ -35,6 +35,7 @@ const userController = {
         name,
         email,
         password: passwordHash,
+        avatar,
       };
 
       const activation_token = createActivationToken(newUser);
@@ -58,7 +59,7 @@ const userController = {
         process.env.ACTIVATION_TOKEN_SECRET
       );
 
-      const { name, email, password } = user;
+      const { name, email, password, avatar } = user;
 
       const check = await User.findOne({ email });
       if (check)
@@ -68,6 +69,7 @@ const userController = {
         name,
         email,
         password,
+        avatar,
       });
 
       await newUser.save();
