@@ -126,11 +126,12 @@
 
 .header .logo a img {
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   top: 14px;
 }
 
 .header .logo a span {
+  z-index: 2;
   text-transform: uppercase;
   letter-spacing: 0.4rem;
   margin: 8px;
@@ -268,22 +269,29 @@
   position: relative;
 }
 
+.header2 .menu li::after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  background: #f4abad;
+  z-index: 10;
+  transform: scale(0, 1);
+  transform-origin: 0% 100%;
+  transition: transform 0.3s ease;
+}
+
+.header2.menu li:hover a {
+  color: #f4abad;
+}
+
+.header2 .menu li:hover::after {
+  transform: scale(1, 1);
+}
+
 .header2 .menu .active {
   border: 3px solid #ededed;
-}
-
-.header2 .menu li a {
-  color: #5c986a;
-}
-
-.header2 .menu li:hover {
-  border: 3px solid #ededed;
-  background: #5c986a;
-}
-
-.header2 .menu li:hover a {
-  color: white;
-  outline: none;
 }
 
 .header2 .menu li a {
@@ -291,6 +299,11 @@
   text-transform: uppercase;
   font-weight: 600;
   color: #777;
+  color: #5c986a;
+  transition: all 0.3s ease;
+}
+.header2 .menu li:hover a {
+  color: #f4abad;
 }
 
 .header2 .menu li a i {
@@ -301,6 +314,26 @@
   transform: rotate(180deg);
 }
 
+.header2 .menu .cart-btn {
+  position: relative;
+  left: 100px;
+}
+
+.header2 .menu .cart-btn a {
+  color: black;
+}
+
+.header2 .menu .cart-btn img {
+  width: 20px;
+  height: 25px;
+  background: transparent;
+}
+
+.header2 .menu .cart-btn span {
+  position: absolute;
+  left: 23px;
+  top: 10px;
+}
 .header3 {
   display: none;
 }
@@ -469,6 +502,31 @@
     transform: scale(0.8);
   }
 
+  .header3 .cart-btn {
+    position: relative;
+    margin-left: auto;
+    margin-right: 0;
+    left: 210px;
+    top: 2px;
+  }
+
+  .header3 .menu .cart-btn a {
+    color: black;
+  }
+
+  .header3 .cart-btn img {
+    width: 20px;
+    height: 25px;
+    background: transparent;
+  }
+
+  .header3 .cart-btn span {
+    position: absolute;
+    left: 26px;
+    top: 10px;
+    font-size: 14px;
+  }
+
   .sidebar {
     position: fixed;
     top: 50px;
@@ -481,6 +539,7 @@
     z-index: 10;
     transition: all 0.5s ease;
     transform: translateX(-250px);
+    border: 2px solid #ededed;
     padding: 10px;
   }
 
@@ -492,9 +551,9 @@
     text-transform: uppercase;
     list-style: none;
     display: flex;
-    padding: 0 10px;
+    padding: 10px 20px;
     width: 100%;
-    height: 40px;
+    height: 60px;
     align-items: center;
     transition: all 0.5s ease-in-out;
   }
@@ -529,8 +588,8 @@
 
   .sidebar-card {
     position: fixed;
-    top: 55px;
-    right: 5px;
+    top: 53px;
+    right: 3px;
     padding: 10px;
     display: flex;
     flex-direction: column;

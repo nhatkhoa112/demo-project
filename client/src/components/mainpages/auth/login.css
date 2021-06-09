@@ -206,11 +206,9 @@ input {
   transform: translateY(-50%);
   background-image: linear-gradient(
     135deg,
-    #c700ab 0%,
-    #c700ed 25%,
-    #a100d5 50%,
-    #a100ef 75%,
-    #9600ff 100%
+    #04befe 0%,
+    #4481eb 50%,
+    purple 100%
   );
   transition: 1.8s ease-in-out;
   border-radius: 50%;

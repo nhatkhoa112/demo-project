@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Menu from './icon/menu.svg';
-import Close from './icon/close.svg';
-import Cart from './icon/cart.svg';
 import logo from './icon/typography-image-1-83x72.png';
+import cart from './icon/cart.png';
 import { Link } from 'react-router-dom';
 let prevScrollY = 0;
 
@@ -72,7 +70,7 @@ export const Header = () => {
                 <Link to="/user/:id">Profile Page</Link>
               </div>
               <div className="item ">
-                <Link to="/login">SIGN IN/UP</Link>
+                <Link to="/login">SIGN IN / UP</Link>
               </div>
             </div>
             <div className="right__bottom">
@@ -83,7 +81,10 @@ export const Header = () => {
         </div>
         <div className={isScroll ? 'header2' : 'header-hidden'}>
           <ul className="menu">
-            <li className="item active">
+            <li
+              className="item 
+            "
+            >
               <Link to="/">Home</Link>
             </li>
             <li className="item">
@@ -101,8 +102,14 @@ export const Header = () => {
               <Link to="/user/:id">Profile </Link>
             </li>
             <li className="item">
-              <Link to="/login">SIGN IN/UP</Link>
+              <Link to="/login">SIGN IN / UP</Link>
             </li>
+            <div className="cart-btn">
+              <Link to="cart">
+                <img src={cart} alt="cart" />
+                <span className="count">0</span>
+              </Link>
+            </div>
           </ul>
         </div>
 
@@ -120,6 +127,12 @@ export const Header = () => {
                 <span className="name">kohaku</span>
                 <span>cosmetics</span>
               </div>
+            </Link>
+          </div>
+          <div className="cart-btn">
+            <Link to="cart">
+              <img src={cart} alt="cart" />
+              <span className="count">0</span>
             </Link>
           </div>
           <div
@@ -151,7 +164,7 @@ export const Header = () => {
           <Link to="/user/:id">Profile Page</Link>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/login">SIGN IN/UP</Link>
+          <Link to="/login">SIGN IN / UP</Link>
         </li>
       </div>
 
