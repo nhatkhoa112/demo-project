@@ -8,13 +8,13 @@ const loginRequest = (user) => async (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST, payload: null });
     const { data } = await api.post('/user/login', user);
     toast.success(`Welcome ${data.data.user.name}`);
-    dispatch({ type: types.LOGIN_REQUEST, payload: data.data });
+    dispatch({ type: types.LOGIN_SUCCESS, payload: data.data });
     api.defaults.headers.common['authorization'] = data.data.accesstoken;
-    api.defaults.headers['Authorization'] = data.data.accesstoken;
+    api.defaults.headers['authorization'] = data.data.accesstoken;
     localStorage.setItem('accessToken', data.data.accesstoken);
     dispatch(routeActions.redirect('/'));
   } catch (error) {
-    dispatch({ type: types.LOGIN_REQUEST, payload: null });
+    dispatch({ type: types.LOGIN_FAILURE, payload: null });
     console.log(error.message);
   }
 };
@@ -28,6 +28,7 @@ const loginGoogleRequest = (access_token) => async (dispatch) => {
   try {
   } catch (error) {}
 };
+
 const register = (user) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
@@ -48,8 +49,8 @@ const verifyEmail = (activation_token) => async (dispatch) => {
     dispatch({ type: types.VERIFY_EMAIL_SUCCESS, payload: data.data });
     const name = data.data.user.name;
     toast.success(`Welcome, ${name}! Your email address has been verified.`);
-    api.defaults.headers['Authorization'] = data.data.accesstoken;
     api.defaults.headers.common['authorization'] = data.data.accesstoken;
+    api.defaults.headers['authorization'] = data.data.accesstoken;
   } catch (error) {
     dispatch({ type: types.VERIFY_EMAIL_FAILURE, payload: error });
   }
@@ -65,7 +66,13 @@ const getCurrentUser = (accessToken) => async (dispatch) => {
   } catch (error) {}
 };
 
-const logout = () => (dispatch) => {};
+const logout = () => (dispatch) => {
+  delete api.defaults.headers.common['authorization'];
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('koHaUser');
+
+  dispatch({ type: types.LOGOUT, payload: null });
+};
 
 export const authActions = {
   loginRequest,

@@ -1,7 +1,7 @@
 import * as types from '../constants/auth.constants';
 
-const isAuthenticated = !!localStorage.getItem('accessToken');
 const koHaUser = JSON.parse(localStorage.getItem('koHaUser'));
+const isAuthenticated = !!localStorage.getItem('accessToken');
 
 const initialState = {
   isAuthenticated,
@@ -42,10 +42,14 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         user: {
           ...state.user,
-          name: payload.user.name,
-          email: payload.user.email,
-          id: payload.user._id,
-          avatar: payload.user.avatar,
+          isAuthenticated: true,
+          user: {
+            ...state.user,
+            name: payload.user.name,
+            email: payload.user.email,
+            id: payload.user._id,
+            avatar: payload.user.avatar,
+          },
         },
       };
 
@@ -57,6 +61,20 @@ const authReducer = (state = initialState, action) => {
       };
 
     case types.LOGIN_SUCCESS:
+      localStorage.setItem('accessToken', payload.accesstoken);
+      localStorage.setItem('koHaUser', JSON.stringify(payload.user));
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: {
+          ...state.user,
+          name: payload.user.name,
+          email: payload.user.email,
+          id: payload.user._id,
+          avatar: payload.user.avatar,
+        },
+      };
     case types.LOGIN_GOOGLE_SUCCESS:
     case types.LOGIN_FACEBOOK_SUCCESS:
       return {
@@ -85,7 +103,14 @@ const authReducer = (state = initialState, action) => {
     case types.LOGOUT:
       return {
         ...state,
+        user: {
+          name: '',
+          email: '',
+          avatar: '',
+          id: '',
+        },
         loading: false,
+        isAuthenticated: false,
       };
     default:
       return state;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './DetailProduct.css';
-import { Carousel } from 'react-responsive-carousel';
 import image from './image/alexandra-gorn-CJ6SJO_yR5w-unsplash.jpeg';
 import image2 from './image/revolt-164_6wVEHfI-unsplash.jpeg';
 import image3 from './image/jakob-owens-JzJSybPFb3s-unsplash.jpeg';
@@ -10,8 +9,8 @@ export const DetailProduct = () => {
   const productImages = [
     { id: 0, img: image },
     { id: 1, img: image2 },
-    // { id: 2, img: image3 },
-    // { id: 3, img: image4 },
+    { id: 2, img: image3 },
+    { id: 3, img: image4 },
   ];
   const [selectImage, setSelectImage] = useState(productImages[0].img);
 

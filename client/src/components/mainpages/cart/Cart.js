@@ -14,24 +14,8 @@ export const Cart = () => {
         exit="exit"
         transition={{ duration: 0.75 }}
       >
-        <div className="cart-page">
-          <motion.img
-            initial={{
-              width: '200px',
-              height: '200px',
-            }}
-            animate={{
-              width: '100%',
-              height: '350px',
-              transition: { delay: 0.2, ...transition },
-            }}
-            className="image"
-            src={image}
-            alt="image"
-          />
-        </div>
+        <div className="cart-page"></div>
       </motion.div>
-      <motion.div initial={{ opacity: 0 }}></motion.div>
     </>
   );
 };

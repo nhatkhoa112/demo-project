@@ -19,6 +19,7 @@ code {
   min-height: 100vh;
   margin: 0 auto;
   box-shadow: 0 0 35px #eee;
+  background: #fff;
 }
 
 a {

@@ -1,0 +1,24 @@
+.about-page {
+  width: 100%;
+  min-height: 200vh;
+  position: absolute;
+  top: 200px;
+  left: 0;
+  right: 0;
+  background: blue;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .about-page {
+    top: 160px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .about-page {
+    top: 50px;
+  }
+}

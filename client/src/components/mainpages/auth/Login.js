@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../../redux/actions';
+import { Redirect } from 'react-router-dom';
 import './login.css';
 import image1 from './image/image3.svg';
 import image2 from './image/image4.svg';
-import { isValidMotionProp, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { ToastContainer } from 'react-toastify';
 
 export const Login = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   let imageUpload = [];
   const [user, setUser] = useState({
     email: '',
@@ -15,9 +18,7 @@ export const Login = () => {
     avatar: '',
   });
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
   const [isSignUp, setIsSignUp] = useState(false);
-  const [avatar, setAvatar] = useState({});
   const [image, setImage] = useState([]);
   const widget = window.cloudinary.createUploadWidget(
     {
@@ -36,7 +37,6 @@ export const Login = () => {
     }
   );
 
-  console.log(user);
   const handleOpenWidget = (e) => {
     e.preventDefault();
     widget.open();
@@ -61,14 +61,17 @@ export const Login = () => {
     dispatch(authActions.register(user));
   };
 
+  if (isAuthenticated) return <Redirect to="/" />;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
-      className="login-page"
+      transition={{ duration: 2 }}
+      className={'login-page '}
     >
+      <ToastContainer />
       <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
         <div className="forms-container">
           <div className="signin-signup">
@@ -107,14 +110,9 @@ export const Login = () => {
                 <button className="social-icon">
                   <i className="fab fa-facebook-f" />
                 </button>
-                <button className="social-icon">
-                  <i className="fab fa-twitter" />
-                </button>
+
                 <button className="social-icon">
                   <i className="fab fa-google" />
-                </button>
-                <button className="social-icon">
-                  <i className="fab fa-linkedin-in" />
                 </button>
               </div>
             </form>
@@ -123,7 +121,7 @@ export const Login = () => {
               className="sign-up-form"
               onSubmit={handleSignUp}
             >
-              <h2 className="title">Sign in</h2>
+              <h2 className="title">Sign up</h2>
               <div className="input-field">
                 <i className="fas fa-user" />
                 <input
