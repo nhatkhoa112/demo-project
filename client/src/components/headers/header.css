@@ -46,31 +46,41 @@
 }
 
 .header .left-menu .left__top .item {
+  width: 150px;
+  height: 45px;
   color: black;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
-  padding: 10px 10px;
   position: relative;
   border: 2px rgba(0, 0, 0, 0) solid;
   transition: all 0.5s ease-in-out;
-  border: 2px solid #ededed;
 }
 
 .header .left-menu .left__top .item:hover {
-  background: linear-gradient(45deg, #5c986a 0%, #7fae8a 50%, #bad3c0 100%);
-}
-
-.header .left-menu .left__top .item:active {
-  border: 2px solid #ededed !important;
+  border: 2px solid #ededed;
 }
 
 .header .left-menu .left__top .item a {
   color: black;
+  width: 100%;
+  height: 100%;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-in-out;
+}
+
+.header .left-menu .left__top .item:hover a {
+  color: #5c986a;
+}
+
+.header .left-menu .left__top .active-navLink {
+  border: 2px solid #ededed;
+  color: #5c986a !important;
 }
 
 .header .left-menu .left__top .item a div {
@@ -166,17 +176,19 @@
 }
 
 .header .right-menu .right__top .item {
+  width: 150px;
+  height: 45px;
   background: rgba(255, 255, 255, 0);
   position: relative;
   text-transform: uppercase;
   font-size: 1rem;
-  padding: 10px 20px;
   border: 2px rgba(0, 0, 0, 0) solid;
   transition: all 0.5s ease-in-out;
-  border: 2px solid #ededed;
 }
 
 .header .right-menu .right__top .item a {
+  width: 100%;
+  height: 100%;
   position: relative;
   z-index: 2;
   color: black;
@@ -187,15 +199,20 @@
   transition: all 0.5s ease-in-out;
 }
 
+.header .right-menu .right__top .item:hover a {
+  color: #5c986a;
+}
+
 .header .right-menu .item:hover {
-  background: linear-gradient(45deg, #5c986a 0%, #7fae8a 50%, #bad3c0 100%);
+  border: 2px solid #ededed;
 }
 
-.header .item:hover a {
-  color: white !important;
+.header .right-menu .active-navLink {
+  border: 2px solid #ededed;
+  color: #5c986a !important;
 }
 
-.header .left-menu .left__top .item:hover a i {
+.header .right-menu .right__top .item:hover a i {
   transform: rotate(180deg);
 }
 
@@ -249,6 +266,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 3px solid #ededed;
 }
 
 .header2 .menu {
@@ -290,19 +308,19 @@
   transform: scale(1, 1);
 }
 
-.header2 .menu .active {
-  border: 3px solid #ededed;
-}
-
 .header2 .menu li a {
   display: flex;
   text-transform: uppercase;
   font-weight: 600;
-  color: #777;
   color: #5c986a;
   transition: all 0.3s ease;
 }
+
 .header2 .menu li:hover a {
+  color: #f4abad;
+}
+
+.header2 .menu .active-navLink {
   color: #f4abad;
 }
 
@@ -503,11 +521,11 @@
   }
 
   .header3 .cart-btn {
-    position: relative;
+    position: absolute;
     margin-left: auto;
     margin-right: 0;
-    left: 210px;
-    top: 2px;
+    right: 80px;
+    top: 10px;
   }
 
   .header3 .menu .cart-btn a {
@@ -551,7 +569,6 @@
     text-transform: uppercase;
     list-style: none;
     display: flex;
-    padding: 10px 20px;
     width: 100%;
     height: 60px;
     align-items: center;
@@ -559,6 +576,9 @@
   }
 
   .sidebar li a {
+    margin: 10px 20px;
+    width: 100%;
+    height: 100%;
     color: #5c986a;
     font-weight: 600;
     font-size: 1.1rem;

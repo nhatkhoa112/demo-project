@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './icon/typography-image-1-83x72.png';
 import cart from './icon/cart.png';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 let prevScrollY = 0;
 
 export const Header = () => {
@@ -31,21 +31,25 @@ export const Header = () => {
           <div className="left-menu">
             <div className="left__top">
               <div className=" item active ">
-                <Link to="/">Home</Link>
+                <NavLink activeClassName="active-navLink" to="/">
+                  Home
+                </NavLink>
               </div>
               <div className="item ">
-                <Link to="/about">About us</Link>
+                <NavLink activeClassName="active-navLink" to="/about">
+                  About us
+                </NavLink>
               </div>
               <div
                 className="item"
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
               >
-                <Link to="/products">
+                <NavLink activeClassName="active-navLink" to="/products">
                   <div>Products</div>
 
                   <i className="fas fa-chevron-up"></i>
-                </Link>
+                </NavLink>
               </div>
             </div>
             <div className="left__bottom">
@@ -54,23 +58,29 @@ export const Header = () => {
             </div>
           </div>
           <div className="logo">
-            <Link to="/">
+            <NavLink activeClassName="active-navLink" to="/">
               <img src={logo} alt="logo" />
               <span className="title">KoHaKu</span>
               <span>COSMETICS</span>
               <p>shop</p>
-            </Link>
+            </NavLink>
           </div>
           <div className="right-menu">
             <div className="right__top">
               <div className=" item ">
-                <Link to="/">News</Link>
+                <NavLink activeClassName="active-navLink" to="/news">
+                  News
+                </NavLink>
               </div>
               <div className="item ">
-                <Link to="/user/:id">Profile Page</Link>
+                <NavLink activeClassName="active-navLink" to="/user/:id">
+                  Profile Page
+                </NavLink>
               </div>
               <div className="item ">
-                <Link to="/login">SIGN IN / UP</Link>
+                <NavLink activeClassName="active-navLink" to="/login">
+                  SIGN IN / UP
+                </NavLink>
               </div>
             </div>
             <div className="right__bottom">
@@ -85,30 +95,40 @@ export const Header = () => {
               className="item 
             "
             >
-              <Link to="/">Home</Link>
+              <NavLink activeClassName="active-navLink" to="/">
+                Home
+              </NavLink>
             </li>
             <li className="item">
-              <Link to="/about">About us</Link>
+              <NavLink activeClassName="active-navLink" to="/about">
+                About us
+              </NavLink>
             </li>
             <li className="item">
-              <Link to="/products">
+              <NavLink activeClassName="active-navLink" to="/products">
                 <div>Products</div>
-              </Link>{' '}
+              </NavLink>{' '}
             </li>
             <li className="item">
-              <Link to="/">News</Link>
+              <NavLink activeClassName="active-navLink" to="/news">
+                News
+              </NavLink>
             </li>
             <li className="item">
-              <Link to="/user/:id">Profile </Link>
+              <NavLink activeClassName="active-navLink" to="/profiles">
+                Profile{' '}
+              </NavLink>
             </li>
             <li className="item">
-              <Link to="/login">SIGN IN / UP</Link>
+              <NavLink activeClassName="active-navLink" to="/login">
+                SIGN IN / UP
+              </NavLink>
             </li>
             <div className="cart-btn">
-              <Link to="cart">
+              <NavLink to="cart">
                 <img src={cart} alt="cart" />
                 <span className="count">0</span>
-              </Link>
+              </NavLink>
             </div>
           </ul>
         </div>
@@ -122,18 +142,18 @@ export const Header = () => {
           </div>
           <div className="logo">
             <img src={logo} alt="logo" />
-            <Link to="/">
+            <NavLink to="/">
               <div className="logo__title">
                 <span className="name">kohaku</span>
                 <span>cosmetics</span>
               </div>
-            </Link>
+            </NavLink>
           </div>
           <div className="cart-btn">
-            <Link to="cart">
+            <NavLink to="cart">
               <img src={cart} alt="cart" />
               <span className="count">0</span>
-            </Link>
+            </NavLink>
           </div>
           <div
             className="info-btn"
@@ -146,25 +166,35 @@ export const Header = () => {
 
       <div className={isOpen ? 'sidebar sidebar-show' : 'sidebar'}>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/">Home</Link>
+          <NavLink activeClassName="active-navLink" to="/">
+            Home
+          </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/about">About us</Link>
+          <NavLink activeClassName="active-navLink" to="/about">
+            About us
+          </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/products">
+          <NavLink activeClassName="active-navLink" to="/products">
             <div>Products</div>
             <i className="fas fa-chevron-right"></i>
-          </Link>{' '}
+          </NavLink>{' '}
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/">News</Link>
+          <NavLink activeClassName="active-navLink" to="/">
+            News
+          </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/user/:id">Profile Page</Link>
+          <NavLink activeClassName="active-navLink" to="/user/:id">
+            Profile Page
+          </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <Link to="/login">SIGN IN / UP</Link>
+          <NavLink activeClassName="active-navLink" to="/login">
+            SIGN IN / UP
+          </NavLink>
         </li>
       </div>
 

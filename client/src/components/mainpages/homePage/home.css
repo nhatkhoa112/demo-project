@@ -228,6 +228,124 @@
     margin: 5px;
   }
 }
+/* ------------Section1.1----------- */
+
+.home-page .section1-1 {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page .section1-1 .title img {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  z-index: 1;
+}
+
+.home-page .section1-1 .title {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  position: relative;
+}
+
+.home-page .section1-1 .title div {
+  z-index: 2;
+}
+
+.home-page .section1-1 .title::after {
+  content: '';
+  width: 10%;
+  height: 2px;
+  background: #f3a5a7;
+  position: absolute;
+  bottom: 0;
+}
+
+.section1-1 .slick-slider,
+.section1-1 .slick-list {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.section1-1 .slick-track {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.section1-1 .slick-slide {
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.section1-1 .slick-slide > div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.section1-1 .slick-slide {
+  margin: 0 5px;
+}
+
+.section1-1 .slick-slide *:focus {
+  outline: none;
+}
+/* carousel slider style end */
+
+.section1-1 .content__card {
+  width: 90% !important;
+  height: 160px;
+  padding: 15px;
+  margin: 10px 0;
+  text-align: center;
+  border: 1px solid #ccc;
+  transition: 0.5s all ease;
+  box-shadow: 0 3px 6px #ccc;
+}
+
+.section1-1 .content__card:hover {
+  box-shadow: 0 10px 20px #ccc;
+}
+
+.section1-1 .content__text {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.section1-1 .content__text .content__text_title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.section1-1 .content__text .content__text_body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
 
 /* ---------Section2------------ */
 
@@ -276,8 +394,6 @@
 .home-page .section2 .content {
   height: 80%;
 }
-
-/* ------------Section3----------- */
 
 /* ---------Section2------------ */
 
