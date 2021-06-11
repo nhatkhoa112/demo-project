@@ -273,6 +273,10 @@
   bottom: 0;
 }
 
+.section1-1 .slick-slider {
+  height: 100% !important;
+}
+
 .section1-1 .slick-slider,
 .section1-1 .slick-list {
   width: 100% !important;
@@ -315,7 +319,7 @@
   text-align: center;
   border: 1px solid #ccc;
   transition: 0.5s all ease;
-  box-shadow: 0 3px 6px #ccc;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .section1-1 .content__card:hover {
@@ -393,6 +397,189 @@
 
 .home-page .section2 .content {
   height: 80%;
+  padding: 20px;
+  background: #fff;
+}
+
+.section2 .slick-slider,
+.section2 .slick-list {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.section2 .slick-track {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.section2 .slick-slide {
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.section2 .slick-slide > div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.section2 .slick-slide {
+  margin: 0 00px;
+}
+
+.section2 .slick-slide *:focus {
+  outline: none;
+}
+
+.section2 .content .content__card {
+  width: 90% !important;
+  height: 60% !important;
+  padding: 15px;
+  margin: 10px 0;
+  text-align: center;
+  transition: 0.5s all ease;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  display: flex !important;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.section2 .content .content__card::after {
+  content: '';
+  position: absolute;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  top: 20px;
+  bottom: 20px;
+  right: 10px;
+  left: 10px;
+  z-index: 3;
+  transform: scaleX(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.section2 .content .content__card::before {
+  content: '';
+  position: absolute;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  left: 20px;
+  right: 20px;
+  top: 10px;
+  bottom: 10px;
+  z-index: 1;
+  transform: scaleY(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.section2 .content__card:hover::before {
+  transform: unset;
+}
+.section2 .content__card:hover::after {
+  transform: unset;
+}
+
+.section2 .content .content__card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.section2 .content .content__card:hover img {
+  transform: scale(1.05);
+}
+
+.section2 .content .text-content {
+  height: 70%;
+  width: 44%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.section2 .content .text-content .content_subtitle {
+  color: #ffa6a8;
+  font-family: 'Lato' sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.section2 .content .text-content .content_title {
+  color: black;
+  font-family: 'Lato' sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 5px 0 10px 0;
+}
+
+@media screen and (max-width: 700px) {
+  .section2 .content .text-content .content_subtitle {
+    font-size: 14px;
+  }
+  .section2 .content .text-content .content_title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .section2 .content .text-content .content_subtitle {
+    font-size: 16px;
+  }
+  .section2 .content .text-content .content_title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+}
+
+.section2 .text-content a {
+  margin-left: 2px;
+  color: black;
+  font-family: 'Lato' sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 23px;
+  width: 76px;
+  padding: 3px 0px 3px 0px;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.section2 a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  border-bottom: 2px solid #ffa6a8;
+  z-index: 5;
+  transform: scaleX(0);
+  transform-origin: 1 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.section2 a:hover::before {
+  transform: scaleX(1);
 }
 
 /* ---------Section2------------ */

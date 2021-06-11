@@ -1,24 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap');
+
 .about-page {
   width: 100%;
-  min-height: 200vh;
+  min-height: auto;
   position: absolute;
   top: 200px;
-  left: 0;
-  right: 0;
-  background: blue;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  justify-content: center;
+  z-index: 10;
+  background: #fff;
 }
 
+.about-page .section1 {
+  width: 100%;
+  height: 350px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./images/flower-page.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.about-page .section1 .content {
+  width: 66%;
+  height: 190px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  z-index: 11;
+}
+
+.about-page .section1 .content img {
+  margin-top: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.about-page .section1 .content .content__title {
+  width: 75%;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #525252;
+  letter-spacing: 0.025rem;
+}
+
+.about-page .breadcrumbs-custom {
+  display: flex;
+  list-style: none;
+}
+
+.breadcrumbs-custom > li:not(:last-child)::after {
+  padding: 0 3px 0 8px;
+  content: '/';
+  color: #aaaaaa;
+}
+
+.breadcrumbs-custom > li {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.71429;
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+.about-page .breadcrumbs-custom a {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.71429;
+  font-size: 14px;
+  color: #aaaaaa;
+}
+
+.about-page .breadcrumbs-custom a:hover {
+  color: black;
+}
+
+/* -----------------Section2---------------- */
+
+.about-page .section2 {
+  width: 100%;
+  height: auto;
+  background: #f3f3f3;
+  padding: 30px;
+  margin: 20px 0;
+}
+
+.about-page .section2 img {
+  width: 100%;
+  height: 320px;
+}
+
+.about-page .section2 .content {
+  width: 100%;
+  height: 130vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-page .section2 .content .introduce {
+  width: 100%;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-page .section2 .content .introduce .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 130px;
+  margin: 20px 0;
+}
+
+.about-page .section2 .content .introduce .title .first {
+  font-family: 'Marcellus', serif;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 4px;
+  margin: 5px;
+}
+
+.about-page .section2 .content .introduce .title .last {
+  font-family: 'Marcellus', serif;
+  font-size: 36px;
+  line-height: 46px;
+  letter-spacing: 6px;
+  margin: 5px;
+}
+
+.about-page .section2 .content .introduce .body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 60px;
+}
+
+.about-page .section2 .content .introduce img {
+  width: 50%;
+  height: 600px;
+}
+
+.about-page .section2 .content .introduce .body__right {
+  width: 50%;
+  height: 600px;
+  position: relative;
+  top: 80px;
+  font-family: 'Inter' sans-serif;
+  font-size: 16px;
+  background: #fff;
+  font-weight: 300;
+  line-height: 30px;
+  padding: 60px 40px;
+  margin: 10px 0px;
+}
+
+/* -------------------Section3--------------------------------- */
+.about-page .section3 {
+  width: 100%;
+  height: 100vh;
+}
+
+/* ---------------------media and max-width----------------- */
 @media screen and (max-width: 1200px) {
   .about-page {
     top: 160px;
+  }
+  .about-page .section1 .content {
+    width: 750px;
+    height: 190px;
+  }
+
+  .about-page .section2 img {
+    width: 100%;
+    height: 280px;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .about-page {
     top: 50px;
+  }
+
+  .about-page .section1 {
+    width: 100%;
+    height: 270px;
+  }
+
+  .about-page .section1 .content {
+    width: 600px;
+    height: 180px;
+  }
+
+  .about-page .section2 .content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-page .section2 img {
+    width: 100%;
+    height: 240px;
+  }
+
+  .about-page .section2 .content .introduce .title .first {
+    font-family: 'Marcellus', serif;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 4px;
+    margin: 5px;
+  }
+
+  .about-page .section2 .content .introduce .title .last {
+    font-family: 'Marcellus', serif;
+    font-size: 32px;
+    line-height: 46px;
+    letter-spacing: 6px;
+    margin: 5px;
+  }
+
+  .about-page .section2 .content .introduce {
+    height: auto;
+  }
+
+  .about-page .section2 .content .introduce img {
+    width: 100%;
+    height: 360px;
+  }
+
+  .about-page .section2 .content .introduce .body__right {
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .about-page .section2 .introduce .body img {
+    height: 300;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .about-page .section1 .content {
+    width: 90%;
+    height: 180px;
+  }
+
+  .about-page .section2 img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .about-page .section2 .introduce .body img {
+    height: 240px;
+    width: 100%;
+  }
+  .about-page .section2 .content .introduce .title .first {
+    font-family: 'Marcellus', serif;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 4px;
+    margin: 5px;
+  }
+
+  .about-page .section2 .content .introduce .title .last {
+    font-family: 'Marcellus', serif;
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: 6px;
+    margin: 5px;
+  }
+  .about-page .section2 .content .introduce .body__right {
+    width: 100%;
+    height: auto;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .about-page .section2 img {
+    width: 100%;
+    height: 140px;
   }
 }

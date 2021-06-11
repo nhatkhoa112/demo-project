@@ -8,7 +8,6 @@ export const Header = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isInforOpen, setIsInforOpen] = useState(false);
-  const [isHover, setIsHover] = useState(false);
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
     if (currentScrollY - prevScrollY > 200) {
@@ -40,11 +39,7 @@ export const Header = () => {
                   About us
                 </NavLink>
               </div>
-              <div
-                className="item"
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-              >
+              <div className="item">
                 <NavLink activeClassName="active-navLink" to="/products">
                   <div>Products</div>
 

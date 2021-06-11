@@ -2,13 +2,14 @@ import React from 'react';
 import './home.css';
 import image from './images/rose-green.png';
 import image2 from './images/typography-image-1-83x72.png';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 
 export const Home = () => {
   const settings = {
     // dots: true,
+
     autoplay: true,
     speed: 2000,
     slidesToShow: 3,
@@ -19,14 +20,16 @@ export const Home = () => {
       {
         breakpoint: 1000,
         settings: {
+          rtl: true,
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           autoplay: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 580,
         settings: {
+          rtl: true,
           slidesToShow: 1,
           slidesToScroll: 1,
         },
@@ -64,6 +67,7 @@ export const Home = () => {
             <img src={image2} alt="logo2" />
             <div>Why choose me?</div>
           </div>
+
           <Slider {...settings}>
             <div className="content__card">
               <svg
@@ -339,7 +343,52 @@ export const Home = () => {
             <img src={image2} alt="logo2" />
             <div>Visit Our Store</div>
           </div>
-          <div className="container content "></div>
+          <div className=" content ">
+            <Slider {...settings} dots={true} autoplay={false}>
+              <div className="content__card">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0549/7140/0399/files/collection1.1.jpg?v=1614935773"
+                  alt="product"
+                />
+                <div className="text-content">
+                  <div className="content_subtitle"> 20% Discount</div>
+                  <div className="content_title"> Coverage</div>
+                  <NavLink to="/products" className="content_navLink">
+                    {' '}
+                    Shop Now
+                  </NavLink>
+                </div>
+              </div>
+              <div className="content__card">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0549/7140/0399/files/collection1.2.jpg?v=1614935881"
+                  alt="product"
+                />
+                <div className="text-content">
+                  <div className="content_subtitle"> 20% Save</div>
+                  <div className="content_title"> Concealer Cream</div>
+                  <NavLink to="/products" className="content_navLink">
+                    {' '}
+                    Shop Now
+                  </NavLink>
+                </div>
+              </div>
+              <div className="content__card">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0549/7140/0399/files/collection1.3.jpg?v=1614935991"
+                  alt="product"
+                />
+                <div className="text-content">
+                  <div className="content_subtitle"> Most Popular</div>
+                  <div className="content_title"> Eyeshadow</div>
+                  <NavLink to="/products" className="content_navLink">
+                    {' '}
+                    Shop Now
+                  </NavLink>
+                </div>
+              </div>
+            </Slider>
+          </div>
         </section>
 
         <section className="section3">
@@ -347,7 +396,7 @@ export const Home = () => {
             <img src={image2} alt="logo2" />
             <div>Our Best Seller</div>
           </div>
-          <div className="container content "></div>
+          <div className=" content "></div>
         </section>
       </div>
     </motion.div>
