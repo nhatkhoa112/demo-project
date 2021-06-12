@@ -39,7 +39,7 @@ const settings = {
 
 const testimonials = [
   {
-    text: 'To say that I love Natural Cosmetics would be an understatement.I love all of your products and services. It’s great that everything you sell is from natural ingredients.',
+    text: 'To say that I love KoHaKu Cosmetics Shop would be an understatement.I love all of your products and services. It’s great that everything you sell is of excellent quality.',
     name: 'Yuki Mio',
     job: '(housewife)',
   },

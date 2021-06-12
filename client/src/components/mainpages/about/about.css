@@ -165,7 +165,7 @@
   height: 570px;
   position: relative;
   top: 80px;
-  font-family: 'Inter' sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   background: #fff;
   font-weight: 300;
@@ -274,9 +274,9 @@
   text-align: left;
   position: relative;
   color: #616161;
-  font-family: 'Inter' sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 24px;
 }
 
