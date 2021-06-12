@@ -39,9 +39,9 @@ export const Home = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ translateX: '-100vw', transition: { duration: 1 } }}
+      animate={{ translateX: '0', transition: { duration: 1 } }}
+      exit={{ translateX: '100vw', transition: { duration: 1 } }}
     >
       <div className="home-page">
         <section className="section1">
@@ -344,7 +344,7 @@ export const Home = () => {
             <div>Visit Our Store</div>
           </div>
           <div className=" content ">
-            <Slider {...settings} dots={true} autoplay={false}>
+            <Slider {...settings} dots={true} autoplay={false} speed={500}>
               <div className="content__card">
                 <img
                   src="https://cdn.shopify.com/s/files/1/0549/7140/0399/files/collection1.1.jpg?v=1614935773"

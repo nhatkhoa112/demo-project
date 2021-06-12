@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 
 .about-page {
   width: 100%;
   min-height: auto;
-  position: absolute;
-  top: 200px;
+  position: relative;
+  /* top: 200px; */
   z-index: 10;
   background: #fff;
 }
@@ -86,7 +89,6 @@
   height: auto;
   background: #f3f3f3;
   padding: 30px;
-  margin: 20px 0;
 }
 
 .about-page .section2 img {
@@ -116,6 +118,15 @@
   width: 100%;
   height: 130px;
   margin: 20px 0;
+  position: relative;
+}
+
+.about-page .section2 .content .introduce .title img {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  top: 50px;
+  z-index: 2;
 }
 
 .about-page .section2 .content .introduce .title .first {
@@ -124,6 +135,7 @@
   line-height: 20px;
   letter-spacing: 4px;
   margin: 5px;
+  z-index: 3;
 }
 
 .about-page .section2 .content .introduce .title .last {
@@ -132,6 +144,7 @@
   line-height: 46px;
   letter-spacing: 6px;
   margin: 5px;
+  z-index: 3;
 }
 
 .about-page .section2 .content .introduce .body {
@@ -144,12 +157,12 @@
 
 .about-page .section2 .content .introduce img {
   width: 50%;
-  height: 600px;
+  height: 550px;
 }
 
 .about-page .section2 .content .introduce .body__right {
   width: 50%;
-  height: 600px;
+  height: 570px;
   position: relative;
   top: 80px;
   font-family: 'Inter' sans-serif;
@@ -159,18 +172,166 @@
   line-height: 30px;
   padding: 60px 40px;
   margin: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #616161;
 }
 
 /* -------------------Section3--------------------------------- */
 .about-page .section3 {
+  margin-bottom: 20px;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-page .section3 .title {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.about-page .section3 .title img {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 15px;
+  z-index: 2;
+}
+
+.about-page .section3 .title .text {
+  z-index: 3;
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 0.15rem;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.about-page .section3 .title .subtext {
+  font-family: 'Merriweather' sans-serif;
+  font-size: 15px;
+  color: #616161;
+  position: relative;
+  z-index: 3;
+}
+
+.about-page .section3 .content {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+}
+
+.about-page .section3 .slick-slider {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.about-page .section3 .slick-list,
+.about-page .section3 .slick-track {
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  justify-content: center !important;
+}
+.section3 .slick-slide > div {
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.about-page .section3 .content__card {
+  width: 100% !important;
+  height: 80% !important;
+  text-align: center;
+  transition: 0.5s all ease;
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 10px;
+  border: 1.5px solid #ddcfcf;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px #ddcfcf;
+}
+
+.about-page .section3 .content__text {
+  padding: 0 25px;
+  text-align: left;
+  position: relative;
+  color: #616161;
+  font-family: 'Inter' sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.about-page .section3 .content__text .fa-quote-left {
+  left: 8px;
+  top: -5px;
+  position: absolute;
+  color: #71a57e;
+  font-size: 14px;
+}
+
+.about-page .section3 .content__text .fa-quote-right {
+  position: relative;
+  right: -1px;
+  bottom: 3px;
+  color: #71a57e;
+  font-size: 14px;
+}
+
+.about-page .section3 .content__name {
+  margin-top: 15px;
+  font-family: 'Roboto Condensed', Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  line-height: 1.2rem;
+  font-weight: 700;
+  color: #525252;
+  letter-spacing: 3px;
+  padding: 0 25px;
+  text-align: left;
+  width: 100%;
+}
+
+.about-page .section3 .content__job {
+  padding: 0 30px;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  color: #777;
+}
+
+.about-page .section3 .slick-dots li button {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.about-page .section3 .slick-dots li button::before {
+  width: 30px !important;
+  height: 30px !important;
+  color: #71a57e;
 }
 
 /* ---------------------media and max-width----------------- */
 @media screen and (max-width: 1200px) {
   .about-page {
-    top: 160px;
+    /* top: 160px; */
   }
   .about-page .section1 .content {
     width: 750px;
@@ -181,11 +342,15 @@
     width: 100%;
     height: 280px;
   }
+
+  .about-page .section3 .content__text {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 1000px) {
   .about-page {
-    top: 50px;
+    /* top: 50px; */
   }
 
   .about-page .section1 {
@@ -241,6 +406,10 @@
     font-size: 14px;
     top: 0;
   }
+
+  .about-page .section3 .content__text {
+    font-size: 16px;
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -248,12 +417,20 @@
     height: 300;
     width: 100%;
   }
+
+  .about-page .section3 .content__text {
+    font-size: 13px;
+  }
 }
 
 @media screen and (max-width: 678px) {
   .about-page .section1 .content {
     width: 90%;
     height: 180px;
+  }
+
+  .about-page .section2 .content .introduce .body {
+    padding: 20px 20px;
   }
 
   .about-page .section2 img {
@@ -291,5 +468,9 @@
   .about-page .section2 img {
     width: 100%;
     height: 140px;
+  }
+
+  .about-page .section3 .content__text {
+    font-size: 16px;
   }
 }
