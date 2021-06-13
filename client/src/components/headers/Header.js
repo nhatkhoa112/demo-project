@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import logo from './icon/typography-image-1-83x72.png';
 import cart from './icon/cart.png';
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { authActions } from '../../redux/actions';
 let prevScrollY = 0;
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  console.log(isAuthenticated);
   const [isScroll, setIsScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isInforOpen, setIsInforOpen] = useState(false);
@@ -73,9 +78,15 @@ export const Header = () => {
                 </NavLink>
               </div>
               <div className="item ">
-                <NavLink activeClassName="active-navLink" to="/login">
-                  SIGN IN / UP
-                </NavLink>
+                {isAuthenticated ? (
+                  <button onClick={() => dispatch(authActions.logout())}>
+                    Sign Out
+                  </button>
+                ) : (
+                  <NavLink activeClassName="active-navLink" to="/login">
+                    SIGN IN / UP
+                  </NavLink>
+                )}
               </div>
             </div>
             <div className="right__bottom">
@@ -115,9 +126,15 @@ export const Header = () => {
               </NavLink>
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" to="/login">
-                SIGN IN / UP
-              </NavLink>
+              {isAuthenticated ? (
+                <button onClick={() => dispatch(authActions.logout())}>
+                  Sign Out
+                </button>
+              ) : (
+                <NavLink activeClassName="active-navLink" to="/login">
+                  SIGN IN / UP
+                </NavLink>
+              )}
             </li>
             <div className="cart-btn">
               <NavLink to="cart">
@@ -128,17 +145,17 @@ export const Header = () => {
                   width={23}
                   id="svg2"
                   version="1.1"
-                  xmlnsDc="http://purl.org/dc/elements/1.1/"
-                  xmlnsCc="http://creativecommons.org/ns#"
-                  xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                  xmlnsSvg="http://www.w3.org/2000/svg"
+                  xmlnsdc="http://purl.org/dc/elements/1.1/"
+                  xmlnscc="http://creativecommons.org/ns#"
+                  xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                  xmlnssvg="http://www.w3.org/2000/svg"
                   xmlSpace="preserve"
                 >
                   <metadata id="metadata8">
                     <rdf>
-                      <work rdfAbout>
+                      <work rdfabout="true">
                         <format>image/svg+xml</format>
-                        <type rdfResource="http://purl.org/dc/dcmitype/StillImage" />
+                        <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
                       </work>
                     </rdf>
                   </metadata>
@@ -212,17 +229,17 @@ export const Header = () => {
                 width={23}
                 id="svg2"
                 version="1.1"
-                xmlnsDc="http://purl.org/dc/elements/1.1/"
-                xmlnsCc="http://creativecommons.org/ns#"
-                xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                xmlnsSvg="http://www.w3.org/2000/svg"
+                xmlnsdc="http://purl.org/dc/elements/1.1/"
+                xmlnscc="http://creativecommons.org/ns#"
+                xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlnssvg="http://www.w3.org/2000/svg"
                 xmlSpace="preserve"
               >
                 <metadata id="metadata8">
                   <rdf>
-                    <work rdfAbout>
+                    <work rdfabout="true">
                       <format>image/svg+xml</format>
-                      <type rdfResource="http://purl.org/dc/dcmitype/StillImage" />
+                      <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
                     </work>
                   </rdf>
                 </metadata>
@@ -302,9 +319,15 @@ export const Header = () => {
           </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" to="/login">
-            SIGN IN / UP
-          </NavLink>
+          {isAuthenticated ? (
+            <button onClick={() => dispatch(authActions.logout())}>
+              Sign Out
+            </button>
+          ) : (
+            <NavLink activeClassName="active-navLink" to="/login">
+              SIGN IN / UP
+            </NavLink>
+          )}
         </li>
       </div>
 

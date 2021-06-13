@@ -46,7 +46,6 @@ export const Home = () => {
     {
       img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/16.1.jpg?v=1614668428',
       title: 'Curl Impact Collagene',
-      sale: 15,
       price: 18,
     },
     {
@@ -58,7 +57,6 @@ export const Home = () => {
     {
       img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/14.1.jpg?v=1614667154',
       title: 'Curl Impact Collagene',
-      sale: 10,
       price: 30,
     },
     {
@@ -70,7 +68,6 @@ export const Home = () => {
     {
       img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/12.1.jpg?v=1614660993',
       title: 'Curl Impact Collagene',
-      sale: 20,
       price: 21,
     },
     {
@@ -451,11 +448,11 @@ export const Home = () => {
             <div className="products">
               {products.map((product, index) => {
                 return (
-                  <div className="card">
+                  <div key={index} className="card">
                     <img src={product.img} alt=" " />
-                    <span className="sale">Sale</span>
+                    {product.sale ? <span className="sale">Sale</span> : ''}
                     <div className="eye-icon">
-                      <i class="far fa-eye" height={20} width={20}></i>
+                      <i className="far fa-eye" height={20} width={20}></i>
                     </div>
                     <div className="cart-icon">
                       <svg
@@ -465,17 +462,17 @@ export const Home = () => {
                         width={20}
                         id="svg2"
                         version="1.1"
-                        xmlnsDc="http://purl.org/dc/elements/1.1/"
-                        xmlnsCc="http://creativecommons.org/ns#"
-                        xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                        xmlnsSvg="http://www.w3.org/2000/svg"
+                        xmlnsdc="http://purl.org/dc/elements/1.1/"
+                        xmlnscc="http://creativecommons.org/ns#"
+                        xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlnssvg="http://www.w3.org/2000/svg"
                         xmlSpace="preserve"
                       >
                         <metadata id="metadata8">
                           <rdf>
-                            <work rdfAbout>
+                            <work rdfabout="true">
                               <format>image/svg+xml</format>
-                              <type rdfResource="http://purl.org/dc/dcmitype/StillImage" />
+                              <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
                             </work>
                           </rdf>
                         </metadata>
@@ -523,12 +520,17 @@ export const Home = () => {
                     <div className="card__price">
                       <span className="final">
                         $
-                        {((product.price * (100 - product.sale)) / 100).toFixed(
-                          2
-                        )}
+                        {product.sale
+                          ? (
+                              (product.price * (100 - product.sale)) /
+                              100
+                            ).toFixed(2)
+                          : product.price}
                       </span>
                       <span>
-                        <strike>${product.price.toFixed(2)}</strike>
+                        <strike>
+                          {product.sale ? `$ ${product.price.toFixed(2)} ` : ''}
+                        </strike>
                       </span>
                     </div>
                   </div>

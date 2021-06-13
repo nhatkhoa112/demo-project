@@ -686,7 +686,7 @@
 
 .home-page .section3 .card .eye-icon,
 .home-page .section3 .card .cart-icon {
-  z-index: 8;
+  z-index: 199;
   position: absolute;
   width: 35px;
   height: 35px;
@@ -697,9 +697,10 @@
   border-radius: 50%;
   transition: all 0.5s ease-in-out;
   transform: translateX(100px);
+  cursor: pointer;
 }
 .home-page .section3 .card .cart-icon {
-  transition: all 0.5s 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .home-page .section3 .card .eye-icon {
@@ -707,9 +708,31 @@
   right: 20px;
 }
 
+.home-page .section3 .card .eye-icon i,
+.home-page .section3 .card .cart-icon #path14,
+.home-page .section3 .card .cart-icon #path16,
+.home-page .section3 .card .cart-icon #path18 {
+  transition: all 0.5s ease-in-out;
+}
+
 .home-page .section3 .card:hover .eye-icon,
 .home-page .section3 .card:hover .cart-icon {
   transform: translateX(0px);
+}
+
+.home-page .section3 .card .eye-icon:hover,
+.home-page .section3 .card .cart-icon:hover {
+  background: black;
+}
+
+.home-page .section3 .card .eye-icon:hover i {
+  color: white;
+}
+
+.home-page .section3 .card .cart-icon:hover #path14,
+.home-page .section3 .card .cart-icon:hover #path18,
+.home-page .section3 .card .cart-icon:hover #path16 {
+  fill: white !important;
 }
 
 .home-page .section3 .card .cart-icon {
