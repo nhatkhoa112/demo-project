@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import logo from './icon/typography-image-1-83x72.png';
-import cart from './icon/cart.png';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../../redux/actions';
@@ -9,7 +8,9 @@ let prevScrollY = 0;
 export const Header = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  console.log(isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
+  const profileRoute = `/auth/${user.id}`;
   const [isScroll, setIsScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isInforOpen, setIsInforOpen] = useState(false);
@@ -73,8 +74,12 @@ export const Header = () => {
                 </NavLink>
               </div>
               <div className="item ">
-                <NavLink activeClassName="active-navLink" to="/user/:id">
-                  Profile Page
+                <NavLink
+                  activeClassName="active-navLink"
+                  exact
+                  to={profileRoute}
+                >
+                  Profile
                 </NavLink>
               </div>
               <div className="item ">
@@ -121,7 +126,7 @@ export const Header = () => {
               </NavLink>
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" to="/profiles">
+              <NavLink activeClassName="active-navLink" exact to={profileRoute}>
                 Profile{' '}
               </NavLink>
             </li>
@@ -136,6 +141,63 @@ export const Header = () => {
                 </NavLink>
               )}
             </li>
+
+            {isAuthenticated ? (
+              <div className="user-btn">
+                <NavLink to={`user/${user.id}`}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 400 400"
+                    height={23}
+                    width={23}
+                    id="svg2"
+                    version="1.1"
+                    xmlnsdc="http://purl.org/dc/elements/1.1/"
+                    xmlnscc="http://creativecommons.org/ns#"
+                    xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                    xmlnssvg="http://www.w3.org/2000/svg"
+                    xmlSpace="preserve"
+                  >
+                    <metadata id="metadata8">
+                      <rdf>
+                        <work rdfabout="true">
+                          <format>image/svg+xml</format>
+                          <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
+                        </work>
+                      </rdf>
+                    </metadata>
+                    <defs id="defs6" />
+                    <g
+                      transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
+                      id="g10"
+                    >
+                      <g transform="scale(0.1)" id="g12">
+                        <path
+                          id="path14"
+                          style={{
+                            fillOpacity: 1,
+                            fillRule: 'nonzero',
+                            stroke: 'none',
+                          }}
+                          d="m 1506.87,2587.11 c -225.04,0 -408.14,-183.08 -408.14,-408.11 0,-225.06 183.1,-408.13 408.14,-408.13 225.02,0 408.13,183.07 408.13,408.13 0,225.03 -183.11,408.11 -408.13,408.11 z m 0,-1038.56 c -347.64,0 -630.432,282.79 -630.432,630.45 0,347.63 282.792,630.43 630.432,630.43 347.63,0 630.42,-282.8 630.42,-630.43 0,-347.66 -282.79,-630.45 -630.42,-630.45 v 0"
+                        />
+                        <path
+                          id="path16"
+                          style={{
+                            fillOpacity: 1,
+                            fillRule: 'nonzero',
+                            stroke: 'none',
+                          }}
+                          d="M 399.648,361.789 H 2614.07 c -25.06,261.531 -139.49,503.461 -327.47,689.831 -124.25,123.14 -300.78,193.96 -483.86,193.96 h -591.76 c -183.61,0 -359.601,-70.82 -483.863,-193.96 C 539.148,865.25 424.719,623.32 399.648,361.789 Z M 2730.69,139.461 H 283.035 c -61.558,0 -111.16,49.59 -111.16,111.16 0,363.438 141.68,704 398.32,959.019 165.657,164.55 399.414,258.82 640.785,258.82 h 591.76 c 241.94,0 475.14,-94.27 640.8,-258.82 256.63,-255.019 398.31,-595.581 398.31,-959.019 0,-61.57 -49.59,-111.16 -111.16,-111.16 v 0"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </NavLink>
+              </div>
+            ) : (
+              ''
+            )}
             <div className="cart-btn">
               <NavLink to="cart">
                 <svg
@@ -220,6 +282,62 @@ export const Header = () => {
               </div>
             </NavLink>
           </div>
+          {isAuthenticated ? (
+            <div className="user-btn">
+              <NavLink to={`user/${user.id}`}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 400 400"
+                  height={23}
+                  width={23}
+                  id="svg2"
+                  version="1.1"
+                  xmlnsdc="http://purl.org/dc/elements/1.1/"
+                  xmlnscc="http://creativecommons.org/ns#"
+                  xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                  xmlnssvg="http://www.w3.org/2000/svg"
+                  xmlSpace="preserve"
+                >
+                  <metadata id="metadata8">
+                    <rdf>
+                      <work rdfabout="true">
+                        <format>image/svg+xml</format>
+                        <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
+                      </work>
+                    </rdf>
+                  </metadata>
+                  <defs id="defs6" />
+                  <g
+                    transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
+                    id="g10"
+                  >
+                    <g transform="scale(0.1)" id="g12">
+                      <path
+                        id="path14"
+                        style={{
+                          fillOpacity: 1,
+                          fillRule: 'nonzero',
+                          stroke: 'none',
+                        }}
+                        d="m 1506.87,2587.11 c -225.04,0 -408.14,-183.08 -408.14,-408.11 0,-225.06 183.1,-408.13 408.14,-408.13 225.02,0 408.13,183.07 408.13,408.13 0,225.03 -183.11,408.11 -408.13,408.11 z m 0,-1038.56 c -347.64,0 -630.432,282.79 -630.432,630.45 0,347.63 282.792,630.43 630.432,630.43 347.63,0 630.42,-282.8 630.42,-630.43 0,-347.66 -282.79,-630.45 -630.42,-630.45 v 0"
+                      />
+                      <path
+                        id="path16"
+                        style={{
+                          fillOpacity: 1,
+                          fillRule: 'nonzero',
+                          stroke: 'none',
+                        }}
+                        d="M 399.648,361.789 H 2614.07 c -25.06,261.531 -139.49,503.461 -327.47,689.831 -124.25,123.14 -300.78,193.96 -483.86,193.96 h -591.76 c -183.61,0 -359.601,-70.82 -483.863,-193.96 C 539.148,865.25 424.719,623.32 399.648,361.789 Z M 2730.69,139.461 H 283.035 c -61.558,0 -111.16,49.59 -111.16,111.16 0,363.438 141.68,704 398.32,959.019 165.657,164.55 399.414,258.82 640.785,258.82 h 591.76 c 241.94,0 475.14,-94.27 640.8,-258.82 256.63,-255.019 398.31,-595.581 398.31,-959.019 0,-61.57 -49.59,-111.16 -111.16,-111.16 v 0"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </NavLink>
+            </div>
+          ) : (
+            ''
+          )}
           <div className="cart-btn">
             <NavLink to="cart">
               <svg
@@ -314,7 +432,7 @@ export const Header = () => {
           </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" to="/user/:id">
+          <NavLink activeClassName="active-navLink" exact to={profileRoute}>
             Profile Page
           </NavLink>
         </li>

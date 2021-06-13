@@ -34,30 +34,22 @@ const authReducer = (state = initialState, action) => {
       return { ...state, loading: true };
 
     case types.VERIFY_EMAIL_SUCCESS:
+      return { ...state, loading: false };
+    case types.REGISTER_SUCCESS:
       localStorage.setItem('accessToken', payload.accesstoken);
       localStorage.setItem('koHaUser', JSON.stringify(payload.user));
       console.log(payload.user);
       return {
         ...state,
         loading: false,
+        isAuthenticated: true,
         user: {
           ...state.user,
-          isAuthenticated: true,
-          user: {
-            ...state.user,
-            name: payload.user.name,
-            email: payload.user.email,
-            id: payload.user._id,
-            avatar: payload.user.avatar,
-          },
+          name: payload.user.name,
+          email: payload.user.email,
+          id: payload.user._id,
+          avatar: payload.user.avatar,
         },
-      };
-
-    case types.REGISTER_SUCCESS:
-      console.log(payload);
-      return {
-        ...state,
-        loading: false,
       };
 
     case types.LOGIN_SUCCESS:

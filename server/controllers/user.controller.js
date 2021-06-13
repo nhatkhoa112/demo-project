@@ -13,7 +13,6 @@ const userController = {
   register: async (req, res) => {
     try {
       const { name, email, password, avatar } = req.body;
-
       if (!name || !email || !password)
         return res.status(400).json({ msg: 'Please fill in all fields.' });
 
@@ -23,6 +22,11 @@ const userController = {
       const user = await User.findOne({ email });
       if (user)
         return res.status(400).json({ msg: 'This email already exists.' });
+
+      if ((avatar = '')) {
+        avatar =
+          'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png';
+      }
 
       if (password.length < 6)
         return res
@@ -38,44 +42,12 @@ const userController = {
         avatar,
       };
 
-      const activation_token = createActivationToken(newUser);
+      const newUser1 = await User(newUser);
 
-      const url = `${CLIENT_URL}/user/activate/${activation_token}`;
-      sendMail(email, url, 'Verify your email address');
+      await newUser1.save();
 
-      res.json({
-        msg: 'Register Success! Please activate your email to start.',
-      });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
-    }
-  },
-
-  activateEmail: async (req, res) => {
-    try {
-      const { activation_token } = req.body;
-      const user = jwt.verify(
-        activation_token,
-        process.env.ACTIVATION_TOKEN_SECRET
-      );
-
-      const { name, email, password, avatar } = user;
-
-      const check = await User.findOne({ email });
-      if (check)
-        return res.status(400).json({ msg: 'This email already exists.' });
-
-      const newUser = new User({
-        name,
-        email,
-        password,
-        avatar,
-      });
-
-      await newUser.save();
-
-      const accesstoken = createAccessToken({ id: user._id });
-      const refreshtoken = createRefreshToken({ id: user._id });
+      const accesstoken = createAccessToken({ id: newUser._id });
+      const refreshtoken = createRefreshToken({ id: newUser._id });
 
       res.cookie('refreshtoken', refreshtoken, {
         httpOnly: true,
@@ -84,13 +56,15 @@ const userController = {
       });
 
       res.json({
-        msg: 'Account has been activated!',
+        msg: 'Create account successfully!',
         data: { accesstoken, user: newUser },
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
   },
+
+  activateEmail: async (req, res) => {},
 
   login: async (req, res) => {
     try {

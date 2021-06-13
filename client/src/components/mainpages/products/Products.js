@@ -2,6 +2,7 @@ import React from 'react';
 import './Products.css';
 import { motion } from 'framer-motion';
 
+
 export const Products = () => {
   return (
     <>

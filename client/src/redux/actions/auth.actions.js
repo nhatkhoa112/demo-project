@@ -33,9 +33,12 @@ const register = (user) => async (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST, payload: null });
   try {
     const { data } = await api.post('/user/register', user);
+    const name = data.data.user.name;
     dispatch({ type: types.REGISTER_SUCCESS, payload: data.data });
     dispatch(routeActions.redirect('/'));
-    toast.success(`Thank you for your registration!`);
+    api.defaults.headers.common['authorization'] = data.data.accesstoken;
+    api.defaults.headers['authorization'] = data.data.accesstoken;
+    toast.success(`Welcome to my store, ${name}! `);
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });
     console.log(error);
@@ -43,17 +46,17 @@ const register = (user) => async (dispatch) => {
 };
 
 const verifyEmail = (activation_token) => async (dispatch) => {
-  dispatch({ type: types.VERIFY_EMAIL_REQUEST, payload: null });
-  try {
-    const { data } = await api.post('/user/activation', { activation_token });
-    dispatch({ type: types.VERIFY_EMAIL_SUCCESS, payload: data.data });
-    const name = data.data.user.name;
-    toast.success(`Welcome, ${name}! Your email address has been verified.`);
-    api.defaults.headers.common['authorization'] = data.data.accesstoken;
-    api.defaults.headers['authorization'] = data.data.accesstoken;
-  } catch (error) {
-    dispatch({ type: types.VERIFY_EMAIL_FAILURE, payload: error });
-  }
+  // dispatch({ type: types.VERIFY_EMAIL_REQUEST, payload: null });
+  // try {
+  //   const { data } = await api.post('/user/activation', { activation_token });
+  //   dispatch({ type: types.VERIFY_EMAIL_SUCCESS, payload: data.data });
+  //   const name = data.data.user.name;
+  //   toast.success(`Welcome, ${name}! Your email address has been verified.`);
+  //   api.defaults.headers.common['authorization'] = data.data.accesstoken;
+  //   api.defaults.headers['authorization'] = data.data.accesstoken;
+  // } catch (error) {
+  //   dispatch({ type: types.VERIFY_EMAIL_FAILURE, payload: error });
+  // }
 };
 
 const updateProfile = (name, avatarUrl) => async (dispatch) => {

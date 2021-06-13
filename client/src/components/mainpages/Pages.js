@@ -28,7 +28,7 @@ export const MainPages = () => {
           component={ActivationPage}
         />
         <Route path="/product/detail/:id" exact component={DetailProduct} />
-        <PrivateRoute path="/user/:id" exact component={ProfilePage} />
+        <PrivateRoute path="/auth/:id" exact component={ProfilePage} />
         <Route path="*" exact component={NotFound} />
       </Switch>
     </AnimatePresence>

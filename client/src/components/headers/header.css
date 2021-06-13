@@ -83,6 +83,10 @@
   color: #5c986a !important;
 }
 
+.header .right-menu .right__top .active-navLink {
+  border: 2px solid #ededed !important;
+  color: #5c986a !important ;
+}
 .header .left-menu .left__top .item a div {
   margin-right: 8px;
 }
@@ -221,6 +225,11 @@
 .header .right-menu .right__top .item:hover a,
 .header .right-menu .right__top .item:hover button {
   color: #5c986a;
+}
+
+.header .right-menu .right__top .item .active-link {
+  border: 2px solid #ededed;
+  color: #5c986a !important;
 }
 
 .header .right-menu .item:hover {
@@ -412,6 +421,10 @@
   transform: scaleX(1);
 }
 
+.header2 .menu .active-link::after {
+  transform: scaleX(1);
+}
+
 .header2 .menu li:hover::after {
   transform: scaleX(0);
 }
@@ -430,6 +443,16 @@
 }
 
 .header2 .menu .cart-btn a {
+  color: black;
+}
+
+.header2 .menu .user-btn {
+  position: relative;
+  left: 80px;
+  top: 2px;
+}
+
+.header2 .menu .user-btn a {
   color: black;
 }
 
@@ -616,8 +639,16 @@
     position: absolute;
     margin-left: auto;
     margin-right: 0;
-    right: 80px;
-    top: 10px;
+    right: 70px;
+    top: 12px;
+  }
+
+  .header3 .user-btn {
+    position: absolute;
+    margin-left: auto;
+    margin-right: 0;
+    right: 105px;
+    top: 14px;
   }
 
   .header3 .menu .cart-btn a {
