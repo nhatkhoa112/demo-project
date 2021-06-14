@@ -3,11 +3,16 @@ import { useParams } from 'react-router-dom';
 import './profilePage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import image from './image/rose-green.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export const ProfilePage = () => {
   const { id } = useParams();
   const user = useSelector((state) => state.auth.user);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  console.log(isAuthenticated);
+  if (!isAuthenticated) return <Redirect to="/" />;
+
   return (
     <div className="profile-page">
       <section className="section1">

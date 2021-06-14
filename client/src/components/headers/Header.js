@@ -77,7 +77,7 @@ export const Header = () => {
                 <NavLink
                   activeClassName="active-navLink"
                   exact
-                  to={profileRoute}
+                  to={isAuthenticated ? profileRoute : '/'}
                 >
                   Profile
                 </NavLink>
@@ -126,7 +126,11 @@ export const Header = () => {
               </NavLink>
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" exact to={profileRoute}>
+              <NavLink
+                activeClassName="active-navLink"
+                exact
+                to={isAuthenticated ? profileRoute : '/'}
+              >
                 Profile{' '}
               </NavLink>
             </li>
@@ -144,7 +148,7 @@ export const Header = () => {
 
             {isAuthenticated ? (
               <div className="user-btn">
-                <NavLink to={`user/${user.id}`}>
+                <NavLink to={isAuthenticated ? profileRoute : '/'}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 400 400"
@@ -284,7 +288,7 @@ export const Header = () => {
           </div>
           {isAuthenticated ? (
             <div className="user-btn">
-              <NavLink to={`user/${user.id}`}>
+              <NavLink to={isAuthenticated ? profileRoute : '/'}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 400 400"
@@ -432,7 +436,11 @@ export const Header = () => {
           </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" exact to={profileRoute}>
+          <NavLink
+            activeClassName="active-navLink"
+            exact
+            to={isAuthenticated ? profileRoute : '/'}
+          >
             Profile Page
           </NavLink>
         </li>

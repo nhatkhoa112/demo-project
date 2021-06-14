@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = require('mongoose').Schema;
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please enter your password!'],
     },
+    orders: [{ ref: 'Order', type: Schema.Types.ObjectId, trim: true }],
     role: {
       type: Number,
       default: 0, // 0 = user, 1 = admin

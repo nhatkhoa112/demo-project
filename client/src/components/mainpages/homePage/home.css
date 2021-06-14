@@ -584,6 +584,13 @@
   transform: scaleX(1);
 }
 
+@media screen and (max-width: 580px) {
+  .section2 .content .text-content .content_title {
+    font-size: 23px;
+    line-height: 34px;
+  }
+}
+
 /* ---------Section2------------ */
 
 .home-page .section3 {
@@ -700,10 +707,12 @@
   cursor: pointer;
 }
 .home-page .section3 .card .cart-icon {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s 0.15s ease-in-out;
 }
 
 .home-page .section3 .card .eye-icon {
+  transition: all 0.5s ease-in-out;
+
   top: 60px;
   right: 20px;
 }

@@ -430,7 +430,7 @@
   }
 
   .about-page .section2 .content .introduce .body {
-    padding: 20px 20px;
+    padding: 20px 0px;
   }
 
   .about-page .section2 img {
@@ -471,6 +471,6 @@
   }
 
   .about-page .section3 .content__text {
-    font-size: 16px;
+    font-size: 15px;
   }
 }

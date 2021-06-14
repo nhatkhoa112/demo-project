@@ -52,8 +52,15 @@ class APIfeatures {
 const productController = {
   create: async (req, res) => {
     try {
-      const { product_id, title, price, description, content, images, sale } =
-        req.body;
+      const {
+        product_id,
+        title,
+        price,
+        description,
+        images,
+        sale,
+        categories,
+      } = req.body;
       if (!images) return res.status(400).json({ msg: 'No image upload' });
       const product = await Product.findOne({ product_id });
       if (product)
@@ -65,6 +72,7 @@ const productController = {
         description,
         images,
         sale,
+        categories,
       });
       await newProduct.save();
       res.json({ msg: 'Created a product', data: { product: newProduct } });

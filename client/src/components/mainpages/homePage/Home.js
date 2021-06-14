@@ -15,6 +15,7 @@ export const Home = () => {
     slidesToScroll: 1,
     cssEase: 'linear',
     infinite: true,
+    autoplay: false,
     responsive: [
       {
         breakpoint: 1000,
@@ -31,6 +32,7 @@ export const Home = () => {
           rtl: true,
           slidesToShow: 1,
           slidesToScroll: 1,
+          autoplay: true,
         },
       },
     ],
