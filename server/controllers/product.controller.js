@@ -8,13 +8,9 @@ class APIfeatures {
 
   filtering() {
     const queryObj = { ...this.queryString };
-
     //queryString = req.query
-
     const excludedFields = ['page', 'sort', 'limit'];
-
     excludedFields.forEach((el) => delete queryObj[el]);
-
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(
       /\b(gte|gt|lt|lte|regex)\b/g,
@@ -25,7 +21,6 @@ class APIfeatures {
     //    lt = lesser than
     //    gt = greater than
     this.query.find(JSON.parse(queryStr));
-
     return this;
   }
 
@@ -36,7 +31,6 @@ class APIfeatures {
     } else {
       this.query = this.query.sort('-createdAt');
     }
-
     return this;
   }
 
@@ -60,6 +54,7 @@ const productController = {
         images,
         sale,
         categories,
+        reviews,
       } = req.body;
       if (!images) return res.status(400).json({ msg: 'No image upload' });
       const product = await Product.findOne({ product_id });
@@ -73,6 +68,7 @@ const productController = {
         images,
         sale,
         categories,
+        reviews,
       });
       await newProduct.save();
       res.json({ msg: 'Created a product', data: { product: newProduct } });
@@ -80,8 +76,11 @@ const productController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   get: async (req, res) => {
     try {
+      const total = await Product.find().count();
+
       const features = new APIfeatures(Product.find(), req.query)
         .filtering()
         .sorting()
@@ -92,11 +91,26 @@ const productController = {
         status: 'success',
         result: products.length,
         products: products,
+        total: total,
       });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
   },
+
+  getProductById: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const product = await Product.findOne({ _id: id }).populate('categories');
+      if (!product)
+        return res.status(400).json({ msg: 'Product is not existed' });
+
+      res.json({ msg: 'Here is your product:', product });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
   delete: async (req, res) => {
     try {
       const product = await Product.findByIdAndDelete(req.params.id);

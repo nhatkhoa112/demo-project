@@ -134,6 +134,16 @@
 
 @media screen and (max-width: 460px) {
   .footer-page .content {
-    padding-left: 60px;
+    padding-left: 30px;
+  }
+
+  .footer-page .content .content__links,
+  .footer-page .content .content__categories,
+  .footer-page .content .content__info {
+    width: 200px;
+    min-width: 200px;
+  }
+  .footer-page .content .content__info .text__item .email {
+    font-size: 12px;
   }
 }

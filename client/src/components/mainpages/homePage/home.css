@@ -207,7 +207,7 @@
 
 @media screen and (max-width: 420px) {
   .home-page .section1 .content {
-    width: 350px;
+    width: 90% !important;
     height: 400px;
   }
 

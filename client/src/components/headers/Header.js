@@ -11,6 +11,7 @@ export const Header = () => {
   const user = useSelector((state) => state.auth.user);
 
   const profileRoute = `/auth/${user.id}`;
+  const cartRoute = `/cart`;
   const [isScroll, setIsScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isInforOpen, setIsInforOpen] = useState(false);
@@ -203,7 +204,7 @@ export const Header = () => {
               ''
             )}
             <div className="cart-btn">
-              <NavLink to="cart">
+              <NavLink to={cartRoute}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 400 400"
@@ -343,7 +344,7 @@ export const Header = () => {
             ''
           )}
           <div className="cart-btn">
-            <NavLink to="cart">
+            <NavLink to={cartRoute}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 400 400"

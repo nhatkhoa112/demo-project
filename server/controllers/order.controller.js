@@ -9,6 +9,7 @@ const ordersController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   getOrderOfUser: async (req, res) => {
     try {
       const { userId } = req.params;
@@ -26,6 +27,7 @@ const ordersController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   createOrder: async (req, res) => {
     const owner = req.user.id;
     const { orderItems } = req.body;
@@ -41,15 +43,33 @@ const ordersController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   updateOrder: async (req, res) => {
-    res.json(req.user);
+    try {
+      const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body },
+        { new: true }
+      );
+
+      if (!order)
+        return res.status(404).json({ msg: 'The order is not exists.' });
+
+      res.status(200).json({ msg: 'Deleted order successfully', order });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   },
+
   deleteOrder: async (req, res) => {
-    const id = req.user.id;
     try {
       const order = await Order.findByIdAndDelete(req.params.id);
+      if (!order)
+        return res.status(404).json({ msg: 'The order is not exists.' });
       res.status(200).json({ msg: 'Deleted order successfully', order });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   },
 };
 

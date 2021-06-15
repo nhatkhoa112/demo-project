@@ -1,81 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { productActions } from '../../../redux/actions';
 import './DetailProduct.css';
-import image from './image/alexandra-gorn-CJ6SJO_yR5w-unsplash.jpeg';
-import image2 from './image/revolt-164_6wVEHfI-unsplash.jpeg';
-import image3 from './image/jakob-owens-JzJSybPFb3s-unsplash.jpeg';
-import image4 from './image/wengang-zhai-_fOL6ebfECQ-unsplash.jpeg';
+import { Loading } from '../utils/loading/Loading';
 
 export const DetailProduct = () => {
-  const productImages = [
-    { id: 0, img: image },
-    { id: 1, img: image2 },
-    { id: 2, img: image3 },
-    { id: 3, img: image4 },
-  ];
-  const [selectImage, setSelectImage] = useState(productImages[0].img);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.selectProduct);
+  const { loading } = useSelector((state) => state.products);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    const idx = e.target.getAttribute('data-index');
-    setSelectImage(productImages[idx].img);
-  };
+  useEffect(() => {
+    dispatch(productActions.getProductById(id));
+  }, [dispatch, id]);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="detail-page">
-      <div className="hero">
-        <div className="row">
-          <div className="col">
-            <div className="slider">
-              <div className="preview">
-                <img src={selectImage} id="imagebox" alt="" />
-              </div>
-              <div className="product">
-                {productImages.map((image) => {
-                  return (
-                    <img
-                      key={image.id}
-                      data-index={image.id}
-                      src={image.img}
-                      alt=""
-                      onClick={handleClick}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+      <div className="detail">
+        <div className="images">
+          <img
+            src={product.images?.length > 0 && product.images[0].url}
+            alt=""
+          />
+        </div>
+        <div className="box-detail">
+          <div className="row">
+            <h2>{product.title}</h2>
+            <h6>#id: {product.product_id}</h6>
           </div>
-          <div className="col">
-            <div className="content">
-              <p className="brand">Brand: Varanga</p>
-              <h2>Woman Black Quirky Print Empire Dress</h2>
-              <div className="rating">
-                <i className="fa fa-star" />
-                <i className="fa fa-star" />
-                <i className="fa fa-star" />
-                <i className="fa fa-star" />
-                <i className="fa fa-star-half-o" />
-              </div>
-              <p className="price">Brand: Varanga</p>
-              <p>
-                Size:{' '}
-                <select name="size">
-                  <option value="select size">select size</option>
-                  <option value="small">small</option>
-                  <option value="medium">medium</option>
-                  <option value="large">large</option>
-                </select>
-              </p>
-              <p>
-                Quantity: <input type="text" defaultValue={1} />
-              </p>
-              <button type="button">
-                <i className="fa fa-shopping-cart" />
-                Add to cart
-              </button>
-            </div>
-          </div>
+          <span>$ {product.price}</span>
+          <p>{product.description}</p>
+          <p>{product.content}</p>
+          <p>Sold: {product.sold}</p>
+          <Link
+            to="/cart"
+            className="cart"
+            // onClick={() => addCart(detailProduct)}
+          >
+            Buy Now
+          </Link>
         </div>
       </div>
+
+      {/* <div>
+        <h2>Related products</h2>
+        <div className="products">
+          {products.map((product) => {
+            return product.category === detailProduct.category ? (
+              <ProductItem key={product._id} product={product} />
+            ) : null;
+          })}
+        </div>
+      </div> */}
     </div>
   );
 };
