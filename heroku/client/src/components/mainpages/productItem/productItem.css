@@ -1,0 +1,194 @@
+.card {
+  width: 23%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 210px;
+  margin-bottom: 20px;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.card > span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  background: red;
+  padding: 5px 15px;
+  color: White;
+  font-family: 'Lato';
+  font-weight: 500;
+}
+
+.card .eye-icon,
+.card .cart-icon {
+  z-index: 199;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
+  transform: translateX(100px);
+  cursor: pointer;
+}
+.card .cart-icon {
+  transition: all 0.5s 0.15s ease-in-out;
+}
+
+.card .eye-icon {
+  transition: all 0.5s ease-in-out;
+
+  top: 60px;
+  right: 20px;
+}
+
+.card .eye-icon i,
+.card .cart-icon #path14,
+.card .cart-icon #path16,
+.card .cart-icon #path18 {
+  transition: all 0.5s ease-in-out;
+}
+
+.card:hover .eye-icon,
+.card:hover .cart-icon {
+  transform: translateX(0px);
+}
+
+.card .eye-icon:hover,
+.card .cart-icon:hover {
+  background: black;
+}
+
+.card .eye-icon:hover i {
+  color: white;
+}
+
+.card .cart-icon:hover #path14,
+.card .cart-icon:hover #path18,
+.card .cart-icon:hover #path16 {
+  fill: white !important;
+}
+
+.card .cart-icon {
+  top: 120px;
+  right: 20px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  max-height: 320px;
+  transition: all 0.5s ease-in-out;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  top: 20px;
+  bottom: 110px;
+  right: 10px;
+  left: 10px;
+  z-index: 3;
+  transform: scaleX(0);
+  transition: all 0.5s ease-in-out;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  left: 20px;
+  right: 20px;
+  top: 10px;
+  bottom: 100px;
+  z-index: 1;
+  transform: scaleY(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.card:hover::before {
+  transform: unset;
+}
+.card:hover::after {
+  transform: unset;
+}
+
+.card .zoom {
+  max-height: 236px;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}
+
+.card .card__title {
+  min-height: 60px;
+  width: 100%;
+  padding: 0px 20px;
+  margin: 10px 10px 0px 10px;
+  font-family: 'Lato';
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.card .card__title:hover {
+  color: #ffa6a8;
+}
+
+.card .card__price {
+  padding: 0px 20px;
+  width: 100%;
+  margin: 0 10px;
+}
+
+.card .card__price span {
+  margin-right: 15px;
+  color: #ccc;
+}
+
+.card .card__price .final {
+  color: #ffa6a8;
+}
+
+@media screen and (max-width: 480px) {
+  .content .card {
+    min-width: 160px;
+  }
+}
+
+/* ------------media max width ------------------ */
+
+@media screen and (max-width: 578px) {
+  .title {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .card {
+    min-width: 150px;
+  }
+
+  .card__title {
+    font-size: 12px !important;
+    max-height: 30px;
+    min-height: 30px !important;
+    line-height: 18px !important;
+  }
+
+  .card__price {
+    font-size: 12px;
+  }
+}

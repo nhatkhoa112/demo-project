@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+.active-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.infor-card {
+  width: 70%;
+  height: 40vh;
+  border: 1px #555 solid;
+  box-shadow: 0 5px 10px #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.infor-card h4 {
+  font-family: 'Kalam', cursive !important;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.infor-card a {
+  font-family: 'Kalam', cursive !important;
+  color: rgb(11, 31, 146);
+  opacity: 0.7;
+  font-size: 1.2rem;
+}
+
+.infor-card a:hover {
+  opacity: 1;
+}
+
+.infor-card:hover {
+  box-shadow: 0 10px 200px #ccc;
+}
