@@ -6,26 +6,42 @@ import './DetailProduct.css';
 import { Loading } from '../utils/loading/Loading';
 import { FaStar } from 'react-icons/fa';
 import { ModalCart } from '../utils/modalCart/ModalCart';
+import { orderItemActions } from '../../../redux/actions';
 
 export const DetailProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const product = useSelector((state) => state.products.selectProduct);
   const { loading } = useSelector((state) => state.products);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const price =
+    product && product.sale
+      ? (product.price * (100 - product.sale)) / 100
+      : product.price;
+  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
+  const orderItemsProduct = orderItems.find(
+    (order) => order.product._id === product._id && order.status === true
+  );
 
   useEffect(() => {
     dispatch(productActions.getProductById(id));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    dispatch(orderItemActions.getAllOrderItemsByUserId(user.id));
+  }, [dispatch, user]);
+
   if (loading) return <Loading />;
   return (
     <div className="detail-page">
       <ModalCart
-        quantity={quantity}
+        quantity={
+          orderItemsProduct ? orderItemsProduct.quantity + quantity : quantity
+        }
         product={product}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -112,7 +128,20 @@ export const DetailProduct = () => {
               </div>
             </div>
             <div className="cart-btn">
-              <button onClick={() => setIsOpen(!isOpen)}>Add to Cart</button>
+              <button
+                onClick={() => {
+                  dispatch(
+                    orderItemActions.createOrderItem(
+                      product._id,
+                      quantity,
+                      price
+                    )
+                  );
+                  setIsOpen(!isOpen);
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
           <div className="categories">

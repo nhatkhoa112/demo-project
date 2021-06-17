@@ -2,15 +2,14 @@ import React from 'react';
 import './modalCart.css';
 import { Modal } from './ModalElements.js';
 import { Link } from 'react-router-dom';
-
 export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
   return (
     <Modal isOpen={isOpen} className="modal-cart">
       <div className="modal-cart">
         <div className="modal-card">
-          <button onClick={() => setIsOpen(false)}>
+          {/* <button onClick={() => setIsOpen(false)}>
             <i className="fas fa-times"></i>
-          </button>
+          </button> */}
           <div className="product-info">
             <div className="alert">Added to cart successfully!</div>
             <img
@@ -38,7 +37,13 @@ export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
               <span className="modal-first">Cart Total: </span>
 
               <span className="modal-last">
-                ${(quantity * product.price).toFixed(2)}
+                $
+                {product && product.sale
+                  ? (
+                      quantity *
+                      ((product.price * (100 - product.sale)) / 100)
+                    ).toFixed(2)
+                  : (product.price * quantity).toFixed(2)}
               </span>
             </div>
           </div>
@@ -52,7 +57,10 @@ export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
             <div className="cart-total">
               CART TOTALS : <span>$ 180.00</span>
             </div>
-            <button onClick={() => setIsOpen(false)} className="continue">
+            <button
+              onClick={() => window.location.reload()}
+              className="continue"
+            >
               continue shopping
             </button>
             <Link to="/cart" className="go-to-cart">

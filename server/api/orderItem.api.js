@@ -6,7 +6,9 @@ const orderItemsController = require('../controllers/orderItem.controller');
 router.get('/', auth, authAdmin, orderItemsController.getAll);
 
 router.get('/:id', auth, orderItemsController.getOrderItemsById);
-    
+
+router.get('/:id/product', auth, orderItemsController.getOrderItemsByProductId);
+
 router.post('/', auth, orderItemsController.createOrderItem);
 
 router.delete('/:id', auth, orderItemsController.deleteOrderItem);

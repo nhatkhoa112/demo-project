@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './cart.css';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import image from './images/rose-green.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { orderItemActions } from '../../../redux/actions';
 
 export const Cart = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const id = user.id;
+  useEffect(() => {
+    dispatch(orderItemActions.getAllOrderItemsByUserId(id));
+  }, [dispatch, id]);
+
   return (
     <>
       <motion.div
@@ -32,22 +41,22 @@ export const Cart = () => {
               <table className="order-table">
                 <thead>
                   <tr>
-                    <th class="table-thumbnail">Image</th>
-                    <th class="table-name">Name</th>
-                    <th class="table-price">Price</th>
-                    <th class="table-quantity">Quantity</th>
-                    <th class="table-subtotal">Subtotal</th>
-                    <th class="table-remove">Remove</th>
+                    <th className="table-thumbnail">Image</th>
+                    <th className="table-name">Name</th>
+                    <th className="table-price">Price</th>
+                    <th className="table-quantity">Quantity</th>
+                    <th className="table-subtotal">Subtotal</th>
+                    <th className="table-remove">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="order-item">
-                    <th class="table-product-thumbnail"></th>
-                    <th class="table-product-name">table-product</th>
-                    <th class="table-product-price">Price</th>
-                    <th class="table-product-quantity">Quantity</th>
-                    <th class="table-product-subtotal">Subtotal</th>
-                    <th class="table-product-remove">Remove</th>
+                    <th className="table-product-thumbnail"></th>
+                    <th className="table-product-name">table-product</th>
+                    <th className="table-product-price">Price</th>
+                    <th className="table-product-quantity">Quantity</th>
+                    <th className="table-product-subtotal">Subtotal</th>
+                    <th className="table-product-remove">Remove</th>
                   </tr>
                 </tbody>
               </table>

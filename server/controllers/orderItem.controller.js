@@ -3,15 +3,68 @@ const OrderItem = require('../models/orderItem.model.js');
 const orderItemsController = {
   getOrderItemsById: async (req, res) => {
     try {
-      const orderItems = await OrderItem.findById(req.user.id)
-        .populate({
+      let { status } = req.query;
+      let orderItems;
+      status = status === 'true' ? true : false;
+
+      if (status) {
+        orderItems = await OrderItem.find({
+          owner: req.user.id,
+          status,
+        }).populate({
           path: 'product',
           populate: {
             path: 'categories',
           },
-        })
-        .populate('owner');
+        });
+      } else {
+        orderItems = await OrderItem.find({
+          owner: req.user.id,
+        }).populate({
+          path: 'product',
+          populate: {
+            path: 'categories',
+          },
+        });
+      }
+
+      // .populate('owner');
       res.json({ msg: 'All orderItems of user are here:', orderItems });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  getOrderItemsByProductId: async (req, res) => {
+    try {
+      let { status, product } = req.query;
+      let orderItems;
+      status = status === 'true' ? true : false;
+
+      if (status) {
+        orderItems = await OrderItem.find({
+          owner: req.user.id,
+          product,
+          status,
+        }).populate({
+          path: 'product',
+          populate: {
+            path: 'categories',
+          },
+        });
+      } else {
+        orderItems = await OrderItem.find({
+          owner: req.user.id,
+        }).populate({
+          path: 'product',
+          populate: {
+            path: 'categories',
+          },
+        });
+      }
+
+      // .populate('owner');
+      res.json({ msg: 'OrderItem of user are here:', orderItems });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
@@ -33,12 +86,12 @@ const orderItemsController = {
   },
   createOrderItem: async (req, res) => {
     try {
-      const { product, price_on_purchase_date, quantity, order_id } = req.body;
+      const { product, price_on_purchase_date, quantity } = req.body;
 
       const orderItem = await OrderItem.findOne({
         product,
         owner: req.user.id,
-        status: false,
+        status: true,
       });
 
       if (orderItem) {
@@ -67,7 +120,6 @@ const orderItemsController = {
         price_on_purchase_date,
         quantity,
         owner: req.user.id,
-        order_id,
       });
 
       await newOrderItem.populate({
