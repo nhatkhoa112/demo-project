@@ -522,16 +522,18 @@ export const Home = () => {
                     <div className="card__price">
                       <span className="final">
                         $
-                        {product.sale
+                        {product.sale > 0
                           ? (
                               (product.price * (100 - product.sale)) /
                               100
                             ).toFixed(2)
-                          : product.price}
+                          : product.price.toFixed(2)}
                       </span>
                       <span>
                         <strike>
-                          {product.sale ? `$ ${product.price.toFixed(2)} ` : ''}
+                          {product.sale > 0
+                            ? `$ ${product.price.toFixed(2)} `
+                            : ''}
                         </strike>
                       </span>
                     </div>

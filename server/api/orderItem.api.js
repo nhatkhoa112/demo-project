@@ -3,8 +3,10 @@ const auth = require('../middlewares/auth');
 const authAdmin = require('../middlewares/authAdmin');
 const orderItemsController = require('../controllers/orderItem.controller');
 
-router.get('/', orderItemsController.getAll);
+router.get('/', auth, authAdmin, orderItemsController.getAll);
 
+router.get('/:id', auth, orderItemsController.getOrderItemsById);
+    
 router.post('/', auth, orderItemsController.createOrderItem);
 
 router.delete('/:id', auth, orderItemsController.deleteOrderItem);

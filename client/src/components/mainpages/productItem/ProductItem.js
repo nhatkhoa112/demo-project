@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './productItem.css';
 import { Link } from 'react-router-dom';
+import { ModalCart } from '../utils/modalCart/ModalCart';
 
 export const ProductItem = ({ product, isFilter }) => {
-  console.log(product);
+  const [isOpen, setIsOpen] = useState(false);
+  const quantity = 1;
+
   return (
     <div className="card">
+      <ModalCart
+        quantity={quantity}
+        product={product}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <img
         className={isFilter ? '' : 'zoom'}
         src={product.images[0].url}
@@ -15,7 +24,12 @@ export const ProductItem = ({ product, isFilter }) => {
       <div className="eye-icon">
         <i className="far fa-eye" height={20} width={20}></i>
       </div>
-      <div className="cart-icon">
+      <div
+        className="cart-icon"
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 400 400"
@@ -82,7 +96,7 @@ export const ProductItem = ({ product, isFilter }) => {
           $
           {product.sale
             ? ((product.price * (100 - product.sale)) / 100).toFixed(2)
-            : product.price}
+            : product.price.toFixed(2)}
         </span>
         <span>
           <strike>

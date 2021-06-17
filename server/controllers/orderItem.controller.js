@@ -1,6 +1,22 @@
 const OrderItem = require('../models/orderItem.model.js');
 
 const orderItemsController = {
+  getOrderItemsById: async (req, res) => {
+    try {
+      const orderItems = await OrderItem.findById(req.user.id)
+        .populate({
+          path: 'product',
+          populate: {
+            path: 'categories',
+          },
+        })
+        .populate('owner');
+      res.json({ msg: 'All orderItems of user are here:', orderItems });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
   getAll: async (req, res) => {
     try {
       const orderItems = await OrderItem.find().populate({
