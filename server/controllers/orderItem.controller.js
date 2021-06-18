@@ -88,37 +88,6 @@ const orderItemsController = {
     try {
       const { product, price_on_purchase_date, quantity } = req.body;
 
-      const orderItem = await OrderItem.findOne({
-        product,
-        owner: req.user.id,
-        status: true,
-      });
-
-      if (orderItem) {
-        const newOrderItem = await OrderItem.findByIdAndUpdate(
-          orderItem._id,
-          {
-            $set: { quantity: orderItem.quantity + quantity },
-          },
-          { new: true }
-        );
-
-        await newOrderItem.populate({
-          path: 'product',
-          populate: {
-            path: 'categories',
-          },
-        });
-        //   .populate('owner');
-        await newOrderItem.execPopulate();
-        await newOrderItem.save();
-
-        return res.json({
-          msg: 'Updated order successfully',
-          orderItem: newOrderItem,
-        });
-      }
-
       const newOrderItem = await new OrderItem({
         product,
         price_on_purchase_date,
@@ -132,6 +101,7 @@ const orderItemsController = {
           path: 'categories',
         },
       });
+      
       //   .populate('owner');
       await newOrderItem.execPopulate();
       await newOrderItem.save();

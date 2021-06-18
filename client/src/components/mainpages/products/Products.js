@@ -9,7 +9,7 @@ import { ProductItem } from '../productItem/ProductItem';
 import { Loading } from '../utils/loading1/Loading';
 import { PaginationBar } from '../utils/pagination/PaginationBar';
 
-export const Products = () => {
+export const Products = ({ userOrder, setUserOrder }) => {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
   const { products } = useSelector((state) => state.products);
@@ -21,10 +21,6 @@ export const Products = () => {
   useEffect(() => {
     dispatch(productActions.getAllProducts());
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(orderItemActions.getAllOrderItemsByUserId(id));
-  }, [dispatch, id]);
 
   // if (loading) return <Loading />;
 
@@ -72,6 +68,8 @@ export const Products = () => {
                         key={index}
                         product={product}
                         isFilter={isFilter}
+                        userOrder={userOrder}
+                        setUserOrder={setUserOrder}
                       />
                     );
                   })}

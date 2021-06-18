@@ -6,23 +6,11 @@ import image from './images/rose-green.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderItemActions } from '../../../redux/actions';
 import { Loading } from '../utils/loading/Loading';
-import { OrderItem } from '../utils/orderItem/OrderItems';
+import { CartItem } from '../utils/cartItem/CartItem';
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
-  const loading = useSelector((state) => state.orderItems.loading);
-  let price = 0;
-  orderItems.map((order) => {
-    price += order.price_on_purchase_date * order.quantity;
-  });
-  const id = user.id;
-  useEffect(() => {
-    dispatch(orderItemActions.getAllOrderItemsByUserId(id));
-  }, [dispatch, id]);
-
-  // if (loading) return <Loading />;
 
   return (
     <>
@@ -59,12 +47,7 @@ export const Cart = () => {
                     <th className="table-remove">Remove</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {orderItems?.length > 0 &&
-                    orderItems.map((order) => {
-                      return <OrderItem key={order._id} order={order} />;
-                    })}
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
             <div className="total-info">
@@ -72,11 +55,11 @@ export const Cart = () => {
                 <h2>Cart Totals</h2>
                 <div className="sub">
                   <span>Subtotal: </span>
-                  <span className="second"> ${price.toFixed(2)} </span>
+                  <span className="second"> </span>
                 </div>
                 <div className="all">
                   <span>Total: </span>
-                  <span className="second">${price.toFixed(2)}</span>
+                  <span className="second"></span>
                 </div>
                 <button className="checkout">Proceed to checkout</button>
               </div>

@@ -5,26 +5,18 @@ import { ModalCart } from '../utils/modalCart/ModalCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderItemActions } from '../../../redux/actions';
 
-export const ProductItem = ({ product, isFilter }) => {
-  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
-  const orderItemsProduct = orderItems.find(
-    (order) => order.product._id === product._id && order.status === true
-  );
-
-
-  let price = product.sale
-    ? (product.price * (100 - product.sale)) / 100
-    : product.price;
-  const dispatch = useDispatch();
+export const ProductItem = ({ product, isFilter, userOrder, setUserOrder }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="card">
       <ModalCart
-        quantity={orderItemsProduct ? orderItemsProduct.quantity : 1}
+        quantity={1}
         product={product}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        userOrder={userOrder}
+        setUserOrder={setUserOrder}
       />
       <img
         className={isFilter ? '' : 'zoom'}
@@ -38,7 +30,6 @@ export const ProductItem = ({ product, isFilter }) => {
       <div
         className="cart-icon"
         onClick={() => {
-          dispatch(orderItemActions.createOrderItem(product._id, 1, price));
           setIsOpen(true);
         }}
       >

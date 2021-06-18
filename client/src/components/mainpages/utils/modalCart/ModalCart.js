@@ -5,20 +5,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Loading } from '../loading/Loading';
 
-export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
-  const loading2 = useSelector((state) => state.orderItems.loading);
-
-  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
-  console.log(orderItems);
-
-  let items = 0;
-  let price = 0;
-  orderItems.map((order) => {
-    items += order.quantity;
-    price += order.price_on_purchase_date * order.quantity;
-  });
-
-  // if (loading2) return <Loading />;
+export const ModalCart = ({
+  quantity,
+  product,
+  isOpen,
+  setIsOpen,
+  userOrder,
+  setUserOrder,
+}) => {
   return (
     <Modal isOpen={isOpen} className="modal-cart">
       <div className="modal-cart">
@@ -66,12 +60,12 @@ export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
           <div className="wrapper-btn">
             <p>
               {' '}
-              There are <span>{items}</span> items
+              There are <span>{5}</span> items
               <br />
               in your cart
             </p>
             <div className="cart-total">
-              CART TOTALS : <span>$ {price.toFixed(2)}</span>
+              CART TOTALS : <span>$ {}</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="continue">
               continue shopping
