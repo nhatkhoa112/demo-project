@@ -6,15 +6,18 @@ import image from './image/rose-green.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { productActions, orderItemActions } from '../../../redux/actions';
 import { ProductItem } from '../productItem/ProductItem';
-import { Loading } from '../utils/loading/Loading';
+import { Loading } from '../utils/loading1/Loading';
+import { PaginationBar } from '../utils/pagination/PaginationBar';
 
 export const Products = () => {
   const dispatch = useDispatch();
+  const [pageNum, setPageNum] = useState(1);
   const { products } = useSelector((state) => state.products);
   const { loading } = useSelector((state) => state.products);
   const user = useSelector((state) => state.auth.user);
   const id = user.id;
   const [isFilter, setIsFilter] = useState(true);
+
   useEffect(() => {
     dispatch(productActions.getAllProducts());
   }, [dispatch]);
@@ -23,7 +26,7 @@ export const Products = () => {
     dispatch(orderItemActions.getAllOrderItemsByUserId(id));
   }, [dispatch, id]);
 
-  if (loading) return <Loading />;
+  // if (loading) return <Loading />;
 
   return (
     <>
@@ -73,7 +76,9 @@ export const Products = () => {
                     );
                   })}
               </div>
-              <div className="pagination"></div>
+              <div className="pagination">
+                <PaginationBar pageNum={pageNum} setPageNum={setPageNum} />
+              </div>
             </div>
           </div>
         </div>

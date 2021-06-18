@@ -679,6 +679,14 @@
   position: relative;
 }
 
+.home-page .section3 .card::after {
+  content: none;
+}
+
+.home-page .section3 .card::before {
+  content: none;
+}
+
 .home-page .section3 .card > span {
   position: absolute;
   top: 10px;

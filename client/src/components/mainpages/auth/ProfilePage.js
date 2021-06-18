@@ -10,7 +10,6 @@ export const ProfilePage = () => {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  console.log(isAuthenticated);
   if (!isAuthenticated) return <Redirect to="/" />;
 
   return (

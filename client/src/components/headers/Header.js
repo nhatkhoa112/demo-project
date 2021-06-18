@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import logo from './icon/typography-image-1-83x72.png';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { authActions } from '../../redux/actions';
+import { authActions, orderItemActions } from '../../redux/actions';
 let prevScrollY = 0;
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
 
@@ -265,7 +267,9 @@ export const Header = () => {
                     </g>
                   </g>
                 </svg>{' '}
-                <span className="count">0</span>
+                <span className={orderItems.length > 0 ? 'count' : 'hidden'}>
+                  {orderItems?.length}
+                </span>
               </NavLink>
             </div>
           </ul>
@@ -402,7 +406,9 @@ export const Header = () => {
                   </g>
                 </g>
               </svg>{' '}
-              <span className="count">0</span>
+              <span className={orderItems.length > 0 ? 'count' : 'hidden'}>
+                {orderItems?.length}
+              </span>
             </NavLink>
           </div>
           <div

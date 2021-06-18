@@ -36,12 +36,11 @@ export const DetailProduct = () => {
   }, [dispatch, user]);
 
   if (loading) return <Loading />;
+
   return (
     <div className="detail-page">
       <ModalCart
-        quantity={
-          orderItemsProduct ? orderItemsProduct.quantity + quantity : quantity
-        }
+        quantity={orderItemsProduct ? orderItemsProduct.quantity : quantity}
         product={product}
         isOpen={isOpen}
         setIsOpen={setIsOpen}

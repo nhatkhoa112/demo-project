@@ -11,6 +11,7 @@ export const ProductItem = ({ product, isFilter }) => {
     (order) => order.product._id === product._id && order.status === true
   );
 
+
   let price = product.sale
     ? (product.price * (100 - product.sale)) / 100
     : product.price;
@@ -20,7 +21,7 @@ export const ProductItem = ({ product, isFilter }) => {
   return (
     <div className="card">
       <ModalCart
-        quantity={orderItemsProduct ? orderItemsProduct.quantity + 1 : 1}
+        quantity={orderItemsProduct ? orderItemsProduct.quantity : 1}
         product={product}
         isOpen={isOpen}
         setIsOpen={setIsOpen}

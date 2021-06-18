@@ -131,6 +131,7 @@
 }
 
 .card .card__title {
+  text-transform: capitalize;
   min-height: 60px;
   width: 100%;
   padding: 0px 20px;

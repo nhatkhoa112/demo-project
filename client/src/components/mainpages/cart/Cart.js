@@ -1,18 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './cart.css';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import image from './images/rose-green.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderItemActions } from '../../../redux/actions';
+import { Loading } from '../utils/loading/Loading';
+import { OrderItem } from '../utils/orderItem/OrderItems';
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
+  const loading = useSelector((state) => state.orderItems.loading);
+  let price = 0;
+  orderItems.map((order) => {
+    price += order.price_on_purchase_date * order.quantity;
+  });
   const id = user.id;
   useEffect(() => {
     dispatch(orderItemActions.getAllOrderItemsByUserId(id));
   }, [dispatch, id]);
+
+  // if (loading) return <Loading />;
 
   return (
     <>
@@ -50,14 +60,10 @@ export const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="order-item">
-                    <th className="table-product-thumbnail"></th>
-                    <th className="table-product-name">table-product</th>
-                    <th className="table-product-price">Price</th>
-                    <th className="table-product-quantity">Quantity</th>
-                    <th className="table-product-subtotal">Subtotal</th>
-                    <th className="table-product-remove">Remove</th>
-                  </tr>
+                  {orderItems?.length > 0 &&
+                    orderItems.map((order) => {
+                      return <OrderItem key={order._id} order={order} />;
+                    })}
                 </tbody>
               </table>
             </div>
@@ -66,11 +72,11 @@ export const Cart = () => {
                 <h2>Cart Totals</h2>
                 <div className="sub">
                   <span>Subtotal: </span>
-                  <span className="second"> $49.00 </span>
+                  <span className="second"> ${price.toFixed(2)} </span>
                 </div>
                 <div className="all">
                   <span>Total: </span>
-                  <span className="second">$49.00</span>
+                  <span className="second">${price.toFixed(2)}</span>
                 </div>
                 <button className="checkout">Proceed to checkout</button>
               </div>

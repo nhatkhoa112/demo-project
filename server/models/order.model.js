@@ -11,6 +11,11 @@ const orderSchema = mongoose.Schema(
         type: Schema.Types.ObjectId,
       },
     ],
+    status: {
+      type: String,
+      enum: ['Pending', 'On delivery', 'Completed'],
+      default: 'Pending',
+    },
   },
   {
     timestamps: true,

@@ -29,7 +29,6 @@ const routeReducer = (state = initialState, action) => {
       return { ...state, loading: false };
 
     case types.GET_ALL_ORDER_ITEMS_BY_USER_ID_SUCCESS:
-      console.log(payload);
       return {
         ...state,
         loading: false,
@@ -39,20 +38,48 @@ const routeReducer = (state = initialState, action) => {
       return { ...state, loading: false };
 
     case types.CREATE_ORDER_ITEM_SUCCESS:
+      let idx = state.orderItemsOfUser.findIndex(
+        (order) => order._id === payload.orderItem._id
+      );
+
+      if (idx === -1) {
+        state.orderItemsOfUser = [...state.orderItemsOfUser, payload.orderItem];
+      }
+
+      if (idx !== -1) {
+        state.orderItemsOfUser[idx].quantity = payload.orderItem.quantity;
+      }
+
       return {
         ...state,
         loading: false,
-        orderItemsOfUser: [...state.orderItemsOfUser, payload.orderItem],
+        orderItemsOfUser: [...state.orderItemsOfUser],
       };
 
     case types.DELETE_ORDER_ITEM_SUCCESS:
-      return { ...state, loading: false };
+      let idu = state.orderItemsOfUser.findIndex(
+        (order) => order._id === payload.orderItem._id
+      );
+      state.orderItemsOfUser.splice(idu, 1);
+      return {
+        ...state,
+        loading: false,
+        orderItemsOfUser: [...state.orderItemsOfUser],
+      };
 
     case types.GET_ORDER_ITEMS_BY_USER_ID_SUCCESS:
       return { ...state, loading: false };
 
     case types.UPDATE_ORDER_ITEM_SUCCESS:
-      return { ...state, loading: false };
+      let idz = state.orderItemsOfUser.findIndex(
+        (order) => order._id === payload.orderItem._id
+      );
+      state.orderItemsOfUser[idz] = payload.orderItem;
+      return {
+        ...state,
+        loading: false,
+        orderItemsOfUser: [...state.orderItemsOfUser],
+      };
 
     case types.GET_ORDER_ITEMS_SUCCESS:
       return { ...state, loading: false };

@@ -2,7 +2,23 @@ import React from 'react';
 import './modalCart.css';
 import { Modal } from './ModalElements.js';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Loading } from '../loading/Loading';
+
 export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
+  const loading2 = useSelector((state) => state.orderItems.loading);
+
+  const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
+  console.log(orderItems);
+
+  let items = 0;
+  let price = 0;
+  orderItems.map((order) => {
+    items += order.quantity;
+    price += order.price_on_purchase_date * order.quantity;
+  });
+
+  // if (loading2) return <Loading />;
   return (
     <Modal isOpen={isOpen} className="modal-cart">
       <div className="modal-cart">
@@ -50,17 +66,14 @@ export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
           <div className="wrapper-btn">
             <p>
               {' '}
-              There are <span>8</span> items
+              There are <span>{items}</span> items
               <br />
               in your cart
             </p>
             <div className="cart-total">
-              CART TOTALS : <span>$ 180.00</span>
+              CART TOTALS : <span>$ {price.toFixed(2)}</span>
             </div>
-            <button
-              onClick={() => window.location.reload()}
-              className="continue"
-            >
+            <button onClick={() => setIsOpen(false)} className="continue">
               continue shopping
             </button>
             <Link to="/cart" className="go-to-cart">

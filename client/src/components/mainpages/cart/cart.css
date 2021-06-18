@@ -112,6 +112,27 @@
   vertical-align: top;
   border: none;
   border-top: 1px solid #dee2e6 !important;
+  padding: 0.75rem;
+}
+
+tr > .table-product-info {
+}
+
+th > div {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.form-quantity input::-webkit-outer-spin-button,
+.form-quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.form-quantity input {
+  width: 60px;
+  height: 40px;
 }
 
 thead > tr > th {
@@ -185,7 +206,7 @@ tbody > .order-item > th {
 
 .cart-page .cart-content .total-info .cart-totals > .all > .second {
   color: #5c8b59;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
 .cart-page .cart-content .total-info .cart-totals > button {
@@ -259,9 +280,17 @@ tbody > .order-item > th {
 
 @media screen and (max-width: 540px) {
   .cart-page .cart-content .order-info {
-    width: 90%;
+    width: 100%;
   }
   .cart-page .cart-content .total-info {
-    width: 90%;
+    width: 100%;
+  }
+
+  tr > .table-subtotal {
+    display: none;
+  }
+
+  tr > .table-remove {
+    display: none;
   }
 }

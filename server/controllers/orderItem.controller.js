@@ -95,9 +95,13 @@ const orderItemsController = {
       });
 
       if (orderItem) {
-        const newOrderItem = await OrderItem.findByIdAndUpdate(orderItem._id, {
-          $set: { quantity: orderItem.quantity + quantity },
-        });
+        const newOrderItem = await OrderItem.findByIdAndUpdate(
+          orderItem._id,
+          {
+            $set: { quantity: orderItem.quantity + quantity },
+          },
+          { new: true }
+        );
 
         await newOrderItem.populate({
           path: 'product',
@@ -163,8 +167,9 @@ const orderItemsController = {
   },
   deleteOrderItem: async (req, res) => {
     try {
-      const orderItem = await OrderItem.findByIdAndDelete(req.params.id);
-      //   .populate('product');
+      const orderItem = await OrderItem.findByIdAndDelete(
+        req.params.id
+      ).populate('product');
 
       res.json({ msg: 'Deleted orderItem', orderItem });
     } catch (error) {

@@ -3,6 +3,7 @@
 .products-page {
   width: 100%;
   height: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -165,7 +166,10 @@
 .products-page .main-content .right-content .pagination {
   height: 80px !important;
   width: 100%;
-  background: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: purple;
   margin-top: auto !important;
   margin-right: 0;
 }

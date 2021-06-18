@@ -1,6 +1,15 @@
 .load-page {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loader {
   width: 300px;
@@ -10,7 +19,7 @@
 .loader div {
   width: calc(100% - 15px);
   height: calc(100% - 15px);
-  border: 2px solid #fff;
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-top: 2px solid crimson;
   border-radius: 50%;
   animation: rotate 10s linear infinite alternate-reverse;
