@@ -4,13 +4,20 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import image from './images/rose-green.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderItemActions } from '../../../redux/actions';
-import { Loading } from '../utils/loading/Loading';
+import { orderUserActions } from '../../../redux/actions';
 import { CartItem } from '../utils/cartItem/CartItem';
 
 export const Cart = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const { orderUser } = useSelector((state) => state.orderUser);
+
+  let price = 0;
+
+  orderUser.map((o) => {
+    price += o.quantity * o.price_on_purchase_date;
+  });
+
+  console.log(price);
 
   return (
     <>
@@ -47,7 +54,12 @@ export const Cart = () => {
                     <th className="table-remove">Remove</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  {orderUser?.length > 0 &&
+                    orderUser.map((order) => {
+                      return <CartItem key={order.orderId} order={order} />;
+                    })}
+                </tbody>
               </table>
             </div>
             <div className="total-info">
@@ -55,11 +67,11 @@ export const Cart = () => {
                 <h2>Cart Totals</h2>
                 <div className="sub">
                   <span>Subtotal: </span>
-                  <span className="second"> </span>
+                  <span className="second"> ${price.toFixed(2)} </span>
                 </div>
                 <div className="all">
                   <span>Total: </span>
-                  <span className="second"></span>
+                  <span className="second">${price.toFixed(2)}</span>
                 </div>
                 <button className="checkout">Proceed to checkout</button>
               </div>

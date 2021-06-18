@@ -5,21 +5,26 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Loading } from '../loading/Loading';
 
-export const ModalCart = ({
-  quantity,
-  product,
-  isOpen,
-  setIsOpen,
-  userOrder,
-  setUserOrder,
-}) => {
+export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
+  const { orderUser } = useSelector((state) => state.orderUser);
+
+  const orderUserProduct = orderUser.find((o) => o.product._id === product._id);
+
+  let price = 0;
+  let items = 0;
+
+  orderUser.map((o) => {
+    items += o.quantity;
+    price += o.quantity * o.price_on_purchase_date;
+  });
+
   return (
     <Modal isOpen={isOpen} className="modal-cart">
       <div className="modal-cart">
         <div className="modal-card">
-          {/* <button onClick={() => setIsOpen(false)}>
+          <button onClick={() => setIsOpen(false)}>
             <i className="fas fa-times"></i>
-          </button> */}
+          </button>
           <div className="product-info">
             <div className="alert">Added to cart successfully!</div>
             <img
@@ -33,39 +38,41 @@ export const ModalCart = ({
               <span className="modal-first">Price</span>
               <span className="modal-last">
                 $
-                {product && product.sale
-                  ? ((product.price * (100 - product.sale)) / 100)?.toFixed(2)
-                  : product.price?.toFixed(2)}{' '}
+                {orderUserProduct
+                  ? orderUserProduct.price_on_purchase_date.toFixed(2)
+                  : undefined}{' '}
               </span>
             </div>
             <div className="modal-quantity">
               <span className="modal-first">Quantity: </span>
 
-              <span className="modal-last">{quantity}</span>
+              <span className="modal-last">
+                {orderUserProduct && orderUserProduct.quantity}
+              </span>
             </div>
             <div className="modal-quantity">
               <span className="modal-first">Cart Total: </span>
 
               <span className="modal-last">
                 $
-                {product && product.sale
+                {orderUserProduct
                   ? (
-                      quantity *
-                      ((product.price * (100 - product.sale)) / 100)
+                      orderUserProduct.quantity *
+                      orderUserProduct.price_on_purchase_date
                     ).toFixed(2)
-                  : (product.price * quantity).toFixed(2)}
+                  : undefined}
               </span>
             </div>
           </div>
           <div className="wrapper-btn">
             <p>
               {' '}
-              There are <span>{5}</span> items
+              There are <span>{items}</span> items
               <br />
               in your cart
             </p>
             <div className="cart-total">
-              CART TOTALS : <span>$ {}</span>
+              CART TOTALS : <span>$ {price.toFixed(2)}</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="continue">
               continue shopping

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './orderItems.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderItemActions } from '../../../../redux/actions';
+import { orderUserActions } from '../../../../redux/actions';
 import { Link } from 'react-router-dom';
 
 export const CartItem = ({ order }) => {
@@ -13,7 +13,7 @@ export const CartItem = ({ order }) => {
         <button
           className="remove"
           onClick={() => {
-            dispatch(orderItemActions.deleteOrderItem(order._id));
+            dispatch(orderUserActions.deleteOrderItem(order.orderId));
           }}
         >
           <i className="far fa-trash-alt"></i>
@@ -45,14 +45,14 @@ export const CartItem = ({ order }) => {
             onClick={() => {
               if (order.quantity > 1) {
                 dispatch(
-                  orderItemActions.updateOrderItem(
-                    order._id,
+                  orderUserActions.updateOrderUser(
+                    order.orderId,
                     order.quantity - 1
                   )
                 );
               }
               if (order.quantity === 1) {
-                dispatch(orderItemActions.deleteOrderItem(order._id));
+                dispatch(orderUserActions.deleteOrderUser(order.orderId));
               }
             }}
             className="decrease"
@@ -63,7 +63,10 @@ export const CartItem = ({ order }) => {
           <button
             onClick={() => {
               dispatch(
-                orderItemActions.updateOrderItem(order._id, order.quantity + 1)
+                orderUserActions.updateOrderUser(
+                  order.orderId,
+                  order.quantity + 1
+                )
               );
             }}
             className="increase"
@@ -82,7 +85,7 @@ export const CartItem = ({ order }) => {
           <button
             className="remove"
             onClick={() => {
-              dispatch(orderItemActions.deleteOrderItem(order._id));
+              dispatch(orderUserActions.deleteOrderUser(order.orderId));
             }}
           >
             <i className="far fa-trash-alt"></i>

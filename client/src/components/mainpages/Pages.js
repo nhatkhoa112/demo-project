@@ -13,20 +13,12 @@ import { ActivationPage } from './auth/ActivationPage';
 import { AnimatePresence } from 'framer-motion';
 
 export const MainPages = () => {
-  const [userOrder, setUserOrder] = useState([]);
-
   const location = useLocation();
   return (
     <AnimatePresence initial={false}>
       <Switch location={location} key={location.pathname}>
         <Route path="/" exact component={Home} />
-        <Route
-          path="/products"
-          exact
-          component={() => (
-            <Products userOrder={userOrder} setUserOrder={setUserOrder} />
-          )}
-        />
+        <Route path="/products" exact component={() => <Products />} />
         <Route path="/about" exact component={About} />
         <Route path="/login" exact component={Login} />
         <Route path="/cart" exact component={Cart} />
@@ -35,13 +27,7 @@ export const MainPages = () => {
           exact
           component={ActivationPage}
         />
-        <Route
-          path="/product/:id"
-          exact
-          component={() => (
-            <ProfilePage userOrder={userOrder} setUserOrder={setUserOrder} />
-          )}
-        />
+        <Route path="/product/:id" exact component={() => <DetailProduct />} />
         <PrivateRoute path="/auth/:id" exact component={ProfilePage} />
         <Route path="*" exact component={NotFound} />
       </Switch>

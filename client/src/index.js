@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />,
+    <App />
   </Provider>,
   document.getElementById('root')
 );

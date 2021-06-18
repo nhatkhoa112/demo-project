@@ -6,6 +6,7 @@ import './DetailProduct.css';
 import { Loading } from '../utils/loading/Loading';
 import { FaStar } from 'react-icons/fa';
 import { ModalCart } from '../utils/modalCart/ModalCart';
+import { orderUserActions } from '../../../redux/actions';
 
 export const DetailProduct = () => {
   const { id } = useParams();
@@ -17,6 +18,8 @@ export const DetailProduct = () => {
   const [hover, setHover] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+
+  const price_on_purchase_date = (product.price * (100 - product.sale)) / 100;
 
   useEffect(() => {
     dispatch(productActions.getProductById(id));
@@ -116,6 +119,13 @@ export const DetailProduct = () => {
             <div className="cart-btn">
               <button
                 onClick={() => {
+                  dispatch(
+                    orderUserActions.createOrderUser(
+                      product,
+                      quantity,
+                      price_on_purchase_date
+                    )
+                  );
                   setIsOpen(!isOpen);
                 }}
               >
