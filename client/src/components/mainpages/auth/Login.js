@@ -9,18 +9,18 @@ import { motion } from 'framer-motion';
 import { ToastContainer } from 'react-toastify';
 
 export const Login = () => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   let imageUpload = [];
-  const [user, setUser] = useState({
+  let [user, setUser] = useState({
     email: '',
     password: '',
     name: '',
     avatar: '',
   });
-  const dispatch = useDispatch();
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [image, setImage] = useState([]);
-  const widget = window.cloudinary.createUploadWidget(
+  let dispatch = useDispatch();
+  let [isSignUp, setIsSignUp] = useState(false);
+  let [image, setImage] = useState([]);
+  let widget = window.cloudinary.createUploadWidget(
     {
       cloudName: 'kohaku121',
       uploadPreset: 'ml_default',
@@ -37,12 +37,12 @@ export const Login = () => {
     }
   );
 
-  const handleOpenWidget = (e) => {
+  let handleOpenWidget = (e) => {
     e.preventDefault();
     widget.open();
   };
 
-  const clear = () => {
+  let clear = () => {
     setUser({
       email: '',
       password: '',
@@ -51,12 +51,12 @@ export const Login = () => {
     });
   };
 
-  const handleSignIn = (e) => {
+  let handleSignIn = (e) => {
     e.preventDefault();
     dispatch(authActions.loginRequest(user));
   };
 
-  const handleSignUp = (e) => {
+  let handleSignUp = (e) => {
     e.preventDefault();
     dispatch(authActions.register(user));
   };

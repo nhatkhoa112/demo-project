@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './home.css';
 import image from './images/rose-green.png';
 import image2 from './images/typography-image-1-83x72.png';
 import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Slider from 'react-slick';
+import { useDispatch, useSelector } from 'react-redux';
+import { productActions, orderUserActions } from '../../../redux/actions';
+import { Loading } from '../utils/loading/Loading';
+
 export const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  let { products } = useSelector((state) => state.products);
+  const { loading } = useSelector((state) => state.products);
+  let { newProducts } = useSelector((state) => state.products);
+  useEffect(() => {
+    dispatch(productActions.getAllProducts(1, '', '-sold'));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(productActions.getNewProduct());
+  }, [dispatch]);
+
+  products = products.filter((product, index) => index < 8);
+  newProducts = newProducts.filter((product, index) => index < 8);
   const settings = {
     // dots: true,
 
@@ -15,7 +34,7 @@ export const Home = () => {
     slidesToScroll: 1,
     cssEase: 'linear',
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     responsive: [
       {
         breakpoint: 1000,
@@ -38,53 +57,7 @@ export const Home = () => {
     ],
   };
 
-  const products = [
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/17.1.jpg?v=1614669224',
-      title: 'Curl Impact Collagene',
-      sale: 10,
-      price: 21,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/16.1.jpg?v=1614668428',
-      title: 'Curl Impact Collagene',
-      price: 18,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/15.1.jpg?v=1614667422',
-      title: 'Curl Impact Collagene',
-      sale: 20,
-      price: 22,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/14.1.jpg?v=1614667154',
-      title: 'Curl Impact Collagene',
-      price: 30,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/13.1.jpg?v=1614661337',
-      title: 'Curl Impact Collagene',
-      sale: 14,
-      price: 25,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/12.1.jpg?v=1614660993',
-      title: 'Curl Impact Collagene',
-      price: 21,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/10.1.jpg?v=1614659527',
-      title: 'Curl Impact Collagene',
-      sale: 10,
-      price: 25,
-    },
-    {
-      img: 'https://cdn.shopify.com/s/files/1/0549/7140/0399/products/9.1.jpg?v=1614657343',
-      title: 'Curl Impact Collagene',
-      sale: 25,
-      price: 22,
-    },
-  ];
+  if (loading) return <Loading />;
 
   return (
     <motion.div
@@ -451,12 +424,31 @@ export const Home = () => {
               {products.map((product, index) => {
                 return (
                   <div key={index} className="card">
-                    <img src={product.img} alt=" " />
-                    {product.sale ? <span className="sale">Sale</span> : ''}
+                    <img src={product.images[0].url} alt=" " />
+                    {product.new ? <span className="new">new</span> : ''}
+                    {product.sale ? (
+                      <span className="sale">-{product.sale}%</span>
+                    ) : (
+                      ''
+                    )}
                     <div className="eye-icon">
                       <i className="far fa-eye" height={20} width={20}></i>
                     </div>
-                    <div className="cart-icon">
+                    <div
+                      onClick={() => {
+                        const price_on_purchase_date =
+                          (product.price * (100 - product.sale)) / 100;
+                        const quantity = 1;
+                        dispatch(
+                          orderUserActions.createOrderUser(
+                            product,
+                            quantity,
+                            price_on_purchase_date
+                          )
+                        );
+                      }}
+                      className="cart-icon"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 400 400"
@@ -518,7 +510,139 @@ export const Home = () => {
                         </g>
                       </svg>
                     </div>
-                    <div className="card__title">{product.title}</div>
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="card__title"
+                    >
+                      {product.title}
+                    </Link>
+                    <div className="card__price">
+                      <span className="final">
+                        $
+                        {product.sale > 0
+                          ? (
+                              (product.price * (100 - product.sale)) /
+                              100
+                            ).toFixed(2)
+                          : product.price.toFixed(2)}
+                      </span>
+                      <span>
+                        <strike>
+                          {product.sale > 0
+                            ? `$ ${product.price.toFixed(2)} `
+                            : ''}
+                        </strike>
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <section className="section4">
+          <div className="title">
+            <img src={image2} alt="logo2" />
+            <div className="text">Our new Products</div>
+          </div>
+          <div className=" content ">
+            <div className="subtitle">New Arrivals This month!</div>
+            <div className="products">
+              {newProducts.map((product, index) => {
+                return (
+                  <div key={index} className="card">
+                    <img src={product.images[0].url} alt=" " />
+                    {product.new ? <span className="new">new</span> : ''}
+                    {product.sale ? (
+                      <span className="sale">-{product.sale}%</span>
+                    ) : (
+                      ''
+                    )}
+                    <div className="eye-icon">
+                      <i className="far fa-eye" height={20} width={20}></i>
+                    </div>
+                    <div
+                      onClick={() => {
+                        const price_on_purchase_date =
+                          (product.price * (100 - product.sale)) / 100;
+                        const quantity = 1;
+                        dispatch(
+                          orderUserActions.createOrderUser(
+                            product,
+                            quantity,
+                            price_on_purchase_date
+                          )
+                        );
+                      }}
+                      className="cart-icon"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 400 400"
+                        height={20}
+                        width={20}
+                        id="svg2"
+                        version="1.1"
+                        xmlnsdc="http://purl.org/dc/elements/1.1/"
+                        xmlnscc="http://creativecommons.org/ns#"
+                        xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlnssvg="http://www.w3.org/2000/svg"
+                        xmlSpace="preserve"
+                      >
+                        <metadata id="metadata8">
+                          <rdf>
+                            <work rdfabout="true">
+                              <format>image/svg+xml</format>
+                              <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
+                            </work>
+                          </rdf>
+                        </metadata>
+                        <defs id="defs6" />
+                        <g
+                          transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
+                          id="g10"
+                        >
+                          <g transform="scale(0.1)" id="g12">
+                            <path
+                              id="path14"
+                              style={{
+                                fill: '#231f20',
+                                fillOpacity: 1,
+                                fillRule: 'nonzero',
+                                stroke: 'none',
+                              }}
+                              d="M 2565.21,2412.71 H 450.992 V 0 H 2565.21 V 2412.71 Z M 2366.79,2214.29 V 198.43 H 649.418 V 2214.29 H 2366.79"
+                            />
+                            <path
+                              id="path16"
+                              style={{
+                                fill: '#231f20',
+                                fillOpacity: 1,
+                                fillRule: 'nonzero',
+                                stroke: 'none',
+                              }}
+                              d="m 1508.11,2990 h -0.01 c -361.22,0 -654.037,-292.82 -654.037,-654.04 V 2216.92 H 2162.14 v 119.04 c 0,361.22 -292.82,654.04 -654.03,654.04 z m 0,-198.43 c 224.16,0 411.02,-162.7 448.69,-376.23 h -897.39 c 37.66,213.53 224.53,376.23 448.7,376.23"
+                            />
+                            <path
+                              id="path18"
+                              style={{
+                                fill: '#231f20',
+                                fillOpacity: 1,
+                                fillRule: 'nonzero',
+                                stroke: 'none',
+                              }}
+                              d="m 1946.24,1868.17 h -876.27 v 169.54 h 876.27 v -169.54"
+                            />
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="card__title"
+                    >
+                      {product.title}
+                    </Link>
                     <div className="card__price">
                       <span className="final">
                         $

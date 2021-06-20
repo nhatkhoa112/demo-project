@@ -6,6 +6,7 @@ import { authActions, orderItemActions } from '../../redux/actions';
 let prevScrollY = 0;
 
 export const Header = () => {
+  const { orderUser } = useSelector((state) => state.orderUser);
   const dispatch = useDispatch();
   const orderItems = useSelector((state) => state.orderItems.orderItemsOfUser);
 
@@ -267,8 +268,8 @@ export const Header = () => {
                     </g>
                   </g>
                 </svg>{' '}
-                <span className={orderItems.length > 0 ? 'count' : 'hidden'}>
-                  {orderItems?.length}
+                <span className={orderUser.length > 0 ? 'count' : 'hidden'}>
+                  {orderUser?.length}
                 </span>
               </NavLink>
             </div>

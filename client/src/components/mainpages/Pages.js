@@ -9,8 +9,10 @@ import { Home } from './homePage/Home';
 import { About } from './about/About';
 import { Cart } from './cart/Cart';
 import { NotFound } from './utils/not_found/NotFound';
+import { Thanks } from './utils/welcome/Thanks';
 import { ActivationPage } from './auth/ActivationPage';
 import { AnimatePresence } from 'framer-motion';
+import { ProceedPage } from './proceedPage/ProceedPage';
 
 export const MainPages = () => {
   const location = useLocation();
@@ -29,6 +31,8 @@ export const MainPages = () => {
         />
         <Route path="/product/:id" exact component={() => <DetailProduct />} />
         <PrivateRoute path="/auth/:id" exact component={ProfilePage} />
+        <Route path="/proceed" exact component={() => <ProceedPage />} />
+        <Route path="/thanks" exact component={Thanks} />
         <Route path="*" exact component={NotFound} />
       </Switch>
     </AnimatePresence>

@@ -1,0 +1,439 @@
+.proceed-page {
+  width: 100%;
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proceed-page .proceed__header {
+  width: 100%;
+  height: 130px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 60px;
+}
+
+.proceed__header .logo {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  font-size: 2em;
+  line-height: 1.3em;
+  color: #333;
+}
+
+.proceed__header .url {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.proceed__header .url > li {
+  margin: 10px;
+}
+
+.proceed__header .url > li > a {
+  color: #1990c6;
+  font: 400 13.3333px Arial;
+  margin-right: 10px;
+  opacity: 0.8;
+}
+
+.proceed__header .url > li > span {
+  font: 400 13.3333px Arial;
+  margin-right: 10px;
+}
+
+.proceed-page .proceed__content {
+  width: 100%;
+  height: auto !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.proceed-page .user-info {
+  width: 60%;
+  height: auto !important;
+  padding: 0 70px;
+}
+
+.proceed-page .order-info {
+  width: 40%;
+  height: auto;
+  background: #fafafa;
+  padding: 40px 50px;
+}
+
+.proceed-page .user-info .main-info {
+  width: 100%;
+  height: auto;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.proceed-page .user-info .main-info .main__content {
+  width: 100%;
+  height: auto;
+}
+
+.proceed-page .order-info .main-info {
+  width: 100%;
+  height: auto;
+}
+
+.proceed__header .url > li > button {
+  color: #1990c6;
+  margin-right: 10px;
+  opacity: 0.8;
+}
+
+.proceed__header .url > li > button:hover,
+.proceed__header .url > li > a:hover {
+  opacity: 1;
+}
+
+.order__summary {
+  width: 100%;
+  height: auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.order__subtotal {
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.content__subtotal {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.content__subtotal > span {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  line-height: 1.3em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-size: 14px;
+  color: #555;
+}
+
+.content__shippingPrice {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.content__shippingPrice > span {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  line-height: 1.3em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-size: 14px;
+  color: #555;
+}
+
+.order__total {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+@media screen and (max-width: 1000px) {
+  .proceed-page .proceed__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .proceed-page .user-info {
+    width: 100%;
+    height: auto !important;
+    min-height: 200px;
+    padding: 0 70px;
+  }
+
+  .proceed-page .order-info {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: #fafafa;
+    padding: 40px 50px;
+  }
+
+  .proceed-page .user-info {
+    width: 100%;
+    height: auto !important;
+    min-height: 200px;
+    padding: 30px 30px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .proceed-page .proceed__header {
+    padding: 0 20px;
+  }
+  .proceed__header .logo {
+    font-size: 1.3rem;
+  }
+  .proceed__header .url > li {
+    margin: 4px;
+  }
+}
+
+.main__content .contact__info {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+}
+
+.main__content .contact__info .contact__title {
+  padding-left: 0.5714285714rem;
+  padding-right: 0.5714285714rem;
+  padding-bottom: 0.1428571429rem;
+  padding-top: 0.1428571429rem;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  font-size: 1.2857142857em;
+  line-height: 1.3em;
+}
+
+.main__content .contact__info .contact__name {
+  padding: 10px 20px;
+  font-size: 15px;
+  width: 50%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.main__content .contact__info .contact__name span,
+.main__content .contact__info .contact__email span {
+  width: 100px;
+  display: flex;
+  color: #5c986a;
+  font-weight: 600;
+}
+
+.item__title {
+  color: rgb(107, 103, 103) !important;
+}
+
+.main__content .contact__info .contact__email {
+  padding: 10px 20px;
+  font-size: 15px;
+  width: 50%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.shipping-address {
+  width: 100%;
+  height: auto;
+  padding: 10px 0;
+}
+
+.shipping__item {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shipping__item > input {
+  outline: none;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 0 30px;
+}
+
+.shipping__item > .input-item {
+  width: 100%;
+  height: 100%;
+}
+
+.shipping__item > .input-item-1 {
+  width: 48%;
+  height: 100%;
+}
+
+.shipping__item > .input-item-2 {
+  width: 48%;
+  height: 100%;
+}
+
+.shipping__title {
+  padding-left: 0.5714285714rem;
+  padding-right: 0.5714285714rem;
+  padding-bottom: 0.1428571429rem;
+  padding-top: 0.1428571429rem;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    sans-serif;
+  font-size: 1.2857142857em;
+  line-height: 1.3em;
+  padding-bottom: 15px;
+}
+
+.btn-wrapper {
+  width: 100%;
+  height: 60px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-wrapper button {
+  width: 200px;
+  height: 100%;
+  background: #3590c6;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.btn-wrapper button:hover {
+  opacity: 1;
+}
+
+.btn-wrapper a {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3590c6;
+  opacity: 0.7;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-wrapper a:hover {
+  opacity: 1;
+}
+
+.information__table {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.table__contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.table__contact > span,
+.table__ship > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table__ship {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.information__method {
+  margin-top: 20px;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.table__contact > button {
+  width: 100px;
+  height: 100%;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table__ship > button {
+  width: 100px;
+  height: 100%;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table__contact > .active {
+  color: #5c986a;
+  font-weight: 600;
+}
+
+.table__ship > .active {
+  color: #5c986a;
+  font-weight: 600;
+}
+
+.shop__alert {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  text-align: center;
+}

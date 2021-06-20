@@ -84,6 +84,7 @@ const orderItemsController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   createOrderItem: async (req, res) => {
     try {
       const { product, price_on_purchase_date, quantity } = req.body;
@@ -92,7 +93,6 @@ const orderItemsController = {
         product,
         price_on_purchase_date,
         quantity,
-        owner: req.user.id,
       });
 
       await newOrderItem.populate({
@@ -101,8 +101,7 @@ const orderItemsController = {
           path: 'categories',
         },
       });
-      
-      //   .populate('owner');
+
       await newOrderItem.execPopulate();
       await newOrderItem.save();
 
@@ -111,6 +110,7 @@ const orderItemsController = {
       res.status(500).json({ msg: error.message });
     }
   },
+
   updateOrderItem: async (req, res) => {
     try {
       const { quantity } = req.body;

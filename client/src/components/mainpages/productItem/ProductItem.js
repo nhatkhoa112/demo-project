@@ -24,6 +24,7 @@ export const ProductItem = ({ product, isFilter }) => {
         src={product.images[0].url}
         alt=" "
       />
+      {product.new ? <span className="new">new</span> : ''}
       {product.sale ? <span className="sale">Sale</span> : ''}
       <div className="eye-icon">
         <i className="far fa-eye" height={20} width={20}></i>

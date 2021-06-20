@@ -17,8 +17,6 @@ export const Cart = () => {
     price += o.quantity * o.price_on_purchase_date;
   });
 
-  console.log(price);
-
   return (
     <>
       <motion.div
@@ -43,24 +41,36 @@ export const Cart = () => {
 
           <div className="cart-content">
             <div className="order-info">
-              <table className="order-table">
-                <thead>
-                  <tr>
-                    <th className="table-thumbnail">Image</th>
-                    <th className="table-name">Name</th>
-                    <th className="table-price">Price</th>
-                    <th className="table-quantity">Quantity</th>
-                    <th className="table-subtotal">Subtotal</th>
-                    <th className="table-remove">Remove</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orderUser?.length > 0 &&
-                    orderUser.map((order) => {
-                      return <CartItem key={order.orderId} order={order} />;
-                    })}
-                </tbody>
-              </table>
+              {orderUser?.length === 0 ? (
+                <div>
+                  <h2 className="text-center">
+                    The cart is empty, let chose some product.
+                  </h2>
+                  <Link className="alink" to="/products">
+                    {' '}
+                    Back to Shop
+                  </Link>
+                </div>
+              ) : (
+                <table className="order-table">
+                  <thead>
+                    <tr>
+                      <th className="table-thumbnail">Image</th>
+                      <th className="table-name">Name</th>
+                      <th className="table-price">Price</th>
+                      <th className="table-quantity">Quantity</th>
+                      <th className="table-subtotal">Subtotal</th>
+                      <th className="table-remove">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orderUser?.length > 0 &&
+                      orderUser.map((order) => {
+                        return <CartItem key={order.orderId} order={order} />;
+                      })}
+                  </tbody>
+                </table>
+              )}
             </div>
             <div className="total-info">
               <div className="cart-totals">
@@ -73,7 +83,12 @@ export const Cart = () => {
                   <span>Total: </span>
                   <span className="second">${price.toFixed(2)}</span>
                 </div>
-                <button className="checkout">Proceed to checkout</button>
+                <button
+                  onClick={() => (window.location.href = '/proceed')}
+                  className="checkout"
+                >
+                  Proceed to checkout
+                </button>
               </div>
             </div>
           </div>

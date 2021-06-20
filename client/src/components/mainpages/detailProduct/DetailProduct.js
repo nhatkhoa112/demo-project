@@ -18,12 +18,25 @@ export const DetailProduct = () => {
   const [hover, setHover] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectImage, setSelectImage] = useState('');
 
   const price_on_purchase_date = (product.price * (100 - product.sale)) / 100;
 
   useEffect(() => {
     dispatch(productActions.getProductById(id));
   }, [dispatch, id]);
+
+  let productImages = [];
+
+  product.images?.map((image, i) => {
+    productImages.push({ img: image.url, id: i });
+  });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const idx = e.target.getAttribute('data-index');
+    setSelectImage(productImages[idx].img);
+  };
 
   if (loading) return <Loading />;
 
@@ -37,11 +50,25 @@ export const DetailProduct = () => {
       />
       <div className="product-content">
         <div className="images">
-          <div className="preview"></div>
+          <div className="preview">
+            {productImages?.map((image) => {
+              return (
+                <img
+                  style={{ marginBottom: '5px' }}
+                  key={image.id}
+                  data-index={image.id}
+                  src={image.img}
+                  alt=""
+                  onClick={handleClick}
+                />
+              );
+            })}
+          </div>
           <div className="image">
             <img
               src={
-                product.images?.length > 0 ? product.images[0].url : undefined
+                selectImage ||
+                (product.images?.length > 0 && product.images[0].url)
               }
               alt=""
             />

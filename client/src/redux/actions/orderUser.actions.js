@@ -48,9 +48,15 @@ const deleteOrderUser = (id) => async (dispatch) => {
   dispatch({ type: types.DELETE_ORDER_USER_SUCCESS, payload: orderUser });
 };
 
+const deleteAllOrderUsers = () => async (dispatch) => {
+  localStorage.setItem('OrderUser', JSON.stringify([]));
+  dispatch({ type: types.DELETE_ALL_ORDER_USERS_SUCCESS, payload: [] });
+};
+
 export const orderUserActions = {
   createOrderUser,
   getOrderUser,
   updateOrderUser,
   deleteOrderUser,
+  deleteAllOrderUsers,
 };

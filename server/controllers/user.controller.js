@@ -12,7 +12,7 @@ const { CLIENT_URL } = process.env;
 const userController = {
   register: async (req, res) => {
     try {
-      const { name, email, password, avatar } = req.body;
+      let { name, email, password, avatar } = req.body;
       if (!name || !email || !password)
         return res.status(400).json({ msg: 'Please fill in all fields.' });
 
@@ -23,7 +23,7 @@ const userController = {
       if (user)
         return res.status(400).json({ msg: 'This email already exists.' });
 
-      if ((avatar = '')) {
+      if (!avatar) {
         avatar =
           'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png';
       }
@@ -46,8 +46,8 @@ const userController = {
 
       await newUser1.save();
 
-      const accesstoken = createAccessToken({ id: newUser._id });
-      const refreshtoken = createRefreshToken({ id: newUser._id });
+      const accesstoken = createAccessToken({ id: newUser1._id });
+      const refreshtoken = createRefreshToken({ id: newUser1._id });
 
       res.cookie('refreshtoken', refreshtoken, {
         httpOnly: true,

@@ -1,36 +1,32 @@
 import React from 'react';
 import {
   PaginationContainer,
-  PaginationFirst,
-  PaginationLast,
   PaginationPrev,
   PaginationNext,
   PaginationItem,
 } from './PaginationElements';
 import { useDispatch } from 'react-redux';
+import { productActions } from '../../../../redux/actions';
 
-export const PaginationBar = ({ pageNum, setPageNum, totalPage = 10 }) => {
-  const handleClickOnFirst = (e) => {
-    e.preventDefault();
-    setPageNum(1);
-  };
+export const PaginationBar = ({ pageNum, setPageNum, totalPage }) => {
+  const dispatch = useDispatch();
+
   const handleClickOnPrev = (e) => {
     e.preventDefault();
     if (pageNum > 1) setPageNum((num) => num - 1);
+    dispatch(productActions.getAllProducts(pageNum));
   };
 
-  const handleClickOnLast = (e) => {
-    e.preventDefault();
-    setPageNum(totalPage);
-  };
   const handleClickOnNext = (e) => {
     e.preventDefault();
     if (pageNum < totalPage) setPageNum((num) => num + 1);
+    dispatch(productActions.getAllProducts(pageNum));
   };
 
   const handleClickOnPage = (e, page) => {
     e.preventDefault();
     setPageNum(page);
+    dispatch(productActions.getAllProducts(pageNum));
   };
 
   return (

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import image from './image/rose-green.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { productActions, orderItemActions } from '../../../redux/actions';
+import { productActions } from '../../../redux/actions';
 import { ProductItem } from '../productItem/ProductItem';
 import { Loading } from '../utils/loading1/Loading';
 import { PaginationBar } from '../utils/pagination/PaginationBar';
@@ -13,13 +13,15 @@ export const Products = () => {
   const dispatch = useDispatch();
   const [pageNum, setPageNum] = useState(1);
   const { products } = useSelector((state) => state.products);
+  const { total } = useSelector((state) => state.products);
+  const totalPage = Math.ceil(total / 12);
   const { loading } = useSelector((state) => state.products);
   const user = useSelector((state) => state.auth.user);
   const id = user.id;
   const [isFilter, setIsFilter] = useState(true);
 
   useEffect(() => {
-    dispatch(productActions.getAllProducts());
+    dispatch(productActions.getAllProducts(1));
   }, [dispatch]);
 
   if (loading) return <Loading />;
@@ -73,7 +75,11 @@ export const Products = () => {
                   })}
               </div>
               <div className="pagination">
-                <PaginationBar pageNum={pageNum} setPageNum={setPageNum} />
+                <PaginationBar
+                  pageNum={pageNum}
+                  setPageNum={setPageNum}
+                  totalPage={totalPage}
+                />
               </div>
             </div>
           </div>

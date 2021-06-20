@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   total: 0,
   products: [],
+  newProducts: [],
   selectProduct: {},
 };
 
@@ -11,10 +12,11 @@ const productReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case types.GET_ALL_PRODUCTS_REQUEST:
     case types.GET_PRODUCT_BY_ID_REQUEST:
+    case types.GET_ALL_PRODUCTS_REQUEST:
+    case types.GET_NEW_PRODUCTS_REQUEST:
       return { ...state, loading: true };
-
+    case types.GET_NEW_PRODUCTS_FAILURE:
     case types.GET_PRODUCT_BY_ID_FAILURE:
     case types.GET_ALL_PRODUCTS_FAILURE:
       return { ...state, loading: false };
@@ -24,6 +26,13 @@ const productReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         products: [...payload.products],
+        total: payload.total,
+      };
+    case types.GET_NEW_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newProducts: [...payload.products],
         total: payload.total,
       };
     case types.GET_PRODUCT_BY_ID_SUCCESS:

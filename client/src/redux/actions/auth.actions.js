@@ -35,9 +35,9 @@ const register = (user) => async (dispatch) => {
     const { data } = await api.post('/user/register', user);
     const name = data.data.user.name;
     dispatch({ type: types.REGISTER_SUCCESS, payload: data.data });
-    dispatch(routeActions.redirect('/'));
     api.defaults.headers.common['Authorization'] = data.data.accesstoken;
     api.defaults.headers['Authorization'] = data.data.accesstoken;
+    localStorage.setItem('accessToken', data.data.accesstoken);
     toast.success(`Welcome to my store, ${name}! `);
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });

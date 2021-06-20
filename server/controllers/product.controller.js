@@ -8,7 +8,6 @@ class APIfeatures {
 
   filtering() {
     const queryObj = { ...this.queryString };
-    //queryString = req.query
     const excludedFields = ['page', 'sort', 'limit'];
     excludedFields.forEach((el) => delete queryObj[el]);
     let queryStr = JSON.stringify(queryObj);
@@ -16,10 +15,6 @@ class APIfeatures {
       /\b(gte|gt|lt|lte|regex)\b/g,
       (match) => '$' + match
     );
-    //    gte = greater than or equal
-    //    lte = lesser than or equal
-    //    lt = lesser than
-    //    gt = greater than
     this.query.find(JSON.parse(queryStr));
     return this;
   }
@@ -79,7 +74,7 @@ const productController = {
 
   get: async (req, res) => {
     try {
-      const total = await Product.find().count();
+      const total = await Product.find().countDocuments();
 
       const features = new APIfeatures(Product.find(), req.query)
         .filtering()

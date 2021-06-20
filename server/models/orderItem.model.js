@@ -5,7 +5,6 @@ const orderItemSchema = mongoose.Schema(
     owner: { ref: 'User', required: true, type: Schema.Types.ObjectId },
     product: { ref: 'Product', required: true, type: Schema.Types.ObjectId },
     price_on_purchase_date: { type: Number, trim: true, required: true },
-    status: { type: Boolean, trim: true, required: false, default: true },
     quantity: { type: Number, trim: true, required: true },
   },
   {

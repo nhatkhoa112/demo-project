@@ -6,7 +6,6 @@ import image from './image/rose-green.png';
 import { Link, Redirect } from 'react-router-dom';
 
 export const ProfilePage = ({ userOrder, setUserOrder }) => {
-  console.log(userOrder);
   const { id } = useParams();
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

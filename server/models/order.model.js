@@ -3,7 +3,7 @@ const Schema = require('mongoose').Schema;
 
 const orderSchema = mongoose.Schema(
   {
-    owner: { ref: 'User', required: true, type: Schema.Types.ObjectId },
+    owner: { ref: 'User', required: false, type: Schema.Types.ObjectId },
     orderItems: [
       {
         ref: 'OrderItem',
@@ -11,6 +11,13 @@ const orderSchema = mongoose.Schema(
         type: Schema.Types.ObjectId,
       },
     ],
+    shippingAddress: {
+      address: { type: String, trim: true, required: true },
+      cityOrProvince: { type: String, trim: true, required: true },
+      countryOrRegion: { type: String, trim: true, required: true },
+      phoneNumber: { type: Number, trim: true, required: true },
+    },
+    totals: { type: Number, trim: true, required: true },
     status: {
       type: String,
       enum: ['Pending', 'On delivery', 'Completed'],

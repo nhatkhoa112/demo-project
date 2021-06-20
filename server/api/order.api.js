@@ -9,8 +9,8 @@ router.get('/:userId', auth, ordersController.getAllOrders);
 
 router.post('/', auth, ordersController.createOrder);
 
-router.delete('/:id', auth, ordersController.deleteOrder);
+router.delete('/:id', auth, authAdmin, ordersController.deleteOrder);
 
-router.patch('/:id', auth, ordersController.updateOrder);
+router.patch('/:id', auth, authAdmin, ordersController.updateOrder);
 
 module.exports = router;

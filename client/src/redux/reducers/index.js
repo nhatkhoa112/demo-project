@@ -4,6 +4,7 @@ import routeReducer from './route.reducer';
 import productReducer from './products.reducer';
 import orderItemReducer from './orderItem.reducer';
 import orderUserReducer from './orderUser.reducer';
+import orderReducer from './order.reducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   products: productReducer,
   orderItems: orderItemReducer,
   orderUser: orderUserReducer,
+  order: orderReducer,
 });

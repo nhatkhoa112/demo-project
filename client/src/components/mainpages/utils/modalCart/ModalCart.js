@@ -80,6 +80,10 @@ export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
             <Link to="/cart" className="go-to-cart">
               Go to Cart
             </Link>
+
+            <Link to="/proceed" className="go-to-proceed">
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       </div>

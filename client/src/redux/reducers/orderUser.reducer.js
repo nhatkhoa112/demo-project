@@ -38,6 +38,12 @@ const routeReducer = (state = initialState, action) => {
         orderUser: payload,
       };
 
+    case types.DELETE_ALL_ORDER_USERS_SUCCESS:
+      return {
+        ...state,
+        orderUser: payload,
+      };
+
     default:
       return state;
   }

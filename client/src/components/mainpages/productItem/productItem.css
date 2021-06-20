@@ -23,6 +23,19 @@
   font-weight: 500;
 }
 
+.card > .new {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  width: 60px;
+  background: orange;
+  padding: 5px 15px;
+  color: White;
+  font-family: 'Lato';
+  font-weight: 500;
+}
+
 .card .eye-icon,
 .card .cart-icon {
   z-index: 199;
