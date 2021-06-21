@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema(
     },
     reviews: [
       {
-        ref: 'Category',
+        ref: 'Review',
         required: false,
         type: Schema.Types.ObjectId,
       },

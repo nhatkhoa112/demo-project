@@ -6,25 +6,49 @@ import './DetailProduct.css';
 import { Loading } from '../utils/loading/Loading';
 import { FaStar } from 'react-icons/fa';
 import { ModalCart } from '../utils/modalCart/ModalCart';
-import { orderUserActions } from '../../../redux/actions';
+import { orderUserActions, reviewsActions } from '../../../redux/actions';
 import { ProductItem } from '../productItem/ProductItem';
+import { ReviewItem } from '../utils/reviewItem/ReviewItem';
 import styled from 'styled-components';
 
 export const DetailProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
   const { products } = useSelector((state) => state.products);
   const product = useSelector((state) => state.products.selectProduct);
   const { loading } = useSelector((state) => state.products);
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [selectImage, setSelectImage] = useState('');
   const [isOpenDes, setIsOpenDes] = useState(true);
   const [isOpenInfo, setIsOpenInfo] = useState(false);
   const [isOpenRev, setIsOpenRev] = useState(false);
+  const [write, setWrite] = useState(false);
+  const reviewsLength = product.reviews?.length;
+  const [review, setReview] = useState({
+    rating: null,
+    title: '',
+    body: '',
+  });
+
+  let resultRating = 0;
+  let totalRating = 0;
+  let ratingIndex = 0;
+
+  product.reviews?.length > 0 &&
+    product.reviews.map((review) => {
+      if (review.rating > 0) {
+        ratingIndex += 1;
+        totalRating += review.rating;
+      }
+    });
+
+  let resultRatingExact = totalRating / ratingIndex;
+  resultRating = Math.round(resultRatingExact);
+
+  const clearReview = () => {
+    setReview({ rating: null, title: '', body: '' });
+  };
 
   const price_on_purchase_date = (product.price * (100 - product.sale)) / 100;
 
@@ -33,7 +57,7 @@ export const DetailProduct = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(productActions.getAllProducts());
+    dispatch(productActions.getAllProducts(1, '', '', 40));
   }, [dispatch, id]);
 
   let productCategory =
@@ -117,14 +141,10 @@ export const DetailProduct = () => {
                 const ratingValue = i + 1;
                 return (
                   <label key={i}>
-                    <input
-                      type="radio"
-                      value={ratingValue}
-                      onClick={() => setRating(ratingValue)}
-                    />
+                    <input type="radio" value={ratingValue} />
                     <FaStar
                       className="star"
-                      color={ratingValue <= rating ? '#7AAB86' : '#e4e5e9'}
+                      color={ratingValue <= resultRating ? 'black' : '#e4e5e9'}
                       className="fas fa-star"
                     />
                   </label>
@@ -132,8 +152,20 @@ export const DetailProduct = () => {
               })}
             </span>
             <div className="review">
+              {resultRatingExact ? (
+                <>
+                  <span>rating: {'  '}</span>
+                  {resultRatingExact} of{' '}
+                </>
+              ) : (
+                ''
+              )}
               {product.reviews?.length === 0 ? 'No' : product.review?.length}{' '}
-              {product.reviews?.length > 1 ? 'reviews' : 'review'}
+              {product.reviews?.length > 1
+                ? `${reviewsLength} reviews `
+                : product.reviews?.length === 1
+                ? `${reviewsLength} review `
+                : 'review'}
             </div>
           </div>
           <div className="product-summary">{product.description}</div>
@@ -259,14 +291,156 @@ export const DetailProduct = () => {
               </div>
             </div>
             <img
-              src={
-                selectImage ||
-                (product.images?.length > 0 && product.images[0].url)
-              }
+              src={product.images?.length > 0 && product.images[0].url}
               alt=""
             />
           </Information>
-          <Review isOpenRev={isOpenRev}></Review>
+          <Review isOpenRev={isOpenRev}>
+            <div className="review-actions">
+              <p>Customer Reviews</p>
+              <div>
+                <div className="info">
+                  <div>
+                    {' '}
+                    {[...Array(5)].map((star, i) => {
+                      const ratingValue = i + 1;
+                      return (
+                        <label key={i}>
+                          <input type="radio" style={{ display: 'none' }} />
+                          <FaStar
+                            className="star"
+                            color={
+                              ratingValue <= resultRating ? 'black' : '#e4e5e9'
+                            }
+                            className="fas fa-star"
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  {product.reviews?.length > 0 ? (
+                    <div>
+                      {' '}
+                      base on{' '}
+                      {product.reviews?.length === 0
+                        ? 'no'
+                        : product.review?.length}{' '}
+                      {product.reviews?.length > 1
+                        ? `${reviewsLength} reviews `
+                        : product.reviews?.length === 1
+                        ? `${reviewsLength} review `
+                        : 'review'}{' '}
+                    </div>
+                  ) : (
+                    <div>no review</div>
+                  )}
+                </div>
+                <button onClick={() => setWrite(!write)} className="write-btn">
+                  Write the review
+                </button>
+              </div>
+            </div>
+            <div className={write ? 'write-review show' : 'write-review'}>
+              <h3 className="spr-form-title">Write a review</h3>
+              <div className="spr-form-review-rating">
+                <label className="spr-form-label" htmlFor="review[rating]">
+                  Rating
+                </label>
+                <div className="rating-stars">
+                  {[...Array(5)].map((star, i) => {
+                    const ratingValue = i + 1;
+                    return (
+                      <label key={i}>
+                        <input
+                          type="radio"
+                          name="rating"
+                          style={{ display: 'none' }}
+                          value={ratingValue}
+                          onClick={() =>
+                            setReview({ ...review, rating: ratingValue })
+                          }
+                        />
+
+                        <FaStar
+                          style={{ cursor: 'pointer' }}
+                          color={
+                            ratingValue <= review.rating ? '#7AAB86' : '#e4e5e9'
+                          }
+                          className="fas fa-star"
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="spr-form-review-title">
+                <label
+                  className="spr-form-label"
+                  htmlFor="review_title_6538634821839"
+                >
+                  Review Title
+                </label>
+                <input
+                  className="spr-form-input spr-form-input-text "
+                  value={review.title}
+                  onChange={(e) =>
+                    setReview({ ...review, title: e.target.value })
+                  }
+                  id="review_title_6538634821839"
+                  type="text"
+                  name="review[title]"
+                  placeholder="Give your review a title"
+                />
+              </div>
+              <div className="spr-form-review-body">
+                <label
+                  className="spr-form-label"
+                  htmlFor="review_body_6538634821839"
+                >
+                  Body of Review
+                </label>
+                <div className="spr-form-input">
+                  <textarea
+                    className="spr-form-input spr-form-input-textarea "
+                    id="review_body_6538634821839"
+                    data-product-id="6538634821839"
+                    name="review[body]"
+                    rows="10"
+                    placeholder="Write your comments here"
+                    value={review.body}
+                    onChange={(e) =>
+                      setReview({ ...review, body: e.target.value })
+                    }
+                  ></textarea>
+                </div>
+              </div>
+              <div className="submit-btn">
+                <button
+                  onClick={() => {
+                    {
+                      dispatch(
+                        reviewsActions.createReviewOfProduct(
+                          review,
+                          product._id
+                        )
+                      );
+                      clearReview();
+                      setWrite(false);
+                    }
+                  }}
+                >
+                  Submit Review
+                </button>
+              </div>
+            </div>
+            <div className="reviews-list">
+              {product.reviews?.length > 0 &&
+                product.reviews.map((review) => {
+                  return <ReviewItem key={review._id} review={review} />;
+                })}
+            </div>
+          </Review>
         </div>
       </div>
       <div className="product-other">
@@ -297,6 +471,7 @@ const Description = styled.div`
   font-weight: 400;
   line-height: 28px;
   color: #a8a8a8;
+  border-bottom: 1px solid #ccc;
 `;
 
 const Information = styled.div`
@@ -306,6 +481,8 @@ const Information = styled.div`
   display: ${({ isOpenInfo }) => (isOpenInfo ? 'flex' : 'none')};
   flex-wrap: wrap;
   justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+
   > div {
     width: 65%;
     display: flex;
@@ -332,6 +509,9 @@ const Information = styled.div`
 const Review = styled.div`
   padding: 20px 20px;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 120px;
   display: ${({ isOpenRev }) => (isOpenRev ? 'flex' : 'none')};
+  border-bottom: 1px solid #ccc;
+  flex-direction: column;
 `;

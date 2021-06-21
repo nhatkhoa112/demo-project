@@ -271,7 +271,7 @@ export const ProceedPage = () => {
                         )
                       );
                       dispatch(orderUserActions.deleteAllOrderUsers());
-                      window.location.href = '/thanks';
+                      // window.location.href = '/thanks';
                     }
                   }}
                 >

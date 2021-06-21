@@ -44,27 +44,32 @@ const ordersController = {
           price_on_purchase_date: orderU.price_on_purchase_date,
         });
 
-        await orderItem.populate('product');
-        await orderItem.execPopulate();
         orderItem.save();
         order.orderItems.push(orderItem._id);
       });
 
-      await order.populate('owner');
-      await order.populate({
-        path: 'orderItem',
-        populate: {
-          path: 'product',
-        },
-      });
-      await order.execPopulate();
       await order.save();
+
+      const newOrder = await Order.findOne({ _id: order._id })
+        .populate({
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: {
+            path: 'product',
+            model: 'Product',
+            populate: {
+              path: 'categories',
+              model: 'Category',
+            },
+          },
+        })
+        .populate('owner');
 
       const user = await User.findById(req.user.id);
       user.orders.push(order._id);
       await user.save();
 
-      res.status(200).json({ msg: 'Created order successfully', order });
+      res.status(200).json({ msg: 'Created order successfully', newOrder });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

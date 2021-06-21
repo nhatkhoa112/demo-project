@@ -91,12 +91,21 @@ const productController = {
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
-  },
+},
 
   getProductById: async (req, res) => {
     const { id } = req.params;
     try {
-      const product = await Product.findOne({ _id: id }).populate('categories');
+      const product = await Product.findOne({ _id: id })
+        .populate('categories')
+        .populate({
+          path: 'reviews',
+          model: 'Review',
+          populate: {
+            path: 'owner',
+            model: 'User',
+          },
+        });
       if (!product)
         return res.status(400).json({ msg: 'Product is not existed' });
 

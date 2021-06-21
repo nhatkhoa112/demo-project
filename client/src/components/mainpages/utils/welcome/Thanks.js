@@ -13,7 +13,7 @@ export const Thanks = () => {
             Thank you for choosing our products{' '}
           </div>
           <div className="content__link">
-            <Link to="/">Go to Home Page</Link>
+            <Link to="/orderInfo">Your to order information</Link>
           </div>
         </div>
       </section>

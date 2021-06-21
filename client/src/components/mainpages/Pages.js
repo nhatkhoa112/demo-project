@@ -13,6 +13,7 @@ import { Thanks } from './utils/welcome/Thanks';
 import { ActivationPage } from './auth/ActivationPage';
 import { AnimatePresence } from 'framer-motion';
 import { ProceedPage } from './proceedPage/ProceedPage';
+import { OrderInfo } from '../mainpages/utils/orderInfo/OrderInfo';
 
 export const MainPages = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ export const MainPages = () => {
         <PrivateRoute path="/auth/:id" exact component={ProfilePage} />
         <Route path="/proceed" exact component={() => <ProceedPage />} />
         <Route path="/thanks" exact component={Thanks} />
+        <Route path="/orderInfo" exact component={OrderInfo} />
         <Route path="*" exact component={NotFound} />
       </Switch>
     </AnimatePresence>

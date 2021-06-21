@@ -3,12 +3,10 @@ import './cart.css';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import image from './images/rose-green.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { orderUserActions } from '../../../redux/actions';
+import { useSelector } from 'react-redux';
 import { CartItem } from '../utils/cartItem/CartItem';
 
 export const Cart = () => {
-  const dispatch = useDispatch();
   const { orderUser } = useSelector((state) => state.orderUser);
 
   let price = 0;
@@ -44,7 +42,7 @@ export const Cart = () => {
               {orderUser?.length === 0 ? (
                 <div>
                   <h2 className="text-center">
-                    The cart is empty, let chose some product.
+                    Your cart is empty, let chose some products
                   </h2>
                   <Link className="alink" to="/products">
                     {' '}
@@ -84,7 +82,15 @@ export const Cart = () => {
                   <span className="second">${price.toFixed(2)}</span>
                 </div>
                 <button
-                  onClick={() => (window.location.href = '/proceed')}
+                  onClick={() => {
+                    if (price === 0) {
+                      alert(
+                        "You don't have any product in cart, let chose some"
+                      );
+                    } else {
+                      window.location.href = '/proceed';
+                    }
+                  }}
                   className="checkout"
                 >
                   Proceed to checkout

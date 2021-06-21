@@ -2,7 +2,7 @@ import * as types from '../constants/product.constants';
 import api from '../../utils/api';
 import { toast } from 'react-toastify';
 
-const getAllProducts = (pageNum, query, sortBy) => async (dispatch) => {
+const getAllProducts = (pageNum, query, sortBy, limit) => async (dispatch) => {
   dispatch({ type: types.GET_ALL_PRODUCTS_REQUEST, payload: null });
   try {
     let queryString = '';
@@ -13,7 +13,7 @@ const getAllProducts = (pageNum, query, sortBy) => async (dispatch) => {
     if (sortBy) sortByString = `&sort=${sortBy}`;
 
     const { data } = await api.get(
-      `/products?page=${pageNum}${queryString}${sortByString}`
+      `/products?page=${pageNum}&limit=${limit}${queryString}${sortByString}`
     );
     dispatch({ type: types.GET_ALL_PRODUCTS_SUCCESS, payload: data });
   } catch (error) {

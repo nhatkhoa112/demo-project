@@ -6,6 +6,11 @@ const orderItemSchema = mongoose.Schema(
     product: { ref: 'Product', required: true, type: Schema.Types.ObjectId },
     price_on_purchase_date: { type: Number, trim: true, required: true },
     quantity: { type: Number, trim: true, required: true },
+    status: {
+      type: String,
+      enum: ['Pending', 'On delivery', 'Completed', 'Out of stock', ''],
+      default: 'Pending',
+    },
   },
   {
     timestamps: true,

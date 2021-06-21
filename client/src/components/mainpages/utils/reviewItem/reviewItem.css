@@ -1,0 +1,37 @@
+.review-item {
+  width: 100%;
+  height: auto;
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-item .spr-review-header-byline {
+  font-style: italic;
+  font-size: 13px;
+  display: inline-block;
+  margin: 0 0 1em 0;
+}
+
+.review-item .spr-review-content {
+  *zoom: 1;
+  margin: 0 0 24px 0;
+}
+
+.spr-review-content-body {
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.spr-review-header-title {
+  font-size: 14px !important;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+}

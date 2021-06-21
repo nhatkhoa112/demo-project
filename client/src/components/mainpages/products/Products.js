@@ -21,7 +21,7 @@ export const Products = () => {
   const [isFilter, setIsFilter] = useState(true);
 
   useEffect(() => {
-    dispatch(productActions.getAllProducts(1));
+    dispatch(productActions.getAllProducts(1, '', '', 12));
   }, [dispatch]);
 
   if (loading) return <Loading />;
