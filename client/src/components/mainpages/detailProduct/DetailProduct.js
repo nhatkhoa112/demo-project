@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { productActions } from '../../../redux/actions';
 import './DetailProduct.css';
-import { Loading } from '../utils/loading/Loading';
+import Slider from 'react-slick';
 import { FaStar } from 'react-icons/fa';
 import { ModalCart } from '../utils/modalCart/ModalCart';
 import { orderUserActions, reviewsActions } from '../../../redux/actions';
@@ -62,12 +62,18 @@ export const DetailProduct = () => {
 
   let productCategory =
     product.categories?.length > 0 && product.categories[0]._id;
+  let relatedProducts = [];
+  if (products.length > 0) {
+    products?.map((pro) => {
+      pro.categories?.map((cate) => {
+        if (cate._id === productCategory) {
+          relatedProducts.push(pro);
+        }
+      });
+    });
+  }
 
-  let relatedProducts = products.filter((pro) =>
-    pro.categories?.includes(productCategory)
-  );
-
-  relatedProducts = relatedProducts.filter((pro, index) => index < 4);
+  relatedProducts = relatedProducts.filter((pro, index) => index < 8);
 
   let productImages = [];
 

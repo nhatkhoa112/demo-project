@@ -1,0 +1,111 @@
+.modal-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-page > .add-content {
+  width: 70%;
+  height: 90%;
+  background: #fff;
+  position: relative;
+  padding: 30px;
+}
+
+.modal-page > .add-content > button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal-page > .add-content > button:hover {
+  color: #3b63f1;
+}
+
+.modal-page > .add-content > .content {
+  width: 100%;
+  height: 100%;
+  background: crimson;
+}
+
+.modal-page .description input.MuiInputBase-input.MuiOutlinedInput-input {
+  max-height: 100px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-multiline.MuiOutlinedInput-multiline {
+  max-height: 100px;
+  overflow: hidden;
+  overflow-y: clip;
+}
+
+textarea.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputMultiline.MuiOutlinedInput-inputMultiline {
+  max-height: 92px !important;
+  overflow: hidden !important;
+  overflow-y: auto !important;
+}
+
+.makeStyles-fileInput-4 {
+  border: none !important;
+}
+
+@media (max-width: 600px) {
+  .modal-page > .add-content {
+    width: 90%;
+    height: 80%;
+    background: #fff;
+    position: relative;
+    padding: 30px;
+  }
+}
+
+.makeStyles-fileInput-15 {
+  border: none !important;
+}
+.css-2b097c-container {
+  width: 100%;
+}
+
+.makeStyles-fileInput-5 {
+  justify-content: flex-start !important;
+}
+
+.select__control.css-yk16xz-control {
+  max-height: 80px !important;
+
+  overflow: hidden !important;
+  overflow-y: auto;
+  outline: none;
+}
+
+.select__value-container.select__value-container--is-multi.select__value-container--has-value.css-g1d714-ValueContainer {
+  max-height: 80px !important;
+
+  overflow: hidden !important;
+  overflow-y: auto;
+  outline: none;
+}
+
+.makeStyles-fileInput-15 > .add {
+  border: 1px solid #ccc;
+  padding: 7px 20px;
+  background: #5c986a;
+  color: white;
+  font-weight: 600;
+}

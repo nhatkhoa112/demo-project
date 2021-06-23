@@ -53,8 +53,19 @@ const getNewProduct = () => async (dispatch) => {
   }
 };
 
+const createProduct = (product) => async (dispatch) => {
+  dispatch({ type: types.CREATE_PRODUCT_REQUEST, payload: null });
+  try {
+    const { data } = await api.post(`/products`, product);
+    dispatch({ type: types.CREATE_PRODUCT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.CREATE_PRODUCT_FAILURE, payload: null });
+  }
+};
+
 export const productActions = {
   getAllProducts,
   getProductById,
   getNewProduct,
+  createProduct,
 };

@@ -9,7 +9,7 @@ function CategoryItem({ cate, i }) {
   const [name, setName] = useState('');
 
   return (
-    <tr key={cate._id} className="cate-item">
+    <tr  className="cate-item">
       <th className="table-cate-info">
         <div>
           <div>{i + 1}</div>

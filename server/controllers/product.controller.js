@@ -41,8 +41,8 @@ class APIfeatures {
 const productController = {
   create: async (req, res) => {
     try {
+      const product_id = Date.now();
       const {
-        product_id,
         title,
         price,
         description,
@@ -50,6 +50,7 @@ const productController = {
         sale,
         categories,
         reviews,
+        sold,
       } = req.body;
       if (!images) return res.status(400).json({ msg: 'No image upload' });
       const product = await Product.findOne({ product_id });
@@ -64,6 +65,7 @@ const productController = {
         sale,
         categories,
         reviews,
+        sold,
       });
       await newProduct.save();
       res.json({ msg: 'Created a product', data: { product: newProduct } });
@@ -76,12 +78,14 @@ const productController = {
     try {
       const total = await Product.find().countDocuments();
 
-      const features = new APIfeatures(Product.find(), req.query)
+      const features = new APIfeatures(
+        Product.find().populate({ path: 'categories', model: 'Category' }),
+        req.query
+      )
         .filtering()
         .sorting()
         .paginating();
       const products = await features.query;
-
       res.json({
         status: 'success',
         result: products.length,
@@ -91,10 +95,10 @@ const productController = {
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
-},
+  },
 
   getProductById: async (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
     try {
       const product = await Product.findOne({ _id: id })
         .populate('categories')

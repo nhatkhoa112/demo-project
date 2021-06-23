@@ -3,7 +3,13 @@ const Schema = require('mongoose').Schema;
 
 const productSchema = new mongoose.Schema(
   {
-    product_id: { type: String, unique: true, trim: true, required: true },
+    product_id: {
+      type: String,
+      unique: true,
+      trim: true,
+      required: false,
+      default: Date.now(),
+    },
     title: { type: String, trim: true, required: true },
     price: { type: Number, trim: true, required: true },
     description: { type: String, required: true },
