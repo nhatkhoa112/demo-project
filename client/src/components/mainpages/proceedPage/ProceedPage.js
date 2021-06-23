@@ -11,6 +11,7 @@ export const ProceedPage = () => {
   const [isOpenInfo, setIsOpenInfo] = useState(true);
   const [isOpenShip, setIsOpenShip] = useState(false);
   const [isOpenPay, setIsOpenPay] = useState(false);
+  const [isOpenThanks, setIsOpenThanks] = useState(false);
   const { orderUser } = useSelector((state) => state.orderUser);
   const user = useSelector((state) => state.auth.user);
   const shippingPriceLocal = JSON.parse(localStorage.getItem('addressPrice'));
@@ -40,63 +41,70 @@ export const ProceedPage = () => {
     <div className="proceed-page">
       <div className="proceed__header">
         <div className="logo">KoHaKu Shop - The cosmetics Ecommerce</div>
-        <div className="url">
-          <li>
-            <NavLink to="/cart" activeClassName="activeNavLink">
-              Cart
-            </NavLink>{' '}
-            {`>`}
-          </li>
-          <li>
-            {isOpenInfo ? (
-              <span>Information</span>
-            ) : (
-              <button
-                onClick={() => {
-                  setIsOpenInfo(true);
-                  setIsOpenShip(false);
-                  setIsOpenPay(false);
-                }}
-              >
-                Information
-              </button>
-            )}
+        {!isOpenThanks ? (
+          <div className="url">
+            <li>
+              <NavLink to="/cart" activeClassName="activeNavLink">
+                Cart
+              </NavLink>{' '}
+              {`>`}
+            </li>
+            <li>
+              {isOpenInfo ? (
+                <span>Information</span>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsOpenInfo(true);
+                    setIsOpenShip(false);
+                    setIsOpenPay(false);
+                    setIsOpenThanks(false);
+                  }}
+                >
+                  Information
+                </button>
+              )}
 
-            {`>`}
-          </li>
-          <li>
-            {isOpenShip ? (
-              <span>Shipping</span>
-            ) : (
-              <button
-                onClick={() => {
-                  setIsOpenInfo(false);
-                  setIsOpenShip(true);
-                  setIsOpenPay(false);
-                }}
-              >
-                Shipping
-              </button>
-            )}
+              {`>`}
+            </li>
+            <li>
+              {isOpenShip ? (
+                <span>Shipping</span>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsOpenInfo(false);
+                    setIsOpenShip(true);
+                    setIsOpenPay(false);
+                    setIsOpenThanks(false);
+                  }}
+                >
+                  Shipping
+                </button>
+              )}
 
-            {`>`}
-          </li>
-          <li>
-            {isOpenPay ? (
-              <span>Payment</span>
-            ) : (
-              <button
-                onClick={() => {
-                  setIsOpenInfo(false);
-                  setIsOpenShip(false);
-                  setIsOpenPay(true);
-                }}
-              >
-                Payment
-              </button>
-            )}
-          </li>
-        </div>
+              {`>`}
+            </li>
+            <li>
+              {isOpenPay ? (
+                <span>Payment</span>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsOpenInfo(false);
+                    setIsOpenShip(false);
+                    setIsOpenPay(true);
+                    setIsOpenThanks(false);
+                  }}
+                >
+                  Payment
+                </button>
+              )}
+            </li>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className="proceed__content">
         <div className="user-info">
@@ -186,6 +194,7 @@ export const ProceedPage = () => {
                         setIsOpenInfo(false);
                         setIsOpenShip(true);
                         setIsOpenPay(false);
+                        setIsOpenThanks(false);
                       }}
                     >
                       Continue to Shipping
@@ -246,6 +255,7 @@ export const ProceedPage = () => {
                         setIsOpenInfo(false);
                         setIsOpenShip(false);
                         setIsOpenPay(true);
+                        setIsOpenThanks(false);
                       }}
                     >
                       Continue to Payment
@@ -271,41 +281,54 @@ export const ProceedPage = () => {
                         )
                       );
                       dispatch(orderUserActions.deleteAllOrderUsers());
-                      // window.location.href = '/thanks';
+                      setIsOpenInfo(false);
+                      setIsOpenShip(false);
+                      setIsOpenPay(false);
+                      setIsOpenThanks(true);
                     }
                   }}
                 >
                   Accept payment
                 </button>
               </ContentPayment>
+              <ContentThanks isOpenThanks={isOpenThanks}>
+                <h4>Thank you for choosing our products</h4>
+                <div className="btn-wrapper">
+                  <Link to="/orderInfo">Your Order Information</Link>
+                </div>
+              </ContentThanks>
             </div>
           </div>
         </div>
-        <div className="order-info">
-          <div className="main-info">
-            <div className="order__summary">
-              {orderUser.map((order) => {
-                return <OrderSummaryItem key={order.orderId} order={order} />;
-              })}
-            </div>
-            <div className="order__subtotal">
-              <div className="content__subtotal">
-                <span>Subtotal: </span>
-                <span>${price.toFixed(2)}</span>
+        {isOpenThanks ? (
+          ''
+        ) : (
+          <div className="order-info">
+            <div className="main-info">
+              <div className="order__summary">
+                {orderUser.map((order) => {
+                  return <OrderSummaryItem key={order.orderId} order={order} />;
+                })}
               </div>
-              <div className="content__shippingPrice">
-                <span>Shipping: </span>
-                <span>
-                  {shippingPrice ? `$ ${shippingPrice.toFixed(2)}` : 'Free'}
-                </span>
+              <div className="order__subtotal">
+                <div className="content__subtotal">
+                  <span>Subtotal: </span>
+                  <span>${price.toFixed(2)}</span>
+                </div>
+                <div className="content__shippingPrice">
+                  <span>Shipping: </span>
+                  <span>
+                    {shippingPrice ? `$ ${shippingPrice.toFixed(2)}` : 'Free'}
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="order__total">
-              <span>Total: </span>
-              <span> $ {(price + shippingPrice).toFixed(2)} </span>
+              <div className="order__total">
+                <span>Total: </span>
+                <span> $ {(price + shippingPrice).toFixed(2)} </span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
@@ -338,5 +361,43 @@ const ContentPayment = styled.div`
     color: white;
     font-size: 16px;
     font-weight: 600;
+  }
+`;
+
+const ContentThanks = styled.div`
+  width: 100%;
+  height: 60vh;
+  display: ${({ isOpenThanks }) => (isOpenThanks ? 'flex' : 'none')};
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  > h4 {
+    font-family: 'Roboto Condensed' sans-serif;
+    font-size: 600;
+    font-size: 16px;
+    width: 60%;
+    text-align: center;
+  }
+
+  > .btn-wrapper {
+    font-family: 'Roboto Condensed' sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  > .btn-wrapper a {
+    border: 2px solid #72b2d7;
+    font-weight: 600;
+    transition: all 0.5s ease-in-out;
+  }
+
+  > .btn-wrapper a:hover {
+    background: #72b2d7;
+    color: white;
   }
 `;

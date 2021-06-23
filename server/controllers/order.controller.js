@@ -45,7 +45,7 @@ const ordersController = {
         });
 
         orderItem.save();
-        order.orderItems.push(orderItem._id);
+        order.orderItems.unshift(orderItem._id);
       });
 
       await order.save();
@@ -67,9 +67,28 @@ const ordersController = {
 
       const user = await User.findById(req.user.id);
       user.orders.push(order._id);
+      await user.populate({
+        path: 'orders',
+        model: 'Order',
+        populate: {
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: {
+            path: 'product',
+            model: 'Product',
+            populate: {
+              path: 'categories',
+              model: 'Category',
+            },
+          },
+        },
+      });
+      await user.execPopulate();
       await user.save();
 
-      res.status(200).json({ msg: 'Created order successfully', newOrder });
+      res
+        .status(200)
+        .json({ msg: 'Created order successfully', order: newOrder, user });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
@@ -98,6 +117,23 @@ const ordersController = {
       if (!order)
         return res.status(404).json({ msg: 'The order is not exists.' });
       res.status(200).json({ msg: 'Deleted order successfully', order });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  getOrderById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const order = await Order.findById(id)
+        .populate({ path: 'owner', model: 'User' })
+        .populate({
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: { path: 'product', model: 'Product' },
+        });
+      if (!order) return res.status(400).json({ msg: 'Order not found!' });
+      res.status(200).json({ msg: 'The order is here:', order });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

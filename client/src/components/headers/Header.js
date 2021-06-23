@@ -12,7 +12,7 @@ export const Header = () => {
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
-
+  const isAdmin = user.role === 1 ? true : false;
   const profileRoute = `/auth/${user.id}`;
   const cartRoute = `/cart`;
   const [isScroll, setIsScroll] = useState(false);
@@ -45,16 +45,31 @@ export const Header = () => {
                 </NavLink>
               </div>
               <div className="item ">
-                <NavLink activeClassName="active-navLink" to="/about">
-                  About us
-                </NavLink>
+                {isAdmin ? (
+                  <NavLink
+                    activeClassName="active-navLink"
+                    to="/category_admin"
+                  >
+                    Category
+                  </NavLink>
+                ) : (
+                  <NavLink activeClassName="active-navLink" to="/about">
+                    About us
+                  </NavLink>
+                )}
               </div>
               <div className="item">
-                <NavLink activeClassName="active-navLink" to="/products">
-                  <div>Products</div>
+                {isAdmin ? (
+                  <NavLink to="/users_admin" activeClassName="active_navLink">
+                    Users
+                  </NavLink>
+                ) : (
+                  <NavLink activeClassName="active-navLink" to="/products">
+                    <div>Products</div>
 
-                  <i className="fas fa-chevron-up"></i>
-                </NavLink>
+                    <i className="fas fa-chevron-up"></i>
+                  </NavLink>
+                )}
               </div>
             </div>
             <div className="left__bottom">
@@ -73,18 +88,33 @@ export const Header = () => {
           <div className="right-menu">
             <div className="right__top">
               <div className=" item ">
-                <NavLink activeClassName="active-navLink" to="/news">
-                  News
-                </NavLink>
+                {isAdmin ? (
+                  <NavLink
+                    activeClassName="active-navLink"
+                    to="/products_admin"
+                  >
+                    Products A
+                  </NavLink>
+                ) : (
+                  <NavLink activeClassName="active-navLink" to="/news">
+                    News
+                  </NavLink>
+                )}
               </div>
               <div className="item ">
-                <NavLink
-                  activeClassName="active-navLink"
-                  exact
-                  to={isAuthenticated ? profileRoute : '/'}
-                >
-                  Profile
-                </NavLink>
+                {isAdmin ? (
+                  <NavLink activeClassName="active-navLink" to="/order_admin">
+                    Orders
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    activeClassName="active-navLink"
+                    exact
+                    to={isAuthenticated ? profileRoute : '/'}
+                  >
+                    Profile
+                  </NavLink>
+                )}
               </div>
               <div className="item ">
                 {isAuthenticated ? (
@@ -115,28 +145,54 @@ export const Header = () => {
               </NavLink>
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" to="/about">
-                About us
-              </NavLink>
+              {isAdmin ? (
+                <NavLink activeClassName="active-navLink" to="/category_admin">
+                  Category
+                </NavLink>
+              ) : (
+                <NavLink activeClassName="active-navLink" to="/about">
+                  About us
+                </NavLink>
+              )}
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" to="/products">
-                <div>Products</div>
-              </NavLink>{' '}
+              {isAdmin ? (
+                <NavLink to="/users_admin" activeClassName="active_navLink">
+                  Users
+                </NavLink>
+              ) : (
+                <NavLink activeClassName="active-navLink" to="/products">
+                  <div>Products</div>
+
+                  <i className="fas fa-chevron-up"></i>
+                </NavLink>
+              )}
             </li>
             <li className="item">
-              <NavLink activeClassName="active-navLink" to="/news">
-                News
-              </NavLink>
+              {isAdmin ? (
+                <NavLink activeClassName="active-navLink" to="/products_admin">
+                  Products A
+                </NavLink>
+              ) : (
+                <NavLink activeClassName="active-navLink" to="/news">
+                  News
+                </NavLink>
+              )}
             </li>
             <li className="item">
-              <NavLink
-                activeClassName="active-navLink"
-                exact
-                to={isAuthenticated ? profileRoute : '/'}
-              >
-                Profile{' '}
-              </NavLink>
+              {isAdmin ? (
+                <NavLink activeClassName="active-navLink" to="/order_admin">
+                  Orders
+                </NavLink>
+              ) : (
+                <NavLink
+                  activeClassName="active-navLink"
+                  exact
+                  to={isAuthenticated ? profileRoute : '/'}
+                >
+                  Profile
+                </NavLink>
+              )}
             </li>
             <li className="item">
               {isAuthenticated ? (
@@ -428,29 +484,54 @@ export const Header = () => {
           </NavLink>
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" to="/about">
-            About us
-          </NavLink>
+          {isAdmin ? (
+            <NavLink activeClassName="active-navLink" to="/category_admin">
+              Category
+            </NavLink>
+          ) : (
+            <NavLink activeClassName="active-navLink" to="/about">
+              About us
+            </NavLink>
+          )}
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" to="/products">
-            <div>Products</div>
-            <i className="fas fa-chevron-right"></i>
-          </NavLink>{' '}
+          {isAdmin ? (
+            <NavLink to="/users_admin" activeClassName="active_navLink">
+              Users
+            </NavLink>
+          ) : (
+            <NavLink activeClassName="active-navLink" to="/products">
+              <div>Products</div>
+
+              <i className="fas fa-chevron-up"></i>
+            </NavLink>
+          )}
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink activeClassName="active-navLink" to="/">
-            News
-          </NavLink>
+          {isAdmin ? (
+            <NavLink activeClassName="active-navLink" to="/products_admin">
+              Products A
+            </NavLink>
+          ) : (
+            <NavLink activeClassName="active-navLink" to="/news">
+              News
+            </NavLink>
+          )}
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
-          <NavLink
-            activeClassName="active-navLink"
-            exact
-            to={isAuthenticated ? profileRoute : '/'}
-          >
-            Profile Page
-          </NavLink>
+          {isAdmin ? (
+            <NavLink activeClassName="active-navLink" to="/order_admin">
+              Orders
+            </NavLink>
+          ) : (
+            <NavLink
+              activeClassName="active-navLink"
+              exact
+              to={isAuthenticated ? profileRoute : '/'}
+            >
+              Profile
+            </NavLink>
+          )}
         </li>
         <li onClick={() => setIsOpen(false)} className="item">
           {isAuthenticated ? (

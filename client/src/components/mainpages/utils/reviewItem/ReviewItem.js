@@ -25,15 +25,15 @@ export const ReviewItem = ({ review }) => {
           );
         })}
       </div>
-      <h3 class="spr-review-header-title">{review.title}</h3>
-      <span class="spr-review-header-byline">
+      <h3 className="spr-review-header-title">{review.title}</h3>
+      <span className="spr-review-header-byline">
         <strong>{review.owner.name}</strong> on{' '}
         <strong>
           {<Moment format="DD, MM, YYYY">{review.createdAt}</Moment>}
         </strong>
       </span>
-      <div class="spr-review-content">
-        <p class="spr-review-content-body">{review.body}</p>
+      <div className="spr-review-content">
+        <p className="spr-review-content-body">{review.body}</p>
       </div>
     </div>
   );

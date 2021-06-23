@@ -171,3 +171,128 @@
     font-size: 28px;
   }
 }
+
+.profile-page .orders {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 0 0;
+  padding: 20px;
+}
+
+.profile-page .orders > h4 {
+  width: 160px;
+  text-align: center;
+  font-size: 24px;
+  border-bottom: 2px solid #f3a5a7;
+}
+
+.table.shop_table,
+table.shop_table {
+  width: 100%;
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 21px;
+  border: 0;
+  background-color: transparent;
+}
+
+.table.shop_table thead,
+table.shop_table thead {
+  border: 1px solid #e8e8e8;
+}
+
+table.shop_table > thead > tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.table.shop_table > tbody > tr > th,
+.table.shop_table > tfoot > tr > th,
+.table.shop_table > thead > tr > th,
+table.shop_table > tbody > tr > th,
+table.shop_table > tfoot > tr > th,
+table.shop_table > thead > tr > th {
+  padding: 16px 30px;
+  line-height: 2;
+  vertical-align: top;
+  border: 1px solid #e6e6e6;
+  color: #000;
+}
+
+.table.shop_table thead th,
+table.shop_table thead th {
+  font-size: 15px;
+  text-transform: uppercase;
+  border: 0 !important;
+  font-weight: 500;
+}
+/* 
+.table.shop_table > tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+} */
+/* 
+.table.shop_table > tbody > tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+} */
+
+.table.shop_table > tbody > tr > td,
+.table.shop_table > tfoot > tr > td,
+.table.shop_table > thead > tr > td,
+table.shop_table > tbody > tr > td,
+table.shop_table > tfoot > tr > td,
+table.shop_table > thead > tr > td {
+  padding: 16px 30px;
+  line-height: 2;
+  vertical-align: top;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.table.shop_table > tbody > tr > td > a,
+.table.shop_table > tfoot > tr > td > a,
+.table.shop_table > thead > tr > td > a,
+table.shop_table > tbody > tr > td > a,
+table.shop_table > tfoot > tr > td > a,
+table.shop_table > thead > tr > td > a {
+  color: black;
+  transition: all 0.5s ease-in-out;
+  font-weight: 600;
+}
+
+.table.shop_table > tbody > tr > td > a:hover,
+.table.shop_table > tfoot > tr > td > a:hover,
+.table.shop_table > thead > tr > td > a:hover,
+table.shop_table > tbody > tr > td > a:hover,
+table.shop_table > tfoot > tr > td > a:hover,
+table.shop_table > thead > tr > td > a:hover {
+  color: #f3a5a7;
+}
+
+.orders > h5 {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  color: #5c986a;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 800px) {
+  .table.shop_table > tbody > tr > .hidden,
+  .table.shop_table > tfoot > tr > .hidden,
+  .table.shop_table > thead > tr > .hidden,
+  table.shop_table > tbody > tr > .hidden,
+  table.shop_table > tfoot > tr > .hidden,
+  table.shop_table > thead > tr > .hidden {
+    display: none;
+  }
+}

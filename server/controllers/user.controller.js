@@ -70,6 +70,25 @@ const userController = {
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
+      await user.populate({
+        path: 'orders',
+        model: 'Order',
+        populate: {
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: {
+            path: 'product',
+            model: 'Product',
+            populate: {
+              path: 'categories',
+              model: 'Category',
+            },
+          },
+        },
+      });
+      await user.execPopulate();
+      await user.save();
+
       if (!user)
         return res.status(400).json({ msg: 'The email is incorrect.' });
 

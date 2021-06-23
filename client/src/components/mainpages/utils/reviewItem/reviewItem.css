@@ -35,3 +35,7 @@
   font-weight: 500;
   color: inherit;
 }
+
+.review-actions > div > .info > div {
+  width: 140px;
+}

@@ -1,0 +1,74 @@
+.category-admin {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.category-admin > h4 {
+  margin-top: 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #5c986a;
+}
+
+.category-admin > .hidden {
+  display: none;
+}
+
+.category-admin .add-button {
+  width: 100%;
+  align-items: center;
+  position: relative;
+  height: 60px;
+}
+
+.category-admin .add-form {
+  width: 90%;
+  height: 100px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.category-admin .add-form > input {
+  width: calc(100% - 120px);
+  height: 100%;
+  outline: none;
+  padding: 0 30px;
+  color: black;
+  font-weight: 500;
+  color: black;
+}
+
+.category-admin .add-form > button {
+  height: 100%;
+  width: 120px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: 600;
+}
+
+.category-admin .add-button > button {
+  margin-left: auto;
+  margin-right: 0;
+  position: absolute;
+  right: 10%;
+  padding: 10px 20px;
+  margin: 10px;
+  border: darkblue 2px solid;
+  background: #3b63f1;
+  opacity: 0.8;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.5s ease-in-out;
+  color: white;
+}
+
+.category-admin .add-button > button:hover {
+  opacity: 1;
+}

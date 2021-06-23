@@ -16,6 +16,16 @@ const createOrder =
     }
   };
 
+const getOrderById = (id) => async (dispatch) => {
+  dispatch({ type: types.GET_ORDER_BY_ID_REQUEST, payload: null });
+  try {
+    const { data } = await api.get(`orders/${id}/order`);
+    dispatch({ type: types.GET_ORDER_BY_ID_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.GET_ORDER_BY_ID_FAILURE, payload: null });
+  }
+};
+
 const deleteOrder = () => async (dispatch) => {};
 
 const updateOrder = () => async (dispatch) => {};
@@ -30,4 +40,5 @@ export const orderActions = {
   updateOrder,
   getOrders,
   getOrdersByUser,
+  getOrderById,
 };
