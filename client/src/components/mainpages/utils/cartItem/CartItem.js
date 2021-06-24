@@ -30,17 +30,17 @@ export const CartItem = ({ order }) => {
         />
       </th>
       <th className="table-product-info">
-        <div>
+        <span>
           <Link to={`/product/${order.product._id}`}>
             {order.product.title}
           </Link>
-        </div>
+        </span>
       </th>
       <th className="table-product-info">
-        <div>$ {order.price_on_purchase_date.toFixed(2)}</div>
+        <span>$ {order.price_on_purchase_date.toFixed(2)}</span>
       </th>
       <th className="table-product-info">
-        <div className="form-quantity">
+        <span className="form-quantity">
           <button
             onClick={() => {
               if (order.quantity > 1) {
@@ -73,15 +73,15 @@ export const CartItem = ({ order }) => {
           >
             +
           </button>
-        </div>
+        </span>
       </th>
-      <th className="table-product-info hidden ">
-        <div>
+      <th className="table-product-info hidden-x ">
+        <span>
           $ {(order.quantity * order.price_on_purchase_date).toFixed(2)}
-        </div>
+        </span>
       </th>
-      <th className="table-product-info hidden">
-        <div className="btn-actions">
+      <th className="table-product-info hidden-x">
+        <span className="btn-actions">
           <button
             className="remove"
             onClick={() => {
@@ -90,7 +90,7 @@ export const CartItem = ({ order }) => {
           >
             <i className="far fa-trash-alt"></i>
           </button>
-        </div>
+        </span>
       </th>
     </tr>
   );

@@ -26,7 +26,7 @@ export const Login = () => {
       uploadPreset: 'ml_default',
     },
     (error, result) => {
-      if (!error && result && result.event === 'success') {
+      if (result.event === 'success') {
         imageUpload.push({
           public_id: result.info.public_id,
           url: result.info.secure_url,

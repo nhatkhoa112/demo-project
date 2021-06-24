@@ -117,10 +117,10 @@ export const OrderPageById = () => {
               <tr>
                 <th className="table-thumbnail">Image</th>
                 <th className="table-name">Name</th>
-                <th className="table-price ">{'Price'}</th>
-                <th className="table-quantity ">{'Quantity'}</th>
                 <th className="table-subtotal">Subtotal</th>
                 <th className="table-remove">Status</th>
+                <th className="hidden-xy ">{'Price'}</th>
+                <th className="hidden-xy  ">{'Quantity'}</th>
               </tr>
             </thead>
             <tbody>

@@ -83,10 +83,13 @@ const createOrderItem = (productId, quantity, price) => async (dispatch) => {
   }
 };
 
-const updateOrderItem = (id, quantity, status) => async (dispatch) => {
+const updateOrderItem = (id, quantity, status, orderId) => async (dispatch) => {
   dispatch({ type: types.UPDATE_ORDER_ITEM_REQUEST, payload: null });
   try {
-    const { data } = await api.patch(`/orderItems/${id}`, { quantity, status });
+    const { data } = await api.patch(`/orderItems/${id}/order/${orderId}`, {
+      quantity,
+      status,
+    });
     dispatch({
       type: types.UPDATE_ORDER_ITEM_SUCCESS,
       payload: data,
@@ -100,10 +103,10 @@ const updateOrderItem = (id, quantity, status) => async (dispatch) => {
   }
 };
 
-const deleteOrderItem = (id) => async (dispatch) => {
+const deleteOrderItem = (id, orderId) => async (dispatch) => {
   dispatch({ type: types.DELETE_ORDER_ITEM_REQUEST, payload: null });
   try {
-    const { data } = await api.delete(`/orderItems/${id}`);
+    const { data } = await api.delete(`/orderItems/${id}/order/${orderId}`);
     dispatch({
       type: types.DELETE_ORDER_ITEM_SUCCESS,
       payload: data,

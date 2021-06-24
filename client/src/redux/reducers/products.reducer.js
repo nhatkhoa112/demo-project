@@ -13,6 +13,11 @@ const productReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case types.CREATE_PRODUCT_REQUEST:
+    case types.DELETE_PRODUCT_REQUEST:
+    case types.UPDATE_PRODUCT_REQUEST:
+      return { ...state, loading: false };
+
     case reviewTypes.CREATE_REVIEW_OF_PRODUCT_REQUEST:
     case reviewTypes.DELETE_REVIEW_OF_PRODUCT_REQUEST:
     case reviewTypes.UPDATE_REVIEW_OF_PRODUCT_REQUEST:
@@ -20,6 +25,9 @@ const productReducer = (state = initialState, action) => {
     case types.GET_ALL_PRODUCTS_REQUEST:
     case types.GET_NEW_PRODUCTS_REQUEST:
       return { ...state, loading: true };
+    case types.CREATE_PRODUCT_FAILURE:
+    case types.DELETE_PRODUCT_FAILURE:
+    case types.UPDATE_PRODUCT_FAILURE:
     case reviewTypes.CREATE_REVIEW_OF_PRODUCT_FAILURE:
     case reviewTypes.DELETE_REVIEW_OF_PRODUCT_FAILURE:
     case reviewTypes.UPDATE_REVIEW_OF_PRODUCT_FAILURE:
@@ -27,9 +35,23 @@ const productReducer = (state = initialState, action) => {
     case types.GET_PRODUCT_BY_ID_FAILURE:
     case types.GET_ALL_PRODUCTS_FAILURE:
       return { ...state, loading: false };
+    case types.CREATE_PRODUCT_SUCCESS:
+      state.products.unshift(payload.product);
+      return {
+        ...state,
+        loading: false,
+        products: [...state.products],
+      };
+    case types.DELETE_PRODUCT_SUCCESS:
+      let idz = state.products.findIndex(
+        (pro) => pro._id === payload.product._id
+      );
+      state.products.splice(idz, 1);
+      return { ...state, loading: false, products: [...state.products] };
+    case types.UPDATE_PRODUCT_SUCCESS:
+      return { ...state, loading: false };
 
     case reviewTypes.CREATE_REVIEW_OF_PRODUCT_SUCCESS:
-      console.log(payload.product);
       return {
         ...state,
         loading: false,

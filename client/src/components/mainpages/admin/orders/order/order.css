@@ -1,0 +1,49 @@
+.nav-link {
+  color: #5c986a;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #f9bcd6;
+}
+
+.css-tlfecz-indicatorContainer {
+  display: none !important;
+}
+
+.css-g1d714-ValueContainer {
+  width: 120px !important;
+}
+
+.button-dropdown {
+  width: 120px;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  position: relative;
+}
+
+.dropdown {
+  width: 120px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #ccc;
+  padding: 10px 0;
+  z-index: 10000;
+  background: #fff;
+}
+
+.button-dropdown > .hidden {
+  display: none;
+}
+
+.dropdown > button {
+  display: flex;
+  height: 33%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+}

@@ -11,6 +11,7 @@ import { Loading } from '../utils/loading/Loading';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   let { products } = useSelector((state) => state.products);
   const { loading } = useSelector((state) => state.products);
@@ -439,13 +440,17 @@ export const Home = () => {
                         const price_on_purchase_date =
                           (product.price * (100 - product.sale)) / 100;
                         const quantity = 1;
-                        dispatch(
-                          orderUserActions.createOrderUser(
-                            product,
-                            quantity,
-                            price_on_purchase_date
-                          )
-                        );
+                        if (!isAuthenticated) {
+                          window.alert('You need sign in to create a order!!');
+                        } else {
+                          dispatch(
+                            orderUserActions.createOrderUser(
+                              product,
+                              quantity,
+                              price_on_purchase_date
+                            )
+                          );
+                        }
                       }}
                       className="cart-icon"
                     >
@@ -566,13 +571,17 @@ export const Home = () => {
                         const price_on_purchase_date =
                           (product.price * (100 - product.sale)) / 100;
                         const quantity = 1;
-                        dispatch(
-                          orderUserActions.createOrderUser(
-                            product,
-                            quantity,
-                            price_on_purchase_date
-                          )
-                        );
+                        if (!isAuthenticated) {
+                          window.alert('You need sign in to create a order!!');
+                        } else {
+                          dispatch(
+                            orderUserActions.createOrderUser(
+                              product,
+                              quantity,
+                              price_on_purchase_date
+                            )
+                          );
+                        }
                       }}
                       className="cart-icon"
                     >

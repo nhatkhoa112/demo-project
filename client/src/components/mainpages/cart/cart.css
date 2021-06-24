@@ -286,11 +286,11 @@ tbody > .order-item > th {
     width: 100%;
   }
 
-  tr > .table-subtotal {
+  tr > .table-ble-subtotal {
     display: none;
   }
 
-  tr > .table-remove {
+  tr > .table-ble-remove {
     display: none;
   }
 }

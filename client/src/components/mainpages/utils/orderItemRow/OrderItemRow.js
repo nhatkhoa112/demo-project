@@ -18,26 +18,26 @@ export const OrderItemRow = ({ order }) => {
         />
       </th>
       <th className="table-product-info">
-        <div>
+        <span>
           <Link to={`/product/${order.product._id}`}>
             {order.product.title}
           </Link>
-        </div>
-      </th>
-      <th className="table-product-info hidden">
-        <div>$ {order.price_on_purchase_date.toFixed(2)}</div>
-      </th>
-      <th className="table-product-info hidden">
-        {' '}
-        <div className="quantity">{order.quantity}</div>
+        </span>
       </th>
       <th className="table-product-info  ">
-        <div>
+        <span>
           $ {(order.quantity * order.price_on_purchase_date).toFixed(2)}
-        </div>
+        </span>
       </th>
       <th className="table-product-info ">
-        <div>{order.status}</div>
+        <span>{order.status}</span>
+      </th>
+      <th className="table-product-info hidden-x">
+        <span>$ {order.price_on_purchase_date.toFixed(2)}</span>
+      </th>
+      <th className="table-product-info hidden-x">
+        {' '}
+        <span className="quantity">{order.quantity}</span>
       </th>
     </tr>
   );

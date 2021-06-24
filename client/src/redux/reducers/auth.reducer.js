@@ -89,7 +89,6 @@ const authReducer = (state = initialState, action) => {
       };
 
     case orderTypes.CREATE_ORDER_SUCCESS:
-      console.log(payload.user);
       localStorage.setItem('koHaUser', JSON.stringify(payload.user));
       return { ...state, loading: false, user: payload.user };
 

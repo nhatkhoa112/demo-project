@@ -817,3 +817,17 @@
 .cart-btn > a > .hidden {
   display: none;
 }
+
+.pink #path14,
+.pink #path16 {
+  transition: all 0.5s ease-in-out;
+}
+
+.pink #path14,
+.pink #path16 {
+  fill: deeppink !important;
+}
+
+.item121:hover {
+  border: none !important;
+}

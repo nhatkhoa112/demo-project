@@ -207,8 +207,16 @@ export const Header = () => {
             </li>
 
             {isAuthenticated ? (
-              <div className="user-btn">
-                <NavLink to={isAuthenticated ? profileRoute : '/'}>
+              <div className={isAdmin ? 'user-btn pink' : 'user-btn'}>
+                <NavLink
+                  to={
+                    isAuthenticated
+                      ? isAdmin
+                        ? '/products_admin'
+                        : profileRoute
+                      : '/'
+                  }
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 400 400"
@@ -263,6 +271,161 @@ export const Header = () => {
               ''
             )}
             <div className="cart-btn">
+              {isAuthenticated && !isAdmin ? (
+                <NavLink to={cartRoute}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 400 400"
+                    height={23}
+                    width={23}
+                    id="svg2"
+                    version="1.1"
+                    xmlnsdc="http://purl.org/dc/elements/1.1/"
+                    xmlnscc="http://creativecommons.org/ns#"
+                    xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                    xmlnssvg="http://www.w3.org/2000/svg"
+                    xmlSpace="preserve"
+                  >
+                    <metadata id="metadata8">
+                      <rdf>
+                        <work rdfabout="true">
+                          <format>image/svg+xml</format>
+                          <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
+                        </work>
+                      </rdf>
+                    </metadata>
+                    <defs id="defs6" />
+                    <g
+                      transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
+                      id="g10"
+                    >
+                      <g transform="scale(0.1)" id="g12">
+                        <path
+                          id="path14"
+                          style={{
+                            fill: '#231f20',
+                            fillOpacity: 1,
+                            fillRule: 'nonzero',
+                            stroke: 'none',
+                          }}
+                          d="M 2565.21,2412.71 H 450.992 V 0 H 2565.21 V 2412.71 Z M 2366.79,2214.29 V 198.43 H 649.418 V 2214.29 H 2366.79"
+                        />
+                        <path
+                          id="path16"
+                          style={{
+                            fill: '#231f20',
+                            fillOpacity: 1,
+                            fillRule: 'nonzero',
+                            stroke: 'none',
+                          }}
+                          d="m 1508.11,2990 h -0.01 c -361.22,0 -654.037,-292.82 -654.037,-654.04 V 2216.92 H 2162.14 v 119.04 c 0,361.22 -292.82,654.04 -654.03,654.04 z m 0,-198.43 c 224.16,0 411.02,-162.7 448.69,-376.23 h -897.39 c 37.66,213.53 224.53,376.23 448.7,376.23"
+                        />
+                        <path
+                          id="path18"
+                          style={{
+                            fill: '#231f20',
+                            fillOpacity: 1,
+                            fillRule: 'nonzero',
+                            stroke: 'none',
+                          }}
+                          d="m 1946.24,1868.17 h -876.27 v 169.54 h 876.27 v -169.54"
+                        />
+                      </g>
+                    </g>
+                  </svg>{' '}
+                  <span className={orderUser.length > 0 ? 'count' : 'hidden'}>
+                    {orderUser?.length}
+                  </span>
+                </NavLink>
+              ) : (
+                ''
+              )}
+            </div>
+          </ul>
+        </div>
+
+        <div className="header3">
+          <div
+            onClick={() => setIsOpen(!isOpen)}
+            className={isOpen ? 'menu-btn open' : 'menu-btn'}
+          >
+            <span className="menu-btn__burger"></span>
+          </div>
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <NavLink to="/">
+              <div className="logo__title">
+                <span className="name">kohaku</span>
+                <span>cosmetics</span>
+              </div>
+            </NavLink>
+          </div>
+          {isAuthenticated ? (
+            <div className={isAdmin ? 'user-btn pink' : 'user-btn'}>
+              <NavLink
+                to={
+                  isAuthenticated
+                    ? isAdmin
+                      ? '/products_admin'
+                      : profileRoute
+                    : '/'
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 400 400"
+                  height={23}
+                  width={23}
+                  id="svg2"
+                  version="1.1"
+                  xmlnsdc="http://purl.org/dc/elements/1.1/"
+                  xmlnscc="http://creativecommons.org/ns#"
+                  xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                  xmlnssvg="http://www.w3.org/2000/svg"
+                  xmlSpace="preserve"
+                >
+                  <metadata id="metadata8">
+                    <rdf>
+                      <work rdfabout="true">
+                        <format>image/svg+xml</format>
+                        <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
+                      </work>
+                    </rdf>
+                  </metadata>
+                  <defs id="defs6" />
+                  <g
+                    transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
+                    id="g10"
+                  >
+                    <g transform="scale(0.1)" id="g12">
+                      <path
+                        id="path14"
+                        style={{
+                          fillOpacity: 1,
+                          fillRule: 'nonzero',
+                          stroke: 'none',
+                        }}
+                        d="m 1506.87,2587.11 c -225.04,0 -408.14,-183.08 -408.14,-408.11 0,-225.06 183.1,-408.13 408.14,-408.13 225.02,0 408.13,183.07 408.13,408.13 0,225.03 -183.11,408.11 -408.13,408.11 z m 0,-1038.56 c -347.64,0 -630.432,282.79 -630.432,630.45 0,347.63 282.792,630.43 630.432,630.43 347.63,0 630.42,-282.8 630.42,-630.43 0,-347.66 -282.79,-630.45 -630.42,-630.45 v 0"
+                      />
+                      <path
+                        id="path16"
+                        style={{
+                          fillOpacity: 1,
+                          fillRule: 'nonzero',
+                          stroke: 'none',
+                        }}
+                        d="M 399.648,361.789 H 2614.07 c -25.06,261.531 -139.49,503.461 -327.47,689.831 -124.25,123.14 -300.78,193.96 -483.86,193.96 h -591.76 c -183.61,0 -359.601,-70.82 -483.863,-193.96 C 539.148,865.25 424.719,623.32 399.648,361.789 Z M 2730.69,139.461 H 283.035 c -61.558,0 -111.16,49.59 -111.16,111.16 0,363.438 141.68,704 398.32,959.019 165.657,164.55 399.414,258.82 640.785,258.82 h 591.76 c 241.94,0 475.14,-94.27 640.8,-258.82 256.63,-255.019 398.31,-595.581 398.31,-959.019 0,-61.57 -49.59,-111.16 -111.16,-111.16 v 0"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </NavLink>
+            </div>
+          ) : (
+            ''
+          )}
+          <div className="cart-btn">
+            {isAuthenticated && !isAdmin ? (
               <NavLink to={cartRoute}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -324,149 +487,13 @@ export const Header = () => {
                     </g>
                   </g>
                 </svg>{' '}
-                <span className={orderUser.length > 0 ? 'count' : 'hidden'}>
-                  {orderUser?.length}
+                <span className={orderItems.length > 0 ? 'count' : 'hidden'}>
+                  {orderItems?.length}
                 </span>
               </NavLink>
-            </div>
-          </ul>
-        </div>
-
-        <div className="header3">
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className={isOpen ? 'menu-btn open' : 'menu-btn'}
-          >
-            <span className="menu-btn__burger"></span>
-          </div>
-          <div className="logo">
-            <img src={logo} alt="logo" />
-            <NavLink to="/">
-              <div className="logo__title">
-                <span className="name">kohaku</span>
-                <span>cosmetics</span>
-              </div>
-            </NavLink>
-          </div>
-          {isAuthenticated ? (
-            <div className="user-btn">
-              <NavLink to={isAuthenticated ? profileRoute : '/'}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 400 400"
-                  height={23}
-                  width={23}
-                  id="svg2"
-                  version="1.1"
-                  xmlnsdc="http://purl.org/dc/elements/1.1/"
-                  xmlnscc="http://creativecommons.org/ns#"
-                  xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                  xmlnssvg="http://www.w3.org/2000/svg"
-                  xmlSpace="preserve"
-                >
-                  <metadata id="metadata8">
-                    <rdf>
-                      <work rdfabout="true">
-                        <format>image/svg+xml</format>
-                        <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
-                      </work>
-                    </rdf>
-                  </metadata>
-                  <defs id="defs6" />
-                  <g
-                    transform="matrix(1.3333333,0,0,-1.3333333,0,400)"
-                    id="g10"
-                  >
-                    <g transform="scale(0.1)" id="g12">
-                      <path
-                        id="path14"
-                        style={{
-                          fillOpacity: 1,
-                          fillRule: 'nonzero',
-                          stroke: 'none',
-                        }}
-                        d="m 1506.87,2587.11 c -225.04,0 -408.14,-183.08 -408.14,-408.11 0,-225.06 183.1,-408.13 408.14,-408.13 225.02,0 408.13,183.07 408.13,408.13 0,225.03 -183.11,408.11 -408.13,408.11 z m 0,-1038.56 c -347.64,0 -630.432,282.79 -630.432,630.45 0,347.63 282.792,630.43 630.432,630.43 347.63,0 630.42,-282.8 630.42,-630.43 0,-347.66 -282.79,-630.45 -630.42,-630.45 v 0"
-                      />
-                      <path
-                        id="path16"
-                        style={{
-                          fillOpacity: 1,
-                          fillRule: 'nonzero',
-                          stroke: 'none',
-                        }}
-                        d="M 399.648,361.789 H 2614.07 c -25.06,261.531 -139.49,503.461 -327.47,689.831 -124.25,123.14 -300.78,193.96 -483.86,193.96 h -591.76 c -183.61,0 -359.601,-70.82 -483.863,-193.96 C 539.148,865.25 424.719,623.32 399.648,361.789 Z M 2730.69,139.461 H 283.035 c -61.558,0 -111.16,49.59 -111.16,111.16 0,363.438 141.68,704 398.32,959.019 165.657,164.55 399.414,258.82 640.785,258.82 h 591.76 c 241.94,0 475.14,-94.27 640.8,-258.82 256.63,-255.019 398.31,-595.581 398.31,-959.019 0,-61.57 -49.59,-111.16 -111.16,-111.16 v 0"
-                      />
-                    </g>
-                  </g>
-                </svg>
-              </NavLink>
-            </div>
-          ) : (
-            ''
-          )}
-          <div className="cart-btn">
-            <NavLink to={cartRoute}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 400 400"
-                height={23}
-                width={23}
-                id="svg2"
-                version="1.1"
-                xmlnsdc="http://purl.org/dc/elements/1.1/"
-                xmlnscc="http://creativecommons.org/ns#"
-                xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                xmlnssvg="http://www.w3.org/2000/svg"
-                xmlSpace="preserve"
-              >
-                <metadata id="metadata8">
-                  <rdf>
-                    <work rdfabout="true">
-                      <format>image/svg+xml</format>
-                      <type rdfresource="http://purl.org/dc/dcmitype/StillImage" />
-                    </work>
-                  </rdf>
-                </metadata>
-                <defs id="defs6" />
-                <g transform="matrix(1.3333333,0,0,-1.3333333,0,400)" id="g10">
-                  <g transform="scale(0.1)" id="g12">
-                    <path
-                      id="path14"
-                      style={{
-                        fill: '#231f20',
-                        fillOpacity: 1,
-                        fillRule: 'nonzero',
-                        stroke: 'none',
-                      }}
-                      d="M 2565.21,2412.71 H 450.992 V 0 H 2565.21 V 2412.71 Z M 2366.79,2214.29 V 198.43 H 649.418 V 2214.29 H 2366.79"
-                    />
-                    <path
-                      id="path16"
-                      style={{
-                        fill: '#231f20',
-                        fillOpacity: 1,
-                        fillRule: 'nonzero',
-                        stroke: 'none',
-                      }}
-                      d="m 1508.11,2990 h -0.01 c -361.22,0 -654.037,-292.82 -654.037,-654.04 V 2216.92 H 2162.14 v 119.04 c 0,361.22 -292.82,654.04 -654.03,654.04 z m 0,-198.43 c 224.16,0 411.02,-162.7 448.69,-376.23 h -897.39 c 37.66,213.53 224.53,376.23 448.7,376.23"
-                    />
-                    <path
-                      id="path18"
-                      style={{
-                        fill: '#231f20',
-                        fillOpacity: 1,
-                        fillRule: 'nonzero',
-                        stroke: 'none',
-                      }}
-                      d="m 1946.24,1868.17 h -876.27 v 169.54 h 876.27 v -169.54"
-                    />
-                  </g>
-                </g>
-              </svg>{' '}
-              <span className={orderItems.length > 0 ? 'count' : 'hidden'}>
-                {orderItems?.length}
-              </span>
-            </NavLink>
+            ) : (
+              ''
+            )}
           </div>
           <div
             className="info-btn"

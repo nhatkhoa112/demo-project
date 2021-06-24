@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
-import './modalAddProduct.css';
+import './modalUpdateProduct.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Paper, Button, Typography } from '@material-ui/core';
-import { productActions } from '../../../../../redux/actions';
+import { categoryActions, productActions } from '../../../../../redux/actions';
 import Select from 'react-select';
 
-export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
+export const ModalUpdateProduct = ({
+  oldProduct,
+  isOpenUpdate,
+  setIsOpenUpdate,
+}) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const [isNew, setIsNew] = useState(true);
   const classes = useStyles();
+  let newCategories = [];
+  oldProduct.categories?.length > 0 &&
+    oldProduct.categories.map((cate) => {
+      newCategories.push(cate._id);
+    });
+
   const [product, setProduct] = useState({
-    title: '',
-    description: '',
-    price: 0,
-    sale: 0,
-    categories: [],
-    images: [],
-    sold: 0,
-    new: true,
-    reviews: [],
+    title: oldProduct.title,
+    description: oldProduct.description,
+    price: oldProduct.price,
+    sale: oldProduct.sale,
+    categories: newCategories,
+    images: oldProduct.images,
+    sold: oldProduct.sold,
   });
 
   let imageUpload = [];
@@ -31,7 +38,7 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
       uploadPreset: 'ml_default',
     },
     (error, result) => {
-      if (result.event === 'success') {
+      if (!error && result && result.event === 'success') {
         imageUpload.push({
           public_id: result.info.public_id,
           url: result.info.secure_url,
@@ -40,7 +47,6 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
       }
     }
   );
-
   let options = [];
 
   categories?.length > 0 &&
@@ -49,9 +55,9 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
     });
 
   return (
-    <div className={isOpen ? `modal-page` : ' hidden'}>
+    <div className={isOpenUpdate ? `modal-page` : ' hidden'}>
       <div className="add-content">
-        <button onClick={() => setIsOpen(false)}>
+        <button onClick={() => setIsOpenUpdate(false)}>
           <i className="fas fa-times"></i>
         </button>
         <Paper className={classes.paper}>
@@ -60,7 +66,7 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
             noValidate
             className={`${classes.form} ${classes.root}`}
           >
-            <Typography variant="h6">Creating Product</Typography>
+            <Typography variant="h6">Updating Product</Typography>
             <TextField
               name="title"
               variant="outlined"
@@ -136,7 +142,6 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
                 type="number"
                 name="sold"
                 // defaultValue={0}
-
                 variant="outlined"
                 autoComplete="new-password"
                 label="Sold"
@@ -181,7 +186,6 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
                   e.map((s) => {
                     value.push(s.value);
                   });
-
                   setProduct({ ...product, categories: value });
                 }}
               />
@@ -190,7 +194,7 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
               className={classes.fileInput}
               style={{
                 width: '100%',
-                height: '60px',
+                height: '30px',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -199,15 +203,15 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
             >
               <button
                 className="add"
-                onClick={(e) => {
-                  e.preventDefault();
-                  widget.open();
-                }}
                 style={{
                   padding: '7px 15px',
                   background: '#5C986A',
                   color: 'white',
                   fontWeight: '500',
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  widget.open();
                 }}
               >
                 Add picture
@@ -217,7 +221,7 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
               className={classes.fileInput}
               style={{
                 width: '100%',
-                height: '60px',
+                height: '30px',
                 display: 'flex',
                 alignItems: 'center',
               }}
@@ -225,10 +229,10 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(productActions.createProduct(product));
-                  setIsOpen(false);
+                  dispatch(productActions.update(product));
                 }}
                 className={classes.buttonSubmit}
+                value={product.categories}
                 variant="container"
                 color="primary"
                 size="large"
@@ -236,14 +240,6 @@ export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
                 fullWidth
               >
                 Submit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="small"
-                fullWidth
-              >
-                Clear
               </Button>
             </div>
           </form>

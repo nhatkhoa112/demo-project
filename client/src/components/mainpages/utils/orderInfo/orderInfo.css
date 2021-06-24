@@ -233,3 +233,9 @@ tbody > .order-item > th {
   background: #72b2d7;
   color: white;
 }
+
+@media screen and (max-width: 540px) {
+  tr .hidden-xyz {
+    display: none !important;
+  }
+}

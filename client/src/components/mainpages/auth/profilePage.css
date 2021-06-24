@@ -287,12 +287,18 @@ table.shop_table > thead > tr > td > a:hover {
 }
 
 @media screen and (max-width: 800px) {
-  .table.shop_table > tbody > tr > .hidden,
-  .table.shop_table > tfoot > tr > .hidden,
-  .table.shop_table > thead > tr > .hidden,
-  table.shop_table > tbody > tr > .hidden,
-  table.shop_table > tfoot > tr > .hidden,
-  table.shop_table > thead > tr > .hidden {
+  .table.shop_table > tbody > tr > .hidden-z,
+  .table.shop_table > tfoot > tr > .hidden-z,
+  .table.shop_table > thead > tr > .hidden-z,
+  table.shop_table > tbody > tr > .hidden-z,
+  table.shop_table > tfoot > tr > .hidden-z,
+  table.shop_table > thead > tr > .hidden-z {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  tr > .hidden-on {
     display: none;
   }
 }

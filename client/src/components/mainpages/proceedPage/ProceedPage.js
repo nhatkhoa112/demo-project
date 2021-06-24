@@ -26,7 +26,7 @@ export const ProceedPage = () => {
       address: '',
       cityOrProvince: '',
       countryOrRegion: '',
-      phoneNumber: 0,
+      phoneNumber: '',
     }
   );
 
@@ -180,7 +180,7 @@ export const ProceedPage = () => {
                       }
                       autoComplete="new-password"
                       placeholder="Phone Number"
-                      type="number"
+                      type="text"
                       className="input-item-2"
                     />
                   </div>

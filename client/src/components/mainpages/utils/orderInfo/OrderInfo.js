@@ -124,10 +124,10 @@ export const OrderInfo = () => {
           <tr>
             <th className="table-thumbnail">Image</th>
             <th className="table-name">Name</th>
-            <th className="table-price ">{'Price'}</th>
-            <th className="table-quantity ">{'Quantity'}</th>
             <th className="table-subtotal">Subtotal</th>
             <th className="table-remove">Status</th>
+            <th className=" hidden-xyz ">{'Price'}</th>
+            <th className=" hidden-xyz ">{'Quantity'}</th>
           </tr>
         </thead>
         <tbody>

@@ -26,11 +26,35 @@ const getOrderById = (id) => async (dispatch) => {
   }
 };
 
-const deleteOrder = () => async (dispatch) => {};
+const deleteOrder = (id) => async (dispatch) => {
+  dispatch({ type: types.DELETE_ORDER_REQUEST, payload: null });
+  try {
+    const { data } = await api.delete(`/orders/${id}`);
+    dispatch({ type: types.DELETE_ORDER_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.DELETE_ORDER_FAILURE, payload: null });
+  }
+};
 
-const updateOrder = () => async (dispatch) => {};
+const updateOrder = (order, id) => async (dispatch) => {
+  dispatch({ type: types.UPDATE_ORDER_REQUEST, payload: null });
+  try {
+    const { data } = await api.patch(`/orders/${id}`, { order });
+    dispatch({ type: types.UPDATE_ORDER_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.UPDATE_ORDER_FAILURE, payload: null });
+  }
+};
 
-const getOrders = () => async (dispatch) => {};
+const getOrders = () => async (dispatch) => {
+  dispatch({ type: types.GET_ORDERS_REQUEST, payload: null });
+  try {
+    const { data } = await api.get(`/orders`);
+    dispatch({ type: types.GET_ORDERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.GET_ORDERS_FAILURE, payload: null });
+  }
+};
 
 const getOrdersByUser = () => async (dispatch) => {};
 

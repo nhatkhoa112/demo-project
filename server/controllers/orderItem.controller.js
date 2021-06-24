@@ -1,4 +1,5 @@
 const OrderItem = require('../models/orderItem.model.js');
+const Order = require('../models/order.model.js');
 
 const orderItemsController = {
   getOrderItemsById: async (req, res) => {
@@ -113,13 +114,26 @@ const orderItemsController = {
 
   updateOrderItem: async (req, res) => {
     try {
-      const { quantity } = req.body;
+      const { orderId } = req.params;
+      const { quantity, pending } = req.body;
       if (quantity === 0) {
         const orderItem = await OrderItem.findByIdAndDelete(
           req.params.id
         ).populate('product');
 
-        return res.json({ msg: 'Deleted orderItem', orderItem });
+        const order = await Order.findById(orderId)
+          .populate({
+            path: 'orderItems',
+            model: 'OrderItem',
+            populate: { path: 'product', model: 'Product' },
+          })
+          .populate({ path: 'owner', model: 'User' });
+
+        let idu = order.orderItems.findIndex((or) => or._id === orderItem._id);
+        order.orderItems.splice(idu, 1);
+        await order.save;
+
+        return res.json({ msg: 'Deleted orderItem', order });
       }
       const orderItem = await OrderItem.findByIdAndUpdate(
         req.params.id,
@@ -130,18 +144,44 @@ const orderItemsController = {
       ).populate('product');
 
       await orderItem.save();
-      res.json({ msg: 'Updated orderItem', orderItem: orderItem });
+
+      const order = await Order.findById(orderId)
+        .populate({
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: { path: 'product', model: 'Product' },
+        })
+        .populate({ path: 'owner', model: 'User' });
+
+      let idu = order.orderItems.findIndex((or) => or._id === orderItem._id);
+      order.orderItems[idu] = orderItem;
+      await order.save;
+
+      res.json({ msg: 'Updated orderItem', order: order });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
   },
   deleteOrderItem: async (req, res) => {
     try {
+      const { orderId } = req.params;
       const orderItem = await OrderItem.findByIdAndDelete(
         req.params.id
       ).populate('product');
 
-      res.json({ msg: 'Deleted orderItem', orderItem });
+      const order = await Order.findById(orderId)
+        .populate({
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: { path: 'product', model: 'Product' },
+        })
+        .populate({ path: 'owner', model: 'User' });
+
+      let idu = order.orderItems.findIndex((or) => or._id === orderItem._id);
+      order.orderItems.splice(idu, 1);
+      await order.save;
+
+      res.json({ msg: 'Deleted orderItem', order });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

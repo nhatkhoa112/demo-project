@@ -12,6 +12,7 @@ import { ReviewItem } from '../utils/reviewItem/ReviewItem';
 import styled from 'styled-components';
 
 export const DetailProduct = () => {
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { id } = useParams();
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
@@ -203,14 +204,18 @@ export const DetailProduct = () => {
             <div className="cart-btn">
               <button
                 onClick={() => {
-                  dispatch(
-                    orderUserActions.createOrderUser(
-                      product,
-                      quantity,
-                      price_on_purchase_date
-                    )
-                  );
-                  setIsOpen(!isOpen);
+                  if (!isAuthenticated) {
+                    window.alert('You need sign in to create a order!!');
+                  } else {
+                    dispatch(
+                      orderUserActions.createOrderUser(
+                        product,
+                        quantity,
+                        price_on_purchase_date
+                      )
+                    );
+                    setIsOpen(true);
+                  }
                 }}
               >
                 Add to Cart

@@ -11,6 +11,8 @@ export const ProductItem = ({ product, isFilter }) => {
   const price_on_purchase_date = (product.price * (100 - product.sale)) / 100;
   const dispatch = useDispatch();
 
+  let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <div className="card">
       <ModalCart
@@ -32,14 +34,18 @@ export const ProductItem = ({ product, isFilter }) => {
       <div
         className="cart-icon"
         onClick={() => {
-          dispatch(
-            orderUserActions.createOrderUser(
-              product,
-              quantity,
-              price_on_purchase_date
-            )
-          );
-          setIsOpen(true);
+          if (!isAuthenticated) {
+            window.alert('You need sign in to create a order!!');
+          } else {
+            dispatch(
+              orderUserActions.createOrderUser(
+                product,
+                quantity,
+                price_on_purchase_date
+              )
+            );
+            setIsOpen(true);
+          }
         }}
       >
         <svg

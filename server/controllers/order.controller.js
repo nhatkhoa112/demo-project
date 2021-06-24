@@ -5,7 +5,13 @@ const User = require('../models/user.model.js');
 const ordersController = {
   getAllOrders: async (req, res) => {
     try {
-      const orders = await Order.find().populate('orderItems');
+      const orders = await Order.find()
+        .populate({
+          path: 'orderItems',
+          model: 'OrderItem',
+          populate: { path: 'product', model: 'Product' },
+        })
+        .populate({ path: 'owner', model: 'User' });
       res.status(200).json({ msg: 'All orders is here:', orders });
     } catch (error) {
       res.status(500).json({ msg: error.message });

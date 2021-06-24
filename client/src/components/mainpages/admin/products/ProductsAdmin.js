@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import './productsAdmin.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { productActions } from '../../../../redux/actions';
+import { productActions, categoryActions } from '../../../../redux/actions';
 import { ProductAItem } from './productItem/ProductAItem';
 import { ModalAddProduct } from './modalAddProduct/ModalAddProduct';
+
 import { Loading } from '../../utils/loading/Loading';
 
 export const ProductsAdmin = () => {
   const { loading } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
   const { products } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(productActions.getAllProducts(1, '', '', 100));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(categoryActions.getCategories());
   }, [dispatch]);
 
   if (loading) return <Loading />;
   return (
     <div className="product-admin">
       <ModalAddProduct isOpen={isOpen} setIsOpen={setIsOpen} />
+
       <div className="category-admin">
         <h4>Products Table</h4>
         <div className="add-button">

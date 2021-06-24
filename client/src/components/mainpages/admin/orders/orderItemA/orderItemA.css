@@ -1,4 +1,4 @@
-.order-admin {
+.OrderItemA {
   width: 100%;
   height: auto;
   min-height: 60vh;
@@ -6,7 +6,9 @@
   flex-direction: column;
   align-items: center;
 }
-
-.order-admin > table {
-  width: 90%;
-}
+/* 
+@media screen and (max-width: 540px) {
+  .hidden-xy {
+    display: none !important;
+  }
+} */

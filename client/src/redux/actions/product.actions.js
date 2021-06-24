@@ -57,9 +57,19 @@ const createProduct = (product) => async (dispatch) => {
   dispatch({ type: types.CREATE_PRODUCT_REQUEST, payload: null });
   try {
     const { data } = await api.post(`/products`, product);
-    dispatch({ type: types.CREATE_PRODUCT_SUCCESS, payload: data });
+    dispatch({ type: types.CREATE_PRODUCT_SUCCESS, payload: data.data });
   } catch (error) {
     dispatch({ type: types.CREATE_PRODUCT_FAILURE, payload: null });
+  }
+};
+
+const deleteProduct = (id) => async (dispatch) => {
+  dispatch({ type: types.DELETE_PRODUCT_REQUEST, payload: null });
+  try {
+    const { data } = await api.delete(`/products/${id}`);
+    dispatch({ type: types.DELETE_PRODUCT_SUCCESS, payload: data.data });
+  } catch (error) {
+    dispatch({ type: types.DELETE_PRODUCT_FAILURE, payload: null });
   }
 };
 
@@ -68,4 +78,5 @@ export const productActions = {
   getProductById,
   getNewProduct,
   createProduct,
+  deleteProduct,
 };

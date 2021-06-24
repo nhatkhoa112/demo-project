@@ -56,9 +56,9 @@ export const Cart = () => {
                       <th className="table-thumbnail">Image</th>
                       <th className="table-name">Name</th>
                       <th className="table-price">Price</th>
-                      <th className="table-quantity">Quantity</th>
-                      <th className="table-subtotal">Subtotal</th>
-                      <th className="table-remove">Remove</th>
+                      <th className="table-ble-quantity">Quantity</th>
+                      <th className="table-ble-subtotal">Subtotal</th>
+                      <th className="table-ble-remove">Remove</th>
                     </tr>
                   </thead>
                   <tbody>

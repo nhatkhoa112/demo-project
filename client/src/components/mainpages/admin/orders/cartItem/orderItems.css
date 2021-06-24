@@ -16,19 +16,19 @@ tr > .table-product-thumbnail > button {
   position: relative;
 }
 
-th > span {
+th > div {
   width: 100%;
   height: 70px;
   display: flex;
   align-items: center;
 }
 
-th > span > a {
+th > div > a {
   color: black;
   transition: all 0.5s ease-in-out;
 }
 
-th > span > a:hover {
+th > div > a:hover {
   color: #5c986a;
 }
 
@@ -66,8 +66,8 @@ th > .btn-actions > button:hover {
   border-left: none;
 }
 
-th > span > .decrease,
-th > span > .increase {
+th > div > .decrease,
+th > div > .increase {
   height: 40px;
   width: 25px;
   border: 1px #ccc solid;
@@ -76,16 +76,16 @@ th > span > .increase {
   transition: all 0.5s ease-in-out;
 }
 
-th > span > .decrease:hover,
-th > span > .increase:hover {
+th > div > .decrease:hover,
+th > div > .increase:hover {
   color: #f3a5a7;
 }
 
-th > span > .decrease {
+th > div > .decrease {
   border-right: none;
 }
 
-th > span > .increase {
+th > div > .increase {
   border-left: none;
 }
 
@@ -128,4 +128,25 @@ tbody > .order-item > th {
     background: #f3a5a7;
     color: white;
   }
+}
+
+.table-product-info > div > button {
+}
+
+.table-product-info > div > ul {
+  position: absolute;
+  top: 60px;
+}
+
+.table-product-info > div > ul > button {
+  display: flex;
+  height: 33%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+input {
+  outline: none !important;
 }

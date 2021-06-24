@@ -11,8 +11,12 @@ router.get('/:id/product', auth, orderItemsController.getOrderItemsByProductId);
 
 router.post('/', auth, orderItemsController.createOrderItem);
 
-router.delete('/:id', auth, orderItemsController.deleteOrderItem);
+router.delete(
+  '/:id/order/:orderId',
+  auth,
+  orderItemsController.deleteOrderItem
+);
 
-router.patch('/:id', auth, orderItemsController.updateOrderItem);
+router.patch('/:id/order/:orderId', auth, orderItemsController.updateOrderItem);
 
 module.exports = router;

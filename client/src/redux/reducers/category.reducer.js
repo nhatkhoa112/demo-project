@@ -21,7 +21,6 @@ const routeReducer = (state = initialState, action) => {
       return { ...state };
 
     case types.DELETE_SUCCESS:
-      console.log('hello world');
       return { ...state };
 
     case types.CREATE_CATEGORY_SUCCESS:

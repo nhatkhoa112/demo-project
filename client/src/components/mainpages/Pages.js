@@ -20,6 +20,7 @@ import { CategoriesAdmin } from '../mainpages/admin/categories/CategoriesAdmin';
 import { OrdersAdmin } from '../mainpages/admin/orders/OrdersAdmin';
 import { OrderPageById } from '../mainpages/utils/orderPageById/OrderPageById';
 import { UsersAdmin } from './admin/users/UsersAdmin';
+import { OrderItemA } from './admin/orders/orderItemA/OrderItemA';
 export const MainPages = () => {
   const location = useLocation();
   return (
@@ -49,6 +50,11 @@ export const MainPages = () => {
           path="/category_admin"
           exact
           component={CategoriesAdmin}
+        />
+        <PrivateAdminRoute
+          path="/orderItems/:id"
+          exact
+          component={OrderItemA}
         />
         <PrivateAdminRoute path="/users_admin" exact component={UsersAdmin} />
         <PrivateAdminRoute path="/order_admin" exact component={OrdersAdmin} />

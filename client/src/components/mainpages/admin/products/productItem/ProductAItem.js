@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './productAItem.css';
 import { NavLink } from 'react-router-dom';
+import { ModalUpdateProduct } from '../modalUpdateProduct/ModalUpdateProduct';
+import { productActions } from '../../../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const ProductAItem = ({ product }) => {
+  const dispatch = useDispatch();
   let categories = [];
   product.categories.map((cate) => {
     categories.push(cate.name);
   });
+  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
 
   return (
     <tr className="product-item">
+      <ModalUpdateProduct
+        oldProduct={product}
+        isOpenUpdate={isOpenUpdate}
+        setIsOpenUpdate={setIsOpenUpdate}
+      />
       <th className="table-product-image hidden-ct">
         <div>
           <img src={product.images[0].url} alt="" width="50px" height="50px" />{' '}
@@ -37,11 +47,21 @@ export const ProductAItem = ({ product }) => {
       </th>
       <th className="table-product-cate ">
         <div>
-          <button onClick={() => {}} className="edit">
+          <button
+            onClick={() => {
+              setIsOpenUpdate(true);
+            }}
+            className="edit"
+          >
             Edit
           </button>
 
-          <button className="delete">Delete</button>
+          <button
+            onClick={() => dispatch(productActions.deleteProduct(product._id))}
+            className="delete"
+          >
+            Delete
+          </button>
         </div>
       </th>
     </tr>

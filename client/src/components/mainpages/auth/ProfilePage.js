@@ -59,13 +59,13 @@ export const ProfilePage = ({ userOrder, setUserOrder }) => {
                 <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-number">
                   <span className="nobr">Order Id</span>
                 </th>
-                <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-date hidden">
+                <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-date hidden-on">
                   <span className="nobr">Date</span>
                 </th>
                 <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-status">
                   <span className="nobr">Status</span>
                 </th>
-                <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-total hidden">
+                <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-total hidden-on">
                   <span className="nobr">Total</span>
                 </th>
                 <th className="woocommerce-orders-table__header woocommerce-orders-table__header-order-actions">
@@ -89,7 +89,7 @@ export const ProfilePage = ({ userOrder, setUserOrder }) => {
                         {order._id}
                       </td>
                       <td
-                        className="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date hidden"
+                        className="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date hidden-on"
                         data-title="Date"
                       >
                         <time datetime="2021-06-22T12:07:04+00:00">
@@ -105,7 +105,7 @@ export const ProfilePage = ({ userOrder, setUserOrder }) => {
                         {order.status}
                       </td>
                       <td
-                        className="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total hidden"
+                        className="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total hidden-on"
                         data-title="Total"
                       >
                         <span className="woocommerce-Price-amount amount">
