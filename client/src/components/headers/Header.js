@@ -66,8 +66,6 @@ export const Header = () => {
                 ) : (
                   <NavLink activeClassName="active-navLink" to="/products">
                     <div>Products</div>
-
-                    <i className="fas fa-chevron-up"></i>
                   </NavLink>
                 )}
               </div>
@@ -163,8 +161,6 @@ export const Header = () => {
               ) : (
                 <NavLink activeClassName="active-navLink" to="/products">
                   <div>Products</div>
-
-                  <i className="fas fa-chevron-up"></i>
                 </NavLink>
               )}
             </li>
@@ -529,8 +525,6 @@ export const Header = () => {
           ) : (
             <NavLink activeClassName="active-navLink" to="/products">
               <div>Products</div>
-
-              <i className="fas fa-chevron-up"></i>
             </NavLink>
           )}
         </li>

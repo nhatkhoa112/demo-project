@@ -76,8 +76,17 @@ const productController = {
 
   get: async (req, res) => {
     try {
-      const total = await Product.find().countDocuments();
+      const features1 = new APIfeatures(
+        Product.find().populate({ path: 'categories', model: 'Category' }),
+        req.query
+      )
+        .filtering()
+        .sorting();
+      // .paginating();
 
+      const products1 = await features1.query;
+
+      let total = products1.length;
       const features = new APIfeatures(
         Product.find().populate({ path: 'categories', model: 'Category' }),
         req.query
@@ -85,12 +94,15 @@ const productController = {
         .filtering()
         .sorting()
         .paginating();
+
       const products = await features.query;
+
       res.json({
         status: 'success',
         result: products.length,
         products: products,
         total: total,
+        isPagination: true,
       });
     } catch (error) {
       res.status(500).json({ msg: error.message });
@@ -130,13 +142,70 @@ const productController = {
 
   update: async (req, res) => {
     try {
-      const {} = req.body;
-      if (!images) return res.status(400).json({ msg: 'No image upload' });
-      const product = await Product.findByIdAndUpdate(req.params.id, {
-        ...req.body,
-      });
+      const product = await Product.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body },
+        { new: true }
+      );
+
       await product.save();
       res.json({ msg: 'Updated a Product', data: { product } });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+
+  search: async (req, res) => {
+    try {
+      const total = await Product.find().countDocuments();
+
+      const features = new APIfeatures(
+        Product.find().populate({ path: 'categories', model: 'Category' }),
+        req.query
+      )
+        .filtering()
+        .sorting();
+      // .paginating();
+
+      const products = await features.query;
+
+      const feature1 = new APIfeatures(
+        Product.find().populate({ path: 'categories', model: 'Category' }),
+        req.query
+      )
+        .filtering()
+        .sorting()
+        .paginating();
+      const products12 = await feature1.query;
+      let newProducts = [];
+      let isPag = true;
+      if (req.query.price && req.query.price.gte) {
+        isPag = false;
+      }
+
+      if (req.body.categories && req.body.categories.length > 0) {
+        isPag = false;
+        products.map((p) => {
+          if (
+            req.body.categories.some((cate) => {
+              let pc = p.categories.map((pc) => pc._id);
+              return pc.includes(cate);
+            })
+          ) {
+            newProducts.push(p);
+          }
+        });
+      } else {
+        newProducts = products12;
+      }
+
+      res.json({
+        status: 'success',
+        result: newProducts.length,
+        products: newProducts,
+        total: total,
+        isPagination: isPag,
+      });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

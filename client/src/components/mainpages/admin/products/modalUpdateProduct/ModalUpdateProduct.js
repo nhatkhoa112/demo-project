@@ -229,7 +229,10 @@ export const ModalUpdateProduct = ({
               <Button
                 onClick={(e) => {
                   e.preventDefault();
-                  dispatch(productActions.update(product));
+                  dispatch(
+                    productActions.updateProduct(oldProduct._id, product)
+                  );
+                  setIsOpenUpdate(false);
                 }}
                 className={classes.buttonSubmit}
                 value={product.categories}

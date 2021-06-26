@@ -1052,3 +1052,8 @@
     min-width: 160px;
   }
 }
+
+.home-page .section3 .card .card__price span,
+.home-page .section4 .card .card__price span {
+  font-weight: 600;
+}

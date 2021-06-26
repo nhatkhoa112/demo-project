@@ -111,7 +111,7 @@ const ordersController = {
       if (!order)
         return res.status(404).json({ msg: 'The order is not exists.' });
 
-      res.status(200).json({ msg: 'Deleted order successfully', order });
+      res.status(200).json({ msg: 'Updated order successfully', order });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './order.css';
 import { Link } from 'react-router-dom';
-import Select from 'react-select';
+import { useDispatch } from 'react-redux';
+import { orderActions } from '../../../../../redux/actions';
 
 export const Order = ({ order }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [status, setStatus] = useState('Pending');
+  const [status, setStatus] = useState(order.status);
+  const dispatch = useDispatch();
 
   let options = [
     { value: 'Pending', label: 'Pending' },
@@ -60,7 +62,11 @@ export const Order = ({ order }) => {
       >
         {order.orderItems.map((o) => {
           return (
-            <Link className="nav-link" to={`orderItems/${order._id}`}>
+            <Link
+              key={o._id}
+              className="nav-link"
+              to={`orderItems/${order._id}`}
+            >
               {o.product.title}
             </Link>
           );
@@ -72,16 +78,18 @@ export const Order = ({ order }) => {
         </button>
         <ul>
           <li className={isOpen ? 'dropdown' : 'hidden'}>
-            {options.map((o) => {
+            {options.map((t) => {
               return (
                 <button
                   onClick={() => {
-                    setStatus(o.label);
+                    setStatus(t.label);
+                    dispatch(orderActions.updateOrder(order._id, t.label));
+
                     setIsOpen(false);
                   }}
-                  key="o.value"
+                  key={t.value}
                 >
-                  {o.label}
+                  {t.label}
                 </button>
               );
             })}

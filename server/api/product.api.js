@@ -9,6 +9,8 @@ router.get('/:id', productController.getProductById);
 
 router.post('/', auth, authAdmin, productController.create);
 
+router.post('/search', productController.search);
+
 router.delete('/:id', auth, authAdmin, productController.delete);
 
 router.patch('/:id', auth, authAdmin, productController.update);

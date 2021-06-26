@@ -206,3 +206,7 @@
     font-size: 12px;
   }
 }
+
+.card .card__price span {
+  font-weight: 600;
+}

@@ -36,10 +36,10 @@ const deleteOrder = (id) => async (dispatch) => {
   }
 };
 
-const updateOrder = (order, id) => async (dispatch) => {
+const updateOrder = (id, status) => async (dispatch) => {
   dispatch({ type: types.UPDATE_ORDER_REQUEST, payload: null });
   try {
-    const { data } = await api.patch(`/orders/${id}`, { order });
+    const { data } = await api.patch(`/orders/${id}`, { status: status });
     dispatch({ type: types.UPDATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: types.UPDATE_ORDER_FAILURE, payload: null });

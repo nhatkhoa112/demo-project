@@ -7,12 +7,14 @@ const initialState = {
   products: [],
   newProducts: [],
   selectProduct: {},
+  isPagination: false,
 };
 
 const productReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case types.FILTER_PRODUCT_REQUEST:
     case types.CREATE_PRODUCT_REQUEST:
     case types.DELETE_PRODUCT_REQUEST:
     case types.UPDATE_PRODUCT_REQUEST:
@@ -25,6 +27,7 @@ const productReducer = (state = initialState, action) => {
     case types.GET_ALL_PRODUCTS_REQUEST:
     case types.GET_NEW_PRODUCTS_REQUEST:
       return { ...state, loading: true };
+    case types.FILTER_PRODUCT_FAILURE:
     case types.CREATE_PRODUCT_FAILURE:
     case types.DELETE_PRODUCT_FAILURE:
     case types.UPDATE_PRODUCT_FAILURE:
@@ -49,7 +52,12 @@ const productReducer = (state = initialState, action) => {
       state.products.splice(idz, 1);
       return { ...state, loading: false, products: [...state.products] };
     case types.UPDATE_PRODUCT_SUCCESS:
-      return { ...state, loading: false };
+      console.log(payload);
+      let ido = state.products.findIndex(
+        (pro) => pro._id === payload.product._id
+      );
+      state.products[ido] = payload.product;
+      return { ...state, loading: false, products: [...state.products] };
 
     case reviewTypes.CREATE_REVIEW_OF_PRODUCT_SUCCESS:
       return {
@@ -74,6 +82,7 @@ const productReducer = (state = initialState, action) => {
         loading: false,
         products: [...payload.products],
         total: payload.total,
+        isPagination: payload.isPagination,
       };
     case types.GET_NEW_PRODUCTS_SUCCESS:
       return {
@@ -84,6 +93,13 @@ const productReducer = (state = initialState, action) => {
       };
     case types.GET_PRODUCT_BY_ID_SUCCESS:
       return { ...state, loading: false, selectProduct: payload.product };
+
+    case types.FILTER_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        products: payload.products,
+        isPagination: payload.isPagination,
+      };
 
     default:
       return state;

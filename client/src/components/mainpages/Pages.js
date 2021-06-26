@@ -21,13 +21,19 @@ import { OrdersAdmin } from '../mainpages/admin/orders/OrdersAdmin';
 import { OrderPageById } from '../mainpages/utils/orderPageById/OrderPageById';
 import { UsersAdmin } from './admin/users/UsersAdmin';
 import { OrderItemA } from './admin/orders/orderItemA/OrderItemA';
-export const MainPages = () => {
+import { ProductByCate } from './utils/categoryPage/ProductByCate';
+
+export const MainPages = ({ isSearch }) => {
   const location = useLocation();
   return (
     <AnimatePresence initial={false}>
       <Switch location={location} key={location.pathname}>
         <Route path="/" exact component={Home} />
-        <Route path="/products" exact component={() => <Products />} />
+        <Route
+          path="/products"
+          exact
+          component={() => <Products isSearch={isSearch} />}
+        />
         <Route path="/about" exact component={About} />
         <Route path="/login" exact component={Login} />
         <Route path="/cart" exact component={Cart} />
@@ -41,6 +47,7 @@ export const MainPages = () => {
         <Route path="/proceed" exact component={() => <ProceedPage />} />
         <Route path="/thanks" exact component={Thanks} />
         <Route path="/orderInfo" exact component={OrderInfo} />
+        <Route path="/category/:id" exact component={ProductByCate} />
         <PrivateAdminRoute
           path="/products_admin"
           exact

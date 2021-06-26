@@ -28,9 +28,7 @@ export const ProductItem = ({ product, isFilter }) => {
       />
       {product.new ? <span className="new">new</span> : ''}
       {product.sale ? <span className="sale">Sale</span> : ''}
-      <div className="eye-icon">
-        <i className="far fa-eye" height={20} width={20}></i>
-      </div>
+
       <div
         className="cart-icon"
         onClick={() => {

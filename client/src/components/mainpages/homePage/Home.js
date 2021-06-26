@@ -432,9 +432,7 @@ export const Home = () => {
                     ) : (
                       ''
                     )}
-                    <div className="eye-icon">
-                      <i className="far fa-eye" height={20} width={20}></i>
-                    </div>
+
                     <div
                       onClick={() => {
                         const price_on_purchase_date =
@@ -563,9 +561,7 @@ export const Home = () => {
                     ) : (
                       ''
                     )}
-                    <div className="eye-icon">
-                      <i className="far fa-eye" height={20} width={20}></i>
-                    </div>
+
                     <div
                       onClick={() => {
                         const price_on_purchase_date =

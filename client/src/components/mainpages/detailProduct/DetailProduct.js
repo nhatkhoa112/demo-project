@@ -12,6 +12,7 @@ import { ReviewItem } from '../utils/reviewItem/ReviewItem';
 import styled from 'styled-components';
 
 export const DetailProduct = () => {
+  let routerCate = '';
   let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -225,8 +226,9 @@ export const DetailProduct = () => {
           <div className="categories">
             <label>Categories:</label>
             {product.categories?.map((category) => {
+              routerCate = `/category/${category._id}`;
               return (
-                <Link key={category._id} to="/">
+                <Link key={category._id} to={routerCate}>
                   {category.name}
                 </Link>
               );
