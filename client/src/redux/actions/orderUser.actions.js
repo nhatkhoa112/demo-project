@@ -1,4 +1,5 @@
 import * as types from '../constants/orderUser.constants';
+
 import { v4 as uuid_v4 } from 'uuid';
 
 const createOrderUser =
@@ -19,7 +20,7 @@ const createOrderUser =
       orderUser[idx].quantity += quantity;
       orderUser[idx].price_on_purchase_date = price_on_purchase_date;
     }
-
+   
     dispatch({ type: types.CREATE_ORDER_USER_SUCCESS, payload: orderUser });
   };
 

@@ -1,20 +1,111 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './profilePage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import image from './image/rose-green.png';
 import { Link, Redirect } from 'react-router-dom';
 import Moment from 'react-moment';
+import { authActions } from '../../../redux/actions';
 
 export const ProfilePage = ({ userOrder, setUserOrder }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  const [newUser, setNewUser] = useState({
+    email: user.email,
+    name: user.name,
+    avatar: user.avatar,
+  });
+  let imageUpload = [];
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [isOpen, setIsOpen] = useState(false);
+
   if (!isAuthenticated) return <Redirect to="/" />;
+
+  let widget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: 'kohaku121',
+      uploadPreset: 'ml_default',
+    },
+    (error, result) => {
+      if (result.event === 'success') {
+        imageUpload.push({
+          public_id: result.info.public_id,
+          url: result.info.secure_url,
+        });
+
+        setAvatar(imageUpload[0].url);
+        dispatch(
+          authActions.updateProfile(user.name, user.email, imageUpload[0].url)
+        );
+      }
+    }
+  );
+
+  let handleOpenWidget = (e) => {
+    e.preventDefault();
+    widget.open();
+  };
 
   return (
     <div className="profile-page">
+      {isOpen ? (
+        <section className="update-user">
+          <div className="update-card">
+            <button onClick={() => setIsOpen(false)}>
+              <i className="fas fa-times"></i>
+            </button>
+            <form className="sign-in-form">
+              <h2 className="title">Update </h2>
+              <div className="input-field">
+                <i className="fas fa-user" />
+                <input
+                  autoComplete="new-password"
+                  type="text"
+                  value={newUser.name}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, name: e.target.value })
+                  }
+                  placeholder="User Name"
+                />
+              </div>
+              <div className="input-field">
+                <i className="fas fa-envelope" />
+                <input
+                  autoComplete="new-password"
+                  type="text"
+                  placeholder="Email"
+                  value={newUser.email}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, email: e.target.value })
+                  }
+                />
+              </div>
+
+              <input
+                onClick={() => {
+                  dispatch(
+                    authActions.updateProfile(
+                      newUser.name,
+                      newUser.email,
+                      newUser.avatar
+                    )
+                  );
+                  setIsOpen(false);
+                }}
+                type="submit"
+                defaultValue="Login"
+                className="btn solid"
+              />
+            </form>
+          </div>
+        </section>
+      ) : (
+        ''
+      )}
+
       <section className="section1">
         <div className="content">
           <img src={image} alt="rose" />
@@ -30,6 +121,9 @@ export const ProfilePage = ({ userOrder, setUserOrder }) => {
 
       <div className="user-info">
         <div className="avatar">
+          <button onClick={handleOpenWidget} className="change-avatar">
+            +
+          </button>
           <img src={user.avatar} alt="avatar" />
         </div>
         <div className="content">
@@ -41,12 +135,12 @@ export const ProfilePage = ({ userOrder, setUserOrder }) => {
           </div>
           <div className="action">
             Action:{' '}
-            <span>
+            <span onClick={() => setIsOpen(true)}>
               <i className="fas fa-pen"></i>
             </span>{' '}
-            <span>
+            {/* <span>
               <i className="far fa-trash-alt"></i>
-            </span>
+            </span> */}
           </div>
         </div>
       </div>

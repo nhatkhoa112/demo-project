@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './orderItems.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { orderUserActions } from '../../../../redux/actions';
 import { Link } from 'react-router-dom';
 
 export const CartItem = ({ order }) => {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(order.quantity);
   return (
     <tr className="order-item">
       <th className="table-product-thumbnail">

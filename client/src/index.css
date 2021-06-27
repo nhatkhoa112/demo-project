@@ -44,31 +44,32 @@ button {
 /* Toast */
 
 .Toastify__toast {
+  z-index: 10000000 !important;
+  
 }
 .Toastify__toast--rtl {
+  z-index: 10000000 !important;
 }
 .Toastify__toast--dark {
+  z-index: 10000000 !important;
 }
 .Toastify__toast--default {
+  z-index: 10000000 !important;
 }
 .Toastify__toast--info {
+  z-index: 10000000 !important;
 }
 .Toastify__toast--success {
-  border: 2px solid teal;
-  background: #c7dded !important;
-  padding: 20px !important;
-  color: #333 !important;
-  text-transform: capitalize !important;
-  box-shadow: 0 5px 10px #ccc !important;
-}
-
-.Toastify__toast--success:hover {
-  box-shadow: 0 10px 20px #ccc !important;
+  z-index: 10000000 !important;
 }
 
 .Toastify__toast--warning {
+  z-index: 10000000 !important;
 }
+
 .Toastify__toast--error {
+  z-index: 10000000 !important;
 }
 .Toastify__toast-body {
+  z-index: 10000000 !important;
 }

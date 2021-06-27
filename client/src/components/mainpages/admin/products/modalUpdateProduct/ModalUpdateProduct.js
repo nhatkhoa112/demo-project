@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles';
 import './modalUpdateProduct.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Paper, Button, Typography } from '@material-ui/core';
-import { categoryActions, productActions } from '../../../../../redux/actions';
+import { productActions } from '../../../../../redux/actions';
 import Select from 'react-select';
 
 export const ModalUpdateProduct = ({

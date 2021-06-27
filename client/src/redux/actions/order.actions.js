@@ -1,5 +1,6 @@
 import * as types from '../constants/order.constants';
 import api from '../../utils/api';
+import { toast } from 'react-toastify';
 
 const createOrder =
   (shippingAddress, totals, orderUser) => async (dispatch) => {
@@ -10,8 +11,14 @@ const createOrder =
         totals,
         orderUser,
       });
+      toast.success('Created order successfully', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: data });
     } catch (error) {
+      toast.warning(error.message, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       dispatch({ type: types.CREATE_ORDER_FAILURE, payload: null });
     }
   };

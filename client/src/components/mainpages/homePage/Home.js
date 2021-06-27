@@ -8,16 +8,16 @@ import Slider from 'react-slick';
 import { useDispatch, useSelector } from 'react-redux';
 import { productActions, orderUserActions } from '../../../redux/actions';
 import { Loading } from '../utils/loading/Loading';
+import { toast } from 'react-toastify';
 
 export const Home = () => {
-  const [isOpen, setIsOpen] = useState(false);
   let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   let { products } = useSelector((state) => state.products);
   const { loading } = useSelector((state) => state.products);
   let { newProducts } = useSelector((state) => state.products);
   useEffect(() => {
-    dispatch(productActions.getAllProducts(1, '', '-sold'));
+    dispatch(productActions.getAllProducts(1, '', '-sold', 100));
   }, [dispatch]);
 
   useEffect(() => {
@@ -448,6 +448,9 @@ export const Home = () => {
                               price_on_purchase_date
                             )
                           );
+                          toast.success('Added product to cart successfully', {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                          });
                         }
                       }}
                       className="cart-icon"
@@ -577,6 +580,9 @@ export const Home = () => {
                               price_on_purchase_date
                             )
                           );
+                          toast.success('Added product to cart successfully', {
+                            position: toast.POSITION.BOTTOM_RIGHT,
+                          });
                         }
                       }}
                       className="cart-icon"

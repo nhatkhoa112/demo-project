@@ -25,7 +25,6 @@ export const Products = () => {
   const totalPage = Math.ceil(total / 12);
   const { loading } = useSelector((state) => state.products);
   const user = useSelector((state) => state.auth.user);
-  const id = user.id;
   const [isFilter, setIsFilter] = useState(true);
 
   const sorts = [

@@ -6,7 +6,8 @@ import './login.css';
 import image1 from './image/image3.svg';
 import image2 from './image/image4.svg';
 import { motion } from 'framer-motion';
-import { ToastContainer } from 'react-toastify';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 export const Login = () => {
   let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -61,6 +62,16 @@ export const Login = () => {
     dispatch(authActions.register(user));
   };
 
+  const FB_APP_ID = process.env.REACT_APP_FB_APP_ID;
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+  const loginWithFacebook = (response) => {
+    console.log('hello');
+    dispatch(authActions.loginFacebookRequest(response));
+  };
+
+  const loginWithGoogle = (response) => {};
+
   if (isAuthenticated) return <Redirect to="/" />;
 
   return (
@@ -71,7 +82,6 @@ export const Login = () => {
       transition={{ duration: 2 }}
       className={'login-page '}
     >
-      <ToastContainer />
       <div className={isSignUp ? 'container sign-up-mode  ' : 'container'}>
         <div className="forms-container">
           <div className="signin-signup">
@@ -114,6 +124,43 @@ export const Login = () => {
                 <button className="social-icon">
                   <i className="fab fa-google" />
                 </button>
+                {/* <FacebookLogin
+                  appId={FB_APP_ID}
+                  fields="name,email,picture"
+                  callback={loginWithFacebook}
+                  icon="fa-facebook"
+                  onFailure={(err) => {
+                    console.log('FB LOGIN ERROR:', err);
+                  }}
+                  containerStyle={{
+                    textAlign: 'center',
+                    backgroundColor: '#3b5998',
+                    borderColor: '#3b5998',
+                    flex: 1,
+                    display: 'flex',
+                    color: '#fff',
+                    cursor: 'pointer',
+                    marginBottom: '3px',
+                  }}
+                  buttonStyle={{
+                    flex: 1,
+                    textTransform: 'none',
+                    padding: '12px',
+                    background: 'none',
+                    border: 'none',
+                  }}
+                />
+
+                <GoogleLogin
+                  className="google-btn d-flex justify-content-center"
+                  clientId={GOOGLE_CLIENT_ID}
+                  buttonText="Login with Google"
+                  onSuccess={loginWithGoogle}
+                  onFailure={(err) => {
+                    console.log('GOOGLE LOGIN ERROR:', err);
+                  }}
+                  cookiePolicy="single_host_origin"
+                /> */}
               </div>
             </form>
             <form
@@ -155,10 +202,14 @@ export const Login = () => {
                 />
               </div>
               <div className="avatar-field">
-                <button onClick={handleOpenWidget}>
-                  <i className="fas fa-plus"></i>
-                  <div>Avatar</div>
-                </button>
+                {user.avatar ? (
+                  <img src={user.avatar} alt="" width="50px" height="50px" />
+                ) : (
+                  <button onClick={handleOpenWidget}>
+                    <i className="fas fa-plus"></i>
+                    <div>Avatar</div>
+                  </button>
+                )}
               </div>
               <input
                 type="submit"

@@ -20,8 +20,19 @@ const loginRequest = (user) => async (dispatch) => {
 };
 
 const loginFacebookRequest = (access_token) => async (dispatch) => {
+  dispatch({ type: types.LOGIN_FACEBOOK_REQUEST, payload: null });
+  console.log(access_token);
   try {
-  } catch (error) {}
+    const { data } = await api.post('/user/login/facebook', { access_token });
+    // const name = res.data.data.user.name;
+    console.log(data);
+    // toast.success(`Welcome ${name}`);
+    dispatch({ type: types.LOGIN_FACEBOOK_SUCCESS, payload: data });
+    // api.defaults.headers.common['Authorization'] = data.data.accesstoken;
+    // api.defaults.headers['Authorization'] = data.data.accesstoken;
+  } catch (error) {
+    dispatch({ type: types.LOGIN_FACEBOOK_FAILURE, payload: error });
+  }
 };
 
 const loginGoogleRequest = (access_token) => async (dispatch) => {
@@ -38,7 +49,9 @@ const register = (user) => async (dispatch) => {
     api.defaults.headers.common['Authorization'] = data.data.accesstoken;
     api.defaults.headers['Authorization'] = data.data.accesstoken;
     localStorage.setItem('accessToken', data.data.accesstoken);
-    toast.success(`Welcome to my store, ${name}! `);
+    toast.success(`Welcome to my store, ${name}! `, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });
     console.log(error);
@@ -59,9 +72,18 @@ const verifyEmail = (activation_token) => async (dispatch) => {
   // }
 };
 
-const updateProfile = (name, avatarUrl) => async (dispatch) => {
+const updateProfile = (name, email, avatar) => async (dispatch) => {
+  dispatch({ type: types.UPDATE_PROFILE_REQUEST, payload: null });
+
   try {
-  } catch (error) {}
+    const { data } = await api.patch('/user/update', { name, email, avatar });
+    toast.success('Update user profile successfully', {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    dispatch({ type: types.UPDATE_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: types.UPDATE_PROFILE_FAILURE, payload: null });
+  }
 };
 
 const getCurrentUser = (accessToken) => async (dispatch) => {

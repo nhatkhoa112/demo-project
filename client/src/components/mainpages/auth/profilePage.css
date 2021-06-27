@@ -94,6 +94,27 @@
   justify-content: center;
   align-items: center;
   width: 400px;
+  position: relative;
+}
+
+.profile-page .avatar button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  top: 130px;
+  right: 110px;
+  font-weight: 600;
+  color: rgb(190, 56, 190);
+}
+
+.profile-page .avatar button:hover {
+  background: #ccc;
+  color: rgb(226, 90, 226);
 }
 
 .profile-page .avatar img {
@@ -350,5 +371,173 @@ table.shop_table > thead > tr > td > a:hover {
     line-height: 2;
     vertical-align: top;
     border-bottom: 1px solid #e6e6e6;
+  }
+}
+
+.profile-page .update-user {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page .update-user .update-card {
+  width: 55%;
+  height: 50%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page .update-user .update-card form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.profile-page .update-user .update-card form.sign-up-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+.profile-page .update-user .update-card form.sign-in-form {
+  z-index: 2;
+}
+
+.profile-page .update-user .update-card .title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.profile-page .update-user .update-card .input-field {
+  max-width: 450px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.profile-page .update-user .update-card .input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+
+.profile-page .update-user .update-card .avatar-field {
+  max-width: 420px;
+  width: 100%;
+  margin: 10px 0;
+  height: 55px;
+  display: grid;
+  padding: 0 0.4rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page .update-user .update-card .avatar-field button {
+  height: 55px;
+  width: 100px;
+  border: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  flex-direction: column;
+  color: #777;
+}
+.profile-page .update-user .update-card .avatar-field button:hover {
+  color: black;
+}
+
+.profile-page .update-user .update-card .input-field input {
+  margin-right: 30px;
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.profile-page .update-user .update-card .input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.profile-page input.btn.solid {
+  width: 150px;
+  background: linear-gradient(45deg, #04befe 0%, #4481eb 50%, purple 100%);
+  opacity: 0.7;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.profile-page .update-user button {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+}
+
+.profile-page .update-user button:hover {
+  color: #5c986a;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-page .update-user .update-card {
+    width: 90%;
+    height: 50%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-page .update-user .update-card form {
+    padding: 0rem 1rem;
+  }
+
+  .profile-page .update-user button {
+    position: absolute;
+    top: 30%;
+    right: 5%;
   }
 }

@@ -33,7 +33,9 @@ const authReducer = (state = initialState, action) => {
     case types.LOGIN_FACEBOOK_REQUEST:
       return { ...state, loading: true };
     case types.UPDATE_PROFILE_REQUEST:
-      return { ...state, loading: true };
+      return {
+        ...state,
+      };
     case types.GET_CURRENT_USER_REQUEST:
       return { ...state, loading: true };
 
@@ -51,7 +53,7 @@ const authReducer = (state = initialState, action) => {
           name: payload.user.name,
           email: payload.user.email,
           avatar: payload.user.avatar,
-          orders: [...payload.user.orders],
+          orders: [],
           id: payload.user._id,
         },
       };
@@ -80,7 +82,9 @@ const authReducer = (state = initialState, action) => {
       };
 
     case types.UPDATE_PROFILE_SUCCESS:
-      return { ...state, loading: false };
+      localStorage.setItem('koHaUser', JSON.stringify(payload.data.user));
+
+      return { ...state, loading: false, user: payload.data.user };
 
     case types.GET_CURRENT_USER_SUCCESS:
       return {

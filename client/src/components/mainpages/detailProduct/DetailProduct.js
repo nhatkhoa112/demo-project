@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { productActions } from '../../../redux/actions';
 import './DetailProduct.css';
-import Slider from 'react-slick';
 import { FaStar } from 'react-icons/fa';
 import { ModalCart } from '../utils/modalCart/ModalCart';
 import { orderUserActions, reviewsActions } from '../../../redux/actions';
@@ -18,7 +17,6 @@ export const DetailProduct = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const product = useSelector((state) => state.products.selectProduct);
-  const { loading } = useSelector((state) => state.products);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [selectImage, setSelectImage] = useState('');
@@ -88,8 +86,6 @@ export const DetailProduct = () => {
     const idx = e.target.getAttribute('data-index');
     setSelectImage(productImages[idx].img);
   };
-
-  // if (loading) return <Loading />;
 
   return (
     <div className="detail-page">
@@ -348,7 +344,16 @@ export const DetailProduct = () => {
                     <div>no review</div>
                   )}
                 </div>
-                <button onClick={() => setWrite(!write)} className="write-btn">
+                <button
+                  onClick={() => {
+                    if (isAuthenticated) {
+                      setWrite(!write);
+                    } else {
+                      window.alert('You need sign in to create a review!!');
+                    }
+                  }}
+                  className="write-btn"
+                >
                   Write the review
                 </button>
               </div>

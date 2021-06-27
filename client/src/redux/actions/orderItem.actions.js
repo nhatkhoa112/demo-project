@@ -23,28 +23,6 @@ const getAllOrderItemsByUserId = (id) => async (dispatch) => {
   }
 };
 
-const getOrderItemByProduct = (id, productId) => async (dispatch) => {
-  dispatch({
-    type: types.GET_ORDER_ITEM_BY_PRODUCT_ID_REQUEST,
-    payload: null,
-  });
-  try {
-    const { data } = await api.get(
-      `/orderItems/${id}/product?status=true&product=${productId}`
-    );
-    dispatch({
-      type: types.GET_ORDER_ITEM_BY_PRODUCT_ID_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: types.GET_ORDER_ITEM_BY_PRODUCT_ID_FAILURE,
-      payload: null,
-    });
-  }
-};
-
 const getOrderItemsByUserId = (id) => async (dispatch) => {
   dispatch({ type: types.GET_ORDER_ITEMS_BY_USER_ID_REQUEST, payload: null });
   try {

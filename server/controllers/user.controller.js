@@ -57,7 +57,7 @@ const userController = {
 
       res.json({
         msg: 'Create account successfully!',
-        data: { accesstoken, user: newUser },
+        data: { accesstoken, user: newUser1 },
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -231,7 +231,20 @@ const userController = {
   },
 
   googleLogin: async (req, res) => {},
-  facebookLogin: async (req, res) => {},
+  facebookLogin: async ({ user }, res) => {
+    if (user) {
+      user = await User.findByIdAndUpdate(
+        user._id,
+        { avatarUrl: user.avatarUrl },
+        { new: true }
+      );
+    } else {
+      throw new Error('There is No User');
+    }
+
+    const accesstoken = createAccessToken({ id: user._id });
+    res.status(200).json({ status: 'success', data: { user, accessToken } });
+  },
 
   test: async (req, res) => {
     try {

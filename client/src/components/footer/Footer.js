@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Footer.css';
 import { Link } from 'react-router-dom';
 import image from './image/bg-image-21.jpeg';
+import { categoryActions } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Footer = () => {
+  const { categories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(categoryActions.getCategories());
+  }, [dispatch]);
+
   return (
     <div className="footer-page">
       <img src={image} alt="" />
@@ -34,24 +42,15 @@ export const Footer = () => {
         <div className="content__categories">
           <div className="content__title">Category</div>
           <div className="items">
-            <li>
-              <Link to="/">Face</Link>
-            </li>
-            <li>
-              <Link to="/">Body</Link>
-            </li>
-            <li>
-              <Link to="/">Hair</Link>
-            </li>
-            <li>
-              <Link to="/">Hands-feet</Link>
-            </li>
-            <li>
-              <Link to="/">Hello</Link>
-            </li>
-            <li>
-              <Link to="/">Bye</Link>
-            </li>
+            {categories?.length > 0 &&
+              categories.map((category) => {
+                const cateRouter = '/category/' + category._id;
+                return (
+                  <li key={category._id}>
+                    <Link to={cateRouter}>{category.name}</Link>
+                  </li>
+                );
+              })}
           </div>
         </div>
         <div className="content__info">

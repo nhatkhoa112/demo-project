@@ -34,4 +34,30 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.statics.findOrCreate = function findOrCreate(profile, cb) {
+  const userObj = new this(); // create a new User class
+  this.findOne({ email: profile.email }, async function (err, result) {
+    if (!result) {
+      let newPassword =
+        profile.password || '' + Math.floor(Math.random() * 100000000);
+      const salt = await bcrypt.genSalt(10);
+      newPassword = await bcrypt.hash(newPassword, salt);
+
+      userObj.name = profile.name;
+      userObj.email = profile.email;
+      userObj.password = newPassword;
+      userObj.googleId = profile.googleId;
+      userObj.facebookId = profile.facebookId;
+      userObj.avatarUrl = profile.avatarUrl;
+      userObj.save(cb);
+    } else {
+      cb(err, result);
+    }
+  });
+};
+
+userSchema.methods.authenticate = function (password) {
+  return this.password === this.hashPassword(password);
+};
+
 module.exports = mongoose.model('User', userSchema);

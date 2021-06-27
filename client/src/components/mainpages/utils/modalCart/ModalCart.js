@@ -3,7 +3,6 @@ import './modalCart.css';
 import { Modal } from './ModalElements.js';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Loading } from '../loading/Loading';
 
 export const ModalCart = ({ quantity, product, isOpen, setIsOpen }) => {
   const { orderUser } = useSelector((state) => state.orderUser);

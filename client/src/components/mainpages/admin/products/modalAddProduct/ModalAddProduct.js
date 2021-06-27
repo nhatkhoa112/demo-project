@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles';
 import './modalAddProduct.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,6 @@ import Select from 'react-select';
 export const ModalAddProduct = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const [isNew, setIsNew] = useState(true);
   const classes = useStyles();
   const [product, setProduct] = useState({
     title: '',

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const userController = require('../controllers/user.controller');
 const auth = require('../middlewares/auth');
 const authAdmin = require('../middlewares/authAdmin');
+const passport = require('../middlewares/passport');
 
 router.post('/register', userController.register);
 
@@ -30,12 +31,13 @@ router.patch(
   userController.updateUsersRole
 );
 
+// router.post(
+//   '/login/facebook',
+//   passport.authenticate('facebook-token', { session: false }),
+//   userController.facebookLogin
+// );
+
 router.delete('/delete/:id', auth, authAdmin, userController.deleteUser);
-
-// Social Login
-router.post('/google_login', userController.googleLogin);
-
-router.post('/facebook_login', userController.facebookLogin);
 
 router.get('/test', userController.test);
 
