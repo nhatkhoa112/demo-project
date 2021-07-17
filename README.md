@@ -17,8 +17,8 @@ The following **required** functionality is completed:
 - [X] Admin can add the new order, update the status of order.
 
 
-
 ## Video Walkthrough
+<p> <img align="left" src="https://github.com/nhatkhoa112/kohaku-cosmetics-shop/blob/master/kohaku.gif" alt="gif" width="700" right="450" /> </p>
 
 
 
