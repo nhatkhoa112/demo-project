@@ -22,4 +22,4 @@ The following **required** functionality is completed:
 
 
 
-url: http://ampha-blog-ror.herokuapp.com
+url: https://kohaku-cosmetics.netlify.app/
