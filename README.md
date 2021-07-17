@@ -20,6 +20,8 @@ The following **required** functionality is completed:
 ## Video Walkthrough
 <p> <img align="left" src="https://github.com/nhatkhoa112/kohaku-cosmetics-shop/blob/master/kohaku.gif" alt="gif" width="700" right="450" /> </p>
 
+<br/>
+<br/>
 
 
 url: https://kohaku-cosmetics.netlify.app/
